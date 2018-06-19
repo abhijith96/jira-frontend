@@ -1,0 +1,13 @@
+<smd-datatable dataUrl="scheduler/jobs" dataHeader="jobs" [paginated]="true"
+	 showCheckBox="true" [responsive]="true" [filterEnabled]="true" [showTableFilter]="false">
+		
+		<smd-datatable-column title="Job Identity" field="tnzJobId" sortable="true" [filterable]="true">
+			<ng-template let-model="data">
+				<!-- {{model.tnzJobId}} -->
+				<!-- Job id -->
+			</ng-template>
+		</smd-datatable-column>
+		
+</smd-datatable>
+
+
