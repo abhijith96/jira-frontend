@@ -12,7 +12,7 @@ import { FuseUtils } from '@fuse/utils';
 export class TodoService implements Resolve<any>
 {   
 
-    private _base_url = "http://192.168.70.120:3000/api/";
+    private _baseUrl = "http://192.168.70.122:3000/api/";
 
 
     stuffFromBackend = []
@@ -150,7 +150,7 @@ export class TodoService implements Resolve<any>
     {
         return new Promise((resolve, reject) => {
             //This is hwere the magic hapens
-            this.http.get(this._base_url + 'issues2')
+            this.http.get(this._baseUrl + 'issues2')
                 .subscribe((todos: any) => {
                     this.todos = todos.map(todo => {
                        
@@ -395,7 +395,7 @@ export class TodoService implements Resolve<any>
     {
         return new Promise((resolve, reject) => {
 
-            this.http.post( this._base_url+  'edit-issues/' + todo._id, todo )
+            this.http.post( this._baseUrl+  'edit-issues/' + todo._id, todo )
                 .subscribe(response => {
                     console.log(response)
                     this.getTodos().then(todos => {
@@ -420,7 +420,7 @@ export class TodoService implements Resolve<any>
 
     // getIssuesFromServer(){
     //     return new Promise( ( resolve,reject)=>{
-    //             this.http.get(this._base_url + '/issues')
+    //             this.http.get(this._baseUrl + '/issues')
     //                 .subscribe((response : any)=>{
     //                         resolve (response)                               
     //                 })
@@ -428,7 +428,7 @@ export class TodoService implements Resolve<any>
     // }
 
         // getIssuesFromServer(){
-        //     return this.http.get(this._base_url +'/issues' )
+        //     return this.http.get(this._baseUrl +'/issues' )
         // }
     
 }

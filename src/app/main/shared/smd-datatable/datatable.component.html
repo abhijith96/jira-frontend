@@ -72,9 +72,9 @@
                             <mat-icon (click)="filterTable()">filter_list</mat-icon>
                         </th>
                         <th *ngFor="let column of columns">
-                            <mat-form-field class="filter-input" *ngIf="column.filterable && columnFilterInputs[column.id]">
+                            <!-- <mat-form-field class="filter-input" *ngIf="column.filterable && columnFilterInputs[column.id]">
                                 <input matInput [ngStyle]="{'text-align':column.numeric?'right':'left'}" [formControl]="columnFilterInputs[column.id]" />
-                            </mat-form-field>
+                            </mat-form-field> -->
                         </th>
                     </tr>
                     <tr *ngIf="responsive && _shouldRenderCheckbox()" class="smd-datatable-responsive-header">

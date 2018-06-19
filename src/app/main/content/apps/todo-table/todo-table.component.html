@@ -1,13 +1,34 @@
-<smd-datatable dataUrl="scheduler/jobs" dataHeader="jobs" [paginated]="true"
+<smd-datatable dataUrl="issues2" dataHeader="jobs" [paginated]="true"
 	 showCheckBox="true" [responsive]="true" [filterEnabled]="true" [showTableFilter]="false">
 		
-		<smd-datatable-column title="Job Identity" field="tnzJobId" sortable="true" [filterable]="true">
+		<smd-datatable-column title="ID" field="_id" sortable="true" [filterable]="true">
 			<ng-template let-model="data">
-				<!-- {{model.tnzJobId}} -->
-				<!-- Job id -->
+				{{model._id}}
 			</ng-template>
 		</smd-datatable-column>
 		
+		<smd-datatable-column title="Name" field="name" sortable="true" [filterable]="true">
+			<ng-template let-model="data">
+				{{model.name}}
+			</ng-template>
+		</smd-datatable-column>
+
+		<smd-datatable-column title="Issue Id" field="name" sortable="true" [filterable]="true">
+			<ng-template let-model="data">
+				{{model.issueType}}
+			</ng-template>
+		</smd-datatable-column>
+
+		<smd-datatable-column title="Project ID" field="name" sortable="true" [filterable]="true">
+			<ng-template let-model="data">
+				{{model.projectId}}
+			</ng-template>
+		</smd-datatable-column>
+
+		
+
+
+
 </smd-datatable>
 
 

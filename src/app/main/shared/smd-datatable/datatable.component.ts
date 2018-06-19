@@ -31,7 +31,8 @@ import { isNullOrUndefined } from 'util';
 
 import { SmdPaginatorComponent } from '../smd-paginator/paginator.component';
 import { FormControl } from '@angular/forms';
-
+import { HttpClient } from '@angular/common/http';
+import { DatatableService } from './datatable.service';
 
 
 
@@ -304,7 +305,10 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 	constructor(differs: IterableDiffers,
 		private _viewContainer: ViewContainerRef,
 		public changeDetector: ChangeDetectorRef,
+
 		//TODO change ChangeDetectorRef to API Service
+		//Create service apiclass instead of injetcing HttpClient
+		private apiClass : DatatableService,
 		private apiServer: ChangeDetectorRef) {
 		this.differ = differs.find([]).create(null);
 		this.filterInput = new FormControl('');
@@ -341,8 +345,6 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 			if (column.filterable) {
 				this.columnFilterInputs[column.id] = new FormControl('');
 				this.columnFilterInputs[column.id].valueChanges
-					.debounceTime(400)
-					.distinctUntilChanged()
 					.subscribe(val => {
 						this._queryTableData().then(() => { }, () => { });
 					});
@@ -651,6 +653,7 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 
 
 				this.token = Math.random();
+				
 
 
 				//TODO call API
@@ -678,7 +681,21 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 				// 	this.loading = false;
 				// 	reject();
 				// });
-			}
+
+				this.apiClass.get( this.dataUrl).subscribe(
+									(data : any[])=>{
+										console.log(data)
+										
+										this.lastQueryExecutedPage = page;
+										//this.models = data[this.dataHeader];
+										this.models = data
+										this.rowCount = data.length;
+										this._updateRows();
+										this.dataChange.emit({ offset: offset, limit: limit, data: data });
+										resolve();
+									}
+								)
+				}
 			else {
 				reject();
 			}
