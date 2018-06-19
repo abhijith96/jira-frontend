@@ -129,7 +129,15 @@ export const navigation = [
                         'bg'       : '#F44336',
                         'fg'       : '#FFFFFF'
                     }
-            }
+            },
+            {
+                    'id'       : 'new-issue-type',
+                    'title'    : 'New Issue Type',
+                    'translate': 'NAV.ACADEMY',
+                    'type'     : 'item',
+                    'icon'     : 'school',
+                    'url'      : '/apps/new-issue-type'
+            },
             
         ]
     },

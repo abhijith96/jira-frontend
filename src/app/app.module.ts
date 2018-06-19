@@ -17,6 +17,7 @@ import { FuseFakeDbService } from './fuse-fake-db/fuse-fake-db.service';
 import { FuseMainModule } from './main/main.module';
 import { AppStoreModule } from './store/store.module';
 
+
 const appRoutes: Routes = [
     {
         path        : 'apps',
@@ -47,7 +48,7 @@ const appRoutes: Routes = [
         FuseSharedModule,
 
         AppStoreModule,
-        FuseMainModule
+        FuseMainModule,
     ],
     bootstrap   : [
         AppComponent

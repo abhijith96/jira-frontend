@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl,  } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -45,24 +45,24 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
     }
 
     ngOnInit(){
-        
-        //Using promises
-        // this.todoService.getIssuesFromServer().then(resolve=>{
-        //                             console.log("Hello  " + JSON.stringify(resolve) )}
-        //                             ,reject=>{}) 
+            /*   
+                Using promises
+                this.todoService.getIssuesFromServer().then(resolve=>{
+                                            console.log("Hello  " + JSON.stringify(resolve) )}
+                                            ,reject=>{}) 
 
-        //Using subscriptions
-            // this.todoService.getIssuesFromServer().subscribe(res=>{
-            //             console.log("Hello ")
-            //             console.log(JSON.stringify(res))
+                Using subscriptions
+                    this.todoService.getIssuesFromServer().subscribe(res=>{
+                                console.log("Hello ")
+                                console.log(JSON.stringify(res))
+                                
+                                this.controlArray = Object.keys(res).map(data=>{
+                                        return [data, res[data] ]
+                                })
+
                         
-            //             this.controlArray = Object.keys(res).map(data=>{
-            //                     return [data, res[data] ]
-            //             })
-
-                        
-            // })
-
+                    })
+            */
             
 
         // Subscribe to update the current todo

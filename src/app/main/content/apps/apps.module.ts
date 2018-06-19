@@ -14,6 +14,10 @@ const routes = [
     {
         path: 'todo-table',
         loadChildren  : './todo-table/todo-table.module#TodoTableModule'
+    },
+    {
+        path : 'new-issue-type',
+        loadChildren : './new-issue-type/new-issue-type.module#NewIssueTypeModule'
     }
     
     

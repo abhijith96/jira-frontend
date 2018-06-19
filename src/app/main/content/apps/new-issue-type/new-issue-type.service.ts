@@ -1,17 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { _baseUrl } from '../../content/apps/apiCall';
+import { _baseUrl } from '../apiCall';
 @Injectable({
   providedIn: 'root'
 })
-export class DatatableService {
+export class NewIssueTypeService {
   private _baseUrl = _baseUrl;
   constructor(private http : HttpClient) { }
-  
-  get(url ){
-          return this.http.get( this._baseUrl+  url);
+
+  getAvailFields(){
+      return this.http.get(_baseUrl + 'fields')
   }
-
-
-  
 }

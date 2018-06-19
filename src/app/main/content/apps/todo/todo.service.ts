@@ -3,17 +3,15 @@ import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { FuseUtils }  from '@fuse/utils';
 
-import { FuseUtils } from '@fuse/utils';
-
-//import { Todo } from './todo.model';
+import {_baseUrl } from '../apiCall';
 
 @Injectable()
 export class TodoService implements Resolve<any>
 {   
-
-    private _baseUrl = "http://192.168.70.122:3000/api/";
-
+    
+    private _baseUrl = _baseUrl; 
 
     stuffFromBackend = []
 
