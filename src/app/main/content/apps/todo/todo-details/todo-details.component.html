@@ -1,3 +1,4 @@
+
 <div *ngIf="!todo" fxLayout="column" fxLayoutAlign="center center" fxFlex>
     <mat-icon class="s-120 mb-12 select-todo-icon hint-text" *fuseIfOnDom
               [@animate]="{value:'*',params:{delay:'300ms',scale:'0.2'}}">check_box
@@ -65,10 +66,12 @@
 
                 <div>
                         <div *ngFor="let field of controlArray">
-                            <mat-form-field fxFill>
+                            <mat-form-field fxFill  >
                                     <input matInput value="{{field[1]}}" 
                                     formControlName="{{field[0]}}" 
                                     placeholder="{{field[0] }}"
+        
+                                    [readonly]="field[0] === '_id'"
                                      >
                             </mat-form-field>  
                                 
@@ -120,10 +123,11 @@
                           maxlength="500">
                 </textarea>
                 <mat-hint align="end">{{notes.value.length}} / 500</mat-hint>
-            </mat-form-field> -->
+            </mat-form-field> 
 
-            <!-- Adding a new form field and value-->
-            <div>
+             Adding a new form field and value-->
+                <!-- Add the button to add new fields-->
+             <!-- <div>
                     <mat-form-field  class="" fxFlex>
                             <textarea  [(ngModel)]="newFieldName" [ngModelOptions]="{standalone: true}"   matInput placeholder="Field Name">
 
@@ -143,7 +147,7 @@
             </div>
             <br>
             <br>
-            <br>
+            <br> -->
             
             <button *ngIf="formType === 'new'"
                     mat-raised-button class="mat-accent"
@@ -151,12 +155,12 @@
             </button>
             
             
-            <h6>
+            <!-- <h6>
                 {{ newFieldName   }}
                 {{ newFieldValue }}
                 {{stuff}}
             </h6>
-            <h6>{{ todoForm.value | json}}</h6>
+            <h6>{{ todoForm.value | json}}</h6> -->
 
         </form>
     

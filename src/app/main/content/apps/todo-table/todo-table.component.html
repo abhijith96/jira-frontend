@@ -1,34 +1,37 @@
-<smd-datatable dataUrl="issues2" dataHeader="jobs" [paginated]="true"
-	 showCheckBox="true" [responsive]="true" [filterEnabled]="true" [showTableFilter]="false">
-		
-		<smd-datatable-column title="ID" field="_id" sortable="true" [filterable]="true">
-			<ng-template let-model="data">
-				{{model._id}}
-			</ng-template>
-		</smd-datatable-column>
-		
-		<smd-datatable-column title="Name" field="name" sortable="true" [filterable]="true">
-			<ng-template let-model="data">
-				{{model.name}}
-			</ng-template>
-		</smd-datatable-column>
+<div  class="page-layout simple fullwidth" fusePerfectScrollbar>
+			<h1 class="text-center" > ALL ISSUES </h1>
+			
+			<smd-datatable dataUrl="issues2" dataHeader="jobs" [paginated]="true"
+				showCheckBox="true" [responsive]="true" [filterEnabled]="true" [showTableFilter]="false">
+					
+					<smd-datatable-column title="ID" field="_id" sortable="true" [filterable]="true" > 
+						<ng-template let-model="data"   >
+							<a routerLink='/apps/todo/all/{{ model._id }}' >{{model._id}}</a>	
+						</ng-template>
+					</smd-datatable-column>
+					
+					<smd-datatable-column title="Name" field="name" sortable="true" [filterable]="true">
+						<ng-template let-model="data">
+							{{model.name}}
+						</ng-template>
+					</smd-datatable-column>
 
-		<smd-datatable-column title="Issue Id" field="name" sortable="true" [filterable]="true">
-			<ng-template let-model="data">
-				{{model.issueType}}
-			</ng-template>
-		</smd-datatable-column>
+					<smd-datatable-column title="Issue Id" field="name" sortable="true" [filterable]="true">
+						<ng-template let-model="data">
+							{{model.issueType}}
+						</ng-template>
+					</smd-datatable-column>
 
-		<smd-datatable-column title="Project ID" field="name" sortable="true" [filterable]="true">
-			<ng-template let-model="data">
-				{{model.projectId}}
-			</ng-template>
-		</smd-datatable-column>
+					<smd-datatable-column title="Project ID" field="name" sortable="true" [filterable]="true">
+						<ng-template let-model="data">
+							{{model.projectId}}
+						</ng-template>
+					</smd-datatable-column>
 
-		
-
-
-
-</smd-datatable>
+					
 
 
+
+			</smd-datatable>
+
+</div>
