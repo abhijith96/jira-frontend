@@ -27,7 +27,8 @@ const routes : Routes = [{
         MatRippleModule,
         MatSelectModule,
         MatSidenavModule,  
-        DatatableModule
+        DatatableModule,
+        MatInputModule
         
   ],
   declarations: [TodoTableComponent,

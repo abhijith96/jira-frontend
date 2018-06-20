@@ -1,24 +1,29 @@
 <div class="page-layout simple fullwidth" fusePerfectScrollbar>      
       <h1 class="text-center">Add New Issue Type</h1>
-      <mat-grid-list cols="2" rowHeight="5:1">
-        <mat-grid-tile>
-          <div>
-              <button  mat-raised-button color="accent" (click)="displayAvailableFields()" >Choose Field</button>
-          </div>
-            <button  mat-raised-button color="accent">Add New Field</button>       
-        </mat-grid-tile>
-
-        <mat-grid-tile>
+      
+       
+           <mat-list role="list">
+                  <mat-list-item role="listitem" *ngFor="let field of availableFields" (click)="addField(field)" >
+                              {{field.name}}
+                  </mat-list-item>
+           </mat-list>
+            
+        
             
           <form [formGroup]="fieldListForm"  >
                 <div *ngFor="let field of fieldsArray" >
-                      <mat-form-field fxFill >
-                            <!-- <input matInput > -->
-                      </mat-form-field>
+                      
+                         <mat-form-field fxFill  >
+                              <input matInput value="{{field[1]}}" 
+                                          formControlName="{{field[0]}}" 
+                                          placeholder="{{field[0] }}"
+                              
+                               >
+                      </mat-form-field>   
+                      
                 </div>
 
           </form>
-        </mat-grid-tile>
-        
-      </mat-grid-list>
+          <h3>{{fieldListForm.value | json     }}</h3>
+        <button (click)="sendForm(fieldListForm.value)" >Send Form</button>
 </div>

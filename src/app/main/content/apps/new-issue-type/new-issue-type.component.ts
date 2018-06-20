@@ -11,8 +11,9 @@ import {NewIssueTypeService } from './new-issue-type.service'
   styleUrls: ['./new-issue-type.component.scss']
 })
 export class NewIssueTypeComponent implements OnInit {
-  private availableFields :any[];
+  private availableFields : any[] ;
   private fieldListForm : FormGroup;
+  private fieldsArray : any[];
 
 
 
@@ -36,9 +37,9 @@ export class NewIssueTypeComponent implements OnInit {
 
   getAvailableFieldsFromServer(){
       this.newIssueService.getAvailFields().subscribe(
-            (data:any[]) =>{
-                    this.availableFields = data;
-                    console.log(this.availableFields)
+            (data : any[]) =>{
+                    this.availableFields =data  ;
+                    console.log( "availableFields is : " +  this.availableFields)
             }
       )
   }
@@ -47,4 +48,22 @@ export class NewIssueTypeComponent implements OnInit {
                   console.log(data.name)
         } ) )
   }
+  addField(field){
+      console.log(field)
+      this.fieldListForm.addControl(field.name, new FormControl())
+      console.log(this.fieldListForm.getRawValue())
+      let stuff =this.fieldListForm.value
+      this.fieldsArray = Object.keys(stuff).map(data=>{
+        return [data, stuff[data]]
+    })
+    console.log(this.fieldsArray)
+  }
+  sendForm(data){
+        this.newIssueService.sendNewIssueType(data).subscribe(
+              (data)=>{
+                    console.log("Succes : New Issue Type Added")
+              }
+        )
+  }
 }
+//Import matinput thats the problem with the search thing TODO

@@ -1,12 +1,12 @@
 <div  class="page-layout simple fullwidth" fusePerfectScrollbar>
 			<h1 class="text-center" > ALL ISSUES </h1>
 			
-			<smd-datatable dataUrl="issues2" dataHeader="jobs" [paginated]="true"
+			<smd-datatable dataUrl="find-issues" dataHeader="jobs" [paginated]="true"
 				showCheckBox="true" [responsive]="true" [filterEnabled]="true" [showTableFilter]="false">
 					
-					<smd-datatable-column title="ID" field="_id" sortable="true" [filterable]="true" > 
+					<smd-datatable-column title="Key" field="key" sortable="true" [filterable]="true" > 
 						<ng-template let-model="data"   >
-							<a routerLink='/apps/todo/all/{{ model._id }}' >{{model._id}}</a>	
+							<a routerLink='/apps/todo/all/{{ model._id }}' >{{model.key}}</a>	
 						</ng-template>
 					</smd-datatable-column>
 					
@@ -16,13 +16,13 @@
 						</ng-template>
 					</smd-datatable-column>
 
-					<smd-datatable-column title="Issue Id" field="name" sortable="true" [filterable]="true">
+					<smd-datatable-column title="Issue Type" field="issueType" sortable="true" [filterable]="true">
 						<ng-template let-model="data">
 							{{model.issueType}}
 						</ng-template>
 					</smd-datatable-column>
 
-					<smd-datatable-column title="Project ID" field="name" sortable="true" [filterable]="true">
+					<smd-datatable-column title="Project ID" field="projectId" sortable="true" [filterable]="true">
 						<ng-template let-model="data">
 							{{model.projectId}}
 						</ng-template>

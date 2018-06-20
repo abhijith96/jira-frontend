@@ -66,12 +66,12 @@
 
                 <div>
                         <div *ngFor="let field of controlArray">
-                            <mat-form-field fxFill  >
+                            <mat-form-field fxFill *ngIf="field[0]!=='_id'" >
                                     <input matInput value="{{field[1]}}" 
                                     formControlName="{{field[0]}}" 
                                     placeholder="{{field[0] }}"
-        
-                                    [readonly]="field[0] === '_id'"
+                                    
+                                    [readonly]="field[0] === 'key'"
                                      >
                             </mat-form-field>  
                                 

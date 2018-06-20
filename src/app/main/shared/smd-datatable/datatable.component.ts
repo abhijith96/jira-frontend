@@ -33,6 +33,7 @@ import { SmdPaginatorComponent } from '../smd-paginator/paginator.component';
 import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { DatatableService } from './datatable.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 
@@ -584,8 +585,8 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 				let offset = (page - 1) * size + 1;
 				// let offset = 1;
 				let limit: number = this.preFetchPages * size;
-				this.params.paramsMap.set("offset", ['' + offset]);
-				this.params.paramsMap.set("limit", ['' + limit]);
+				// this.params.paramsMap.set("offset", ['' + offset]);
+				// this.params.paramsMap.set("limit", ['' + limit]);
 				if (this.sortDirection != null) {
 					this.params.paramsMap.set("sort", ['' + this.sortField]);
 					this.params.paramsMap.set("direction", ['' + this.sortDirection]);
@@ -596,93 +597,109 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 				/**
 				 * Filter conditions START
 				 */
-				let filter = this.customFilter ? [this.customFilter] : [];
-				let andFilters = {};
-				let filters = this.customFilters ? this.customFilters : {};
-				if (this.filterEnabled) {
-					let andGrp = {
-						"type": "group",
-						"con": "and",
-						"items": []
-					};
-					let orGrp = {
-						"type": "group",
-						"con": "and",
-						"items": []
-					};
+				// let filter = this.customFilter ? [this.customFilter] : [];
+				// let andFilters = {};
+				// let filters = this.customFilters ? this.customFilters : {};
+				// if (this.filterEnabled) {
+				// 	let andGrp = {
+				// 		"type": "group",
+				// 		"con": "and",
+				// 		"items": []
+				// 	};
+				// 	let orGrp = {
+				// 		"type": "group",
+				// 		"con": "and",
+				// 		"items": []
+				// 	};
 					this.columns.forEach((column) => {
 						if (column.filterable) {
+							// console.log(column  )
 							if (this.columnFilterInputs[column.id] && this.columnFilterInputs[column.id].value) {
-								andGrp.items.push({
-									"type": "item",
-									"con": "and",
-									"operator": "startsWith",
-									"attr": column.field,
-									"value": this.columnFilterInputs[column.id].value.toLowerCase()
-								});
-								andFilters[column.field] = this.columnFilterInputs[column.id].value.toLowerCase();
+								console.log( column.field + "  and   " + this.columnFilterInputs[column.id].value )
+								this.params.set(column.field,this.columnFilterInputs[column.id].value)
+								
+								// let shit = this.columnFilterInputs[column.id]
+									// console.log( + " here it is ")
+								// andGrp.items.push({
+								// 	"type": "item",
+								// 	"con": "and",
+								// 	"operator": "startsWith",
+								// 	"attr": column.field,
+								// 	"value": this.columnFilterInputs[column.id].value.toLowerCase()
+								// });
+								// andFilters[column.field] = this.columnFilterInputs[column.id].value.toLowerCase();
 							}
-							if (column.filterable && this.filterInput.value) {
-								orGrp.items.push({
-									"type": "item",
-									"con": "or",
-									"operator": "startsWith",
-									"attr": column.field,
-									"value": this.filterInput.value.toLowerCase()
-								});
-								filters[column.field] = this.filterInput.value.toLowerCase();
+							else{
+									this.params.delete(column.field)						
 							}
+							/*
+									if (column.filterable && this.filterInput.value) {
+										// orGrp.items.push({
+										// 	"type": "item",
+										// 	"con": "or",
+										// 	"operator": "startsWith",
+										// 	"attr": column.field,
+										// 	"value": this.filterInput.value.toLowerCase()
+										// });
+										// filters[column.field] = this.filterInput.value.toLowerCase();
+									}
+							*/
 						}
 					});
-					if (andGrp.items.length > 0) {
-						filter.push(andGrp);
-					}
-					if (orGrp.items.length > 0) {
-						filter.push(orGrp);
-					}
-				}
-				for (let key of Object.keys(this.preFilters)) {
-					andFilters[key] = this.preFilters[key] + "<?EQ>";
-				}
-				this.params.set("filter", JSON.stringify(filter));
-				this.params.set("filters", JSON.stringify(filters));
-				this.params.set("andFilters", JSON.stringify(andFilters));
+					/*
+								if (andGrp.items.length > 0) {
+									filter.push(andGrp);
+								}
+								if (orGrp.items.length > 0) {
+									filter.push(orGrp);
+								}
+							}
+							for (let key of Object.keys(this.preFilters)) {
+								andFilters[key] = this.preFilters[key] + "<?EQ>";
+							}
+							this.params.set("filter", JSON.stringify(filter));
+							this.params.set("filters", JSON.stringify(filters));
+							this.params.set("andFilters", JSON.stringify(andFilters));
+
+								this.params.set("issueType","bigbug")
+								this.params.set("key","hi")
+					*/
 				/**
 				 * Filter conditions END
 				 */
-
+				console.log("the params are   :     " + this.params)
 
 				this.token = Math.random();
 				
 
-
-				//TODO call API
-				// this.apiClass.get('/' + this.dataUrl, this.params, this.token).subscribe(data => {
-				// 	if (data.status && typeof data.status === 'number') {
-				// 		if (data.status == 200) {
-				// 			data = data.data;
-				// 		}
-				// 		else {
-				// 			reject();
-				// 		}
-				// 	}
-				// 	if (this.token == data.token) {
-				// 		this.lastQueryExecutedPage = page;
-				// 		this.models = data[this.dataHeader];
-				// 		this.rowCount = data.count;
-				// 		this._updateRows();
-				// 		this.dataChange.emit({ offset: offset, limit: limit, data: data });
-				// 		resolve();
-				// 	} else {
-				// 		reject();
-				// 	}
-				// 	this.loading = false;
-				// }, (err) => {
-				// 	this.loading = false;
-				// 	reject();
-				// });
-
-				this.apiClass.get( this.dataUrl).subscribe(
+						/*
+								TODO call API
+								this.apiClass.get('/' + this.dataUrl, this.params, this.token).subscribe(data => {
+									if (data.status && typeof data.status === 'number') {
+										if (data.status == 200) {
+											data = data.data;
+										}
+										else {
+											reject();
+										}
+									}
+									if (this.token == data.token) {
+										this.lastQueryExecutedPage = page;
+										this.models = data[this.dataHeader];
+										this.rowCount = data.count;
+										this._updateRows();
+										this.dataChange.emit({ offset: offset, limit: limit, data: data });
+										resolve();
+									} else {
+										reject();
+									}
+									this.loading = false;
+								}, (err) => {
+									this.loading = false;
+									reject();
+								});
+						*/
+				this.apiClass.get( this.dataUrl,this.params ).subscribe(
 									(data : any[])=>{
 										console.log(data)
 										

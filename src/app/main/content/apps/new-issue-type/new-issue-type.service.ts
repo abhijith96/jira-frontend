@@ -11,4 +11,7 @@ export class NewIssueTypeService {
   getAvailFields(){
       return this.http.get(_baseUrl + 'fields')
   }
+  sendNewIssueType(data){
+      return this.http.post(_baseUrl+ 'new-issue-type',data)
+  }
 }

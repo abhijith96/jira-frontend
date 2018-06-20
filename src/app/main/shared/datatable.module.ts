@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatButtonModule, MatIconModule, MatMenuModule, MatFormFieldModule, MatCheckboxModule, MatTooltipModule, MatDialogModule, MatSelectModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatMenuModule, MatFormFieldModule, MatCheckboxModule, MatTooltipModule, MatDialogModule, MatSelectModule, MatInputModule } from '@angular/material';
 
 import { SmdDatatableActionButton, SmdDataTableCellComponent, SmdDataTableRowComponent, SmdDataTable, SmdContextualDatatableButton, SmdDataTableColumnComponent } from './smd-datatable';
 import { SmdPaginatorComponent } from 'app/main/shared/smd-paginator';
@@ -19,7 +19,9 @@ import { SmdPaginatorComponent } from 'app/main/shared/smd-paginator';
     MatCheckboxModule,
     MatTooltipModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   declarations: [
     SmdDataTable,
