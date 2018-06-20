@@ -613,13 +613,11 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 				// 	};
 					this.columns.forEach((column) => {
 						if (column.filterable) {
-							// console.log(column  )
+							//Set Params Only when Search Box is not empty
 							if (this.columnFilterInputs[column.id] && this.columnFilterInputs[column.id].value) {
 								console.log( column.field + "  and   " + this.columnFilterInputs[column.id].value )
 								this.params.set(column.field,this.columnFilterInputs[column.id].value)
 								
-								// let shit = this.columnFilterInputs[column.id]
-									// console.log( + " here it is ")
 								// andGrp.items.push({
 								// 	"type": "item",
 								// 	"con": "and",
@@ -664,10 +662,10 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 								this.params.set("issueType","bigbug")
 								this.params.set("key","hi")
 					*/
-				/**
-				 * Filter conditions END
-				 */
-				console.log("the params are   :     " + this.params)
+				
+				/*
+				  Filter conditions END
+				*/
 
 				this.token = Math.random();
 				
