@@ -18,6 +18,10 @@ const routes = [
     {
         path : 'new-issue-type',
         loadChildren : './new-issue-type/new-issue-type.module#NewIssueTypeModule'
+    },
+    {
+        path : 'projects',
+        loadChildren : './projects/projects.module#ProjectsModule'
     }
     
     
@@ -29,7 +33,6 @@ const routes = [
         RouterModule.forChild(routes),
         FuseAngularMaterialModule
     ],
-    declarations: []
 })
 export class FuseAppsModule
 {

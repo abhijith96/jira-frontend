@@ -309,7 +309,7 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 
 		//TODO change ChangeDetectorRef to API Service
 		//Create service apiclass instead of injetcing HttpClient
-		private apiClass : DatatableService,
+		private apiClass: DatatableService,
 		private apiServer: ChangeDetectorRef) {
 		this.differ = differs.find([]).create(null);
 		this.filterInput = new FormControl('');
@@ -576,6 +576,18 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 		this._queryTableData().then(() => { }, () => { });
 	}
 
+
+	// sortData(){
+	// 	this.models =this.models.sort( (a,b)=>{
+	// 				if(a.key < b.key)
+	// 						return -1;
+	// 				if(a.key>b.key)
+	// 						return 1;
+	// 				return 0;
+	// 		} )	
+	// }		
+	sortInfo;
+
 	private _queryTableData(): Promise<any> {
 		return new Promise((resolve, reject) => {
 			if (this.dataHeader && this.dataUrl) {
@@ -585,132 +597,167 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 				let offset = (page - 1) * size + 1;
 				// let offset = 1;
 				let limit: number = this.preFetchPages * size;
-				// this.params.paramsMap.set("offset", ['' + offset]);
-				// this.params.paramsMap.set("limit", ['' + limit]);
-				if (this.sortDirection != null) {
-					this.params.paramsMap.set("sort", ['' + this.sortField]);
-					this.params.paramsMap.set("direction", ['' + this.sortDirection]);
-				} else {
-					this.params.paramsMap.delete("sort");
-					this.params.paramsMap.delete("direction");
+				this.sortInfo = {
+					field: this.sortField,
+					direction: this.sortDirection
 				}
-				/**
+				// console.log(" Direction is " + JSON.stringify(sortInfo) )
+
+				/*
+						this.params.paramsMap.set("offset", ['' + offset]);
+						// this.params.paramsMap.set("limit", ['' + limit]);
+						if (this.sortDirection != null) {
+							// this.params.paramsMap.set("sort", ['' + this.sortField]);
+							// this.params.paramsMap.set("direction", ['' + this.sortDirection]);
+						} else {
+							this.params.paramsMap.delete("sort");
+							this.params.paramsMap.delete("direction");
+						}
+				*/
+
+				/*
 				 * Filter conditions START
 				 */
-				// let filter = this.customFilter ? [this.customFilter] : [];
-				// let andFilters = {};
-				// let filters = this.customFilters ? this.customFilters : {};
-				// if (this.filterEnabled) {
-				// 	let andGrp = {
-				// 		"type": "group",
-				// 		"con": "and",
-				// 		"items": []
-				// 	};
-				// 	let orGrp = {
-				// 		"type": "group",
-				// 		"con": "and",
-				// 		"items": []
-				// 	};
-					this.columns.forEach((column) => {
-						if (column.filterable) {
-							//Set Params Only when Search Box is not empty
-							if (this.columnFilterInputs[column.id] && this.columnFilterInputs[column.id].value) {
-								console.log( column.field + "  and   " + this.columnFilterInputs[column.id].value )
-								this.params.set(column.field,this.columnFilterInputs[column.id].value)
-								
-								// andGrp.items.push({
-								// 	"type": "item",
-								// 	"con": "and",
-								// 	"operator": "startsWith",
-								// 	"attr": column.field,
-								// 	"value": this.columnFilterInputs[column.id].value.toLowerCase()
-								// });
-								// andFilters[column.field] = this.columnFilterInputs[column.id].value.toLowerCase();
-							}
-							else{
-									this.params.delete(column.field)						
-							}
-							/*
-									if (column.filterable && this.filterInput.value) {
-										// orGrp.items.push({
-										// 	"type": "item",
-										// 	"con": "or",
-										// 	"operator": "startsWith",
-										// 	"attr": column.field,
-										// 	"value": this.filterInput.value.toLowerCase()
-										// });
-										// filters[column.field] = this.filterInput.value.toLowerCase();
-									}
-							*/
-						}
-					});
-					/*
-								if (andGrp.items.length > 0) {
-									filter.push(andGrp);
-								}
-								if (orGrp.items.length > 0) {
-									filter.push(orGrp);
-								}
-							}
-							for (let key of Object.keys(this.preFilters)) {
-								andFilters[key] = this.preFilters[key] + "<?EQ>";
-							}
-							this.params.set("filter", JSON.stringify(filter));
-							this.params.set("filters", JSON.stringify(filters));
-							this.params.set("andFilters", JSON.stringify(andFilters));
+				/*
+					let filter = this.customFilter ? [this.customFilter] : [];
+					let andFilters = {};
+					let filters = this.customFilters ? this.customFilters : {};
+					if (this.filterEnabled) {
+						let andGrp = {
+							"type": "group",
+							"con": "and",
+							"items": []
+						};
+						let orGrp = {
+							"type": "group",
+							"con": "and",
+							"items": []
+						};
+				*/
 
-								this.params.set("issueType","bigbug")
-								this.params.set("key","hi")
-					*/
-				
+				this.columns.forEach((column) => {
+					if (column.filterable) {
+						//Set Params Only when Search Box is not empty
+						if (this.columnFilterInputs[column.id] && this.columnFilterInputs[column.id].value) {
+							console.log(column.field + "  and   " + this.columnFilterInputs[column.id].value)
+							this.params.set(column.field, this.columnFilterInputs[column.id].value)
+
+							// andGrp.items.push({
+							// 	"type": "item",
+							// 	"con": "and",
+							// 	"operator": "startsWith",
+							// 	"attr": column.field,
+							// 	"value": this.columnFilterInputs[column.id].value.toLowerCase()
+							// });
+							// andFilters[column.field] = this.columnFilterInputs[column.id].value.toLowerCase();
+						}
+						else {
+							this.params.delete(column.field)
+						}
+						/*
+								if (column.filterable && this.filterInput.value) {
+									// orGrp.items.push({
+									// 	"type": "item",
+									// 	"con": "or",
+									// 	"operator": "startsWith",
+									// 	"attr": column.field,
+									// 	"value": this.filterInput.value.toLowerCase()
+									// });
+									// filters[column.field] = this.filterInput.value.toLowerCase();
+								}
+						*/
+					}
+				});
+				/*
+							if (andGrp.items.length > 0) {
+								filter.push(andGrp);
+							}
+							if (orGrp.items.length > 0) {
+								filter.push(orGrp);
+							}
+						}
+						for (let key of Object.keys(this.preFilters)) {
+							andFilters[key] = this.preFilters[key] + "<?EQ>";
+						}
+						this.params.set("filter", JSON.stringify(filter));
+						this.params.set("filters", JSON.stringify(filters));
+						this.params.set("andFilters", JSON.stringify(andFilters));
+
+							this.params.set("issueType","bigbug")
+							this.params.set("key","hi")
+				*/
+
 				/*
 				  Filter conditions END
 				*/
 
 				this.token = Math.random();
-				
 
-						/*
-								TODO call API
-								this.apiClass.get('/' + this.dataUrl, this.params, this.token).subscribe(data => {
-									if (data.status && typeof data.status === 'number') {
-										if (data.status == 200) {
-											data = data.data;
-										}
-										else {
-											reject();
-										}
-									}
-									if (this.token == data.token) {
-										this.lastQueryExecutedPage = page;
-										this.models = data[this.dataHeader];
-										this.rowCount = data.count;
-										this._updateRows();
-										this.dataChange.emit({ offset: offset, limit: limit, data: data });
-										resolve();
-									} else {
-										reject();
-									}
-									this.loading = false;
-								}, (err) => {
-									this.loading = false;
+
+				/*
+						TODO call API
+						this.apiClass.get('/' + this.dataUrl, this.params, this.token).subscribe(data => {
+							if (data.status && typeof data.status === 'number') {
+								if (data.status == 200) {
+									data = data.data;
+								}
+								else {
 									reject();
-								});
-						*/
-				this.apiClass.get( this.dataUrl,this.params ).subscribe(
-									(data : any[])=>{
-										console.log(data)
-										
-										this.lastQueryExecutedPage = page;
-										//this.models = data[this.dataHeader];
-										this.models = data
-										this.rowCount = data.length;
-										this._updateRows();
-										this.dataChange.emit({ offset: offset, limit: limit, data: data });
-										resolve();
-									}
-								)
-				}
+								}
+							}
+							if (this.token == data.token) {
+								this.lastQueryExecutedPage = page;
+								this.models = data[this.dataHeader];
+								this.rowCount = data.count;
+								this._updateRows();
+								this.dataChange.emit({ offset: offset, limit: limit, data: data });
+								resolve();
+							} else {
+								reject();
+							}
+							this.loading = false;
+						}, (err) => {
+							this.loading = false;
+							reject();
+						});
+				*/
+				this.apiClass.get(this.dataUrl, this.params).subscribe(
+					(data: any[]) => {
+						console.log(data)
+
+						this.lastQueryExecutedPage = page;
+						//this.models = data[this.dataHeader];
+
+						//DONE : Sort Received Data Based on Parameter
+						let sortParam = this.sortInfo;
+						let newKey = sortParam.field;
+						let direction = sortParam.direction;
+						data = data.sort((a, b) => {
+							if (direction == "ASC") {
+								if (a[newKey] < b[newKey])
+									return -1;
+								if (a[newKey] > b[newKey])
+									return 1;
+								return 0;
+							}
+							else {
+								if (a[newKey] > b[newKey])
+									return -1;
+								if (a[newKey] < b[newKey])
+									return 1;
+								return 0;
+
+							}
+						})
+
+						this.models = data
+						this.rowCount = data.length;
+						this._updateRows();
+						this.dataChange.emit({ offset: offset, limit: limit, data: data });
+						resolve();
+					}
+				)
+			}
 			else {
 				reject();
 			}

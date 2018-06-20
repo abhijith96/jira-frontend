@@ -104,8 +104,8 @@ export const navigation = [
             //     'id'       : 'mail-ngrx',
             
             {
-                'id'       : 'to-do',
-                'title'    : 'To-Do',
+                'id'       : 'my-issues',
+                'title'    : 'My Issues',
                 'translate': 'NAV.TODO',
                 'type'     : 'item',
                 'icon'     : 'check_box',
@@ -117,8 +117,8 @@ export const navigation = [
                 }
             },
             {
-                    'id'       : 'todo-Table',
-                    'title'    : 'Todo Table',
+                    'id'       : 'issues',
+                    'title'    : 'Issues',
                     'translate': 'NAV.MAIL.TITLE',
                     'type'     : 'item',
                     'icon'     : 'email',
@@ -138,6 +138,14 @@ export const navigation = [
                     'icon'     : 'school',
                     'url'      : '/apps/new-issue-type'
             },
+            {
+                'id'       : 'projects',
+                'title'    : 'Projects',
+                'translate': 'NAV.ACADEMY',
+                'type'     : 'item',
+                'icon'     : 'school',
+                'url'      : '/apps/projects'
+            }
             
         ]
     },

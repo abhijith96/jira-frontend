@@ -14,4 +14,8 @@ export class NewIssueTypeService {
   sendNewIssueType(data){
       return this.http.post(_baseUrl+ 'new-issue-type',data)
   }
+
+  sendNewField(field){
+      return this.http.post( _baseUrl + 'fields',field)
+  }
 }

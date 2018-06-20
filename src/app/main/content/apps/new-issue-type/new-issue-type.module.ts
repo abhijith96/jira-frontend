@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import {Routes, RouterModule } from '@angular/router';
-import { MatButtonModule, MatCheckboxModule, MatDatepickerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatMenuModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatGridList, MatGridListModule, MatList, MatListModule, MatListItem } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatDatepickerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatMenuModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatGridList, MatGridListModule, MatList, MatListModule, MatListItem, MatCardModule, MatSelectionList } from '@angular/material';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { NewIssueTypeComponent } from './new-issue-type.component';
 
@@ -20,7 +20,9 @@ const routes : Routes = [
     RouterModule.forChild(routes),
     FuseSharedModule,
     MatListModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule,
+    MatCardModule,
     
   ],
   declarations: [NewIssueTypeComponent],
