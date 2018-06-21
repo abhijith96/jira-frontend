@@ -1,49 +1,55 @@
-<div  class="page-layout simple fullwidth" fusePerfectScrollbar>
+<div  class="page-layout carded fullwidth" fusePerfectScrollbar>
+    <div class="top-bg mat-indigo-bg h-30"></div> 
+    <div class="center">  
     
-    <h1 class="text-center" > ALL Projects </h1>
-    
-    <smd-datatable dataUrl="projects" dataHeader="projects" [paginated]="true"
-      showCheckBox="true" [responsive]="true" [filterEnabled]="true" [showTableFilter]="false">
-        
-        <smd-datatable-column title="Project Key" field="projectKey" sortable="true" [filterable]="true" > 
-          <ng-template let-model="data"   >
-            <a routerLink='/apps/projects/all/{{ model._id }}' >{{model.projectKey}}</a>	
-          </ng-template>
-        </smd-datatable-column>
-
-        <smd-datatable-column title="Name" field="name" sortable="true" [filterable]="true" > 
-            <ng-template let-model="data"   >
-                  {{model.name}}
-            </ng-template>
-          </smd-datatable-column>
-
-          <smd-datatable-column title="Project Manager" field="projectManager" sortable="true" [filterable]="true" > 
-              <ng-template let-model="data"   >
-                    {{model.projectManager}}
-              </ng-template>
-            </smd-datatable-column>
-
-            <smd-datatable-column title="Type" field="type" sortable="true" [filterable]="true" > 
-                <ng-template let-model="data"   >
-                      {{model.type}}
-                </ng-template>
-              </smd-datatable-column>
-
-              <smd-datatable-column title="Description" field="description" sortable="true" [filterable]="true" > 
-                  <ng-template let-model="data"   >
-                        {{model.description}}
-                  </ng-template>
-                </smd-datatable-column>
-
-                <smd-datatable-column title="People" field="people" sortable="true" [filterable]="true" > 
+        <div class="header white-fg text-center" id="main-title">
+            <span class="text-center title" > ALL PROJECTS </span>
+        </div>
+          
+          <div class="content-card mat-white-bg">
+              <smd-datatable  dataUrl="projects" dataHeader="projects" [paginated]="true"
+                showCheckBox="true" [responsive]="true" [filterEnabled]="true" [showTableFilter]="false">
+                  
+                  <smd-datatable-column title="Project Key" field="projectKey" sortable="true" [filterable]="true" > 
                     <ng-template let-model="data"   >
-                          <!-- {{model.people }} -->
-                          <span *ngFor='let person of model.people' >{{person.user.email}}, </span>
+                      <a routerLink='/apps/projects/all/{{ model._id }}' >{{model.projectKey}}</a>	
                     </ng-template>
                   </smd-datatable-column>
-        
-      
 
-    </smd-datatable>
+                  <smd-datatable-column title="Name" field="name" sortable="true" [filterable]="true" > 
+                      <ng-template let-model="data"   >
+                            {{model.name}}
+                      </ng-template>
+                    </smd-datatable-column>
 
+                    <smd-datatable-column title="Project Manager" field="projectManager" sortable="true" [filterable]="true" > 
+                        <ng-template let-model="data"   >
+                              {{model.projectManager.name}}
+                        </ng-template>
+                      </smd-datatable-column>
+
+                      <smd-datatable-column title="Type" field="type" sortable="true" [filterable]="true" > 
+                          <ng-template let-model="data"   >
+                                {{model.type}}
+                          </ng-template>
+                        </smd-datatable-column>
+
+                        <!-- <smd-datatable-column title="Description" field="description" sortable="true" [filterable]="true" > 
+                            <ng-template let-model="data"   >
+                                  {{model.description}}
+                            </ng-template>
+                          </smd-datatable-column> -->
+
+                          <smd-datatable-column title="People" field="people" sortable="true" [filterable]="true" > 
+                              <ng-template let-model="data"   >
+                                    <!-- {{model.people }} -->
+                                    <span *ngFor='let person of model.people' >{{person.user.name}}  </span>
+                              </ng-template>
+                            </smd-datatable-column>
+                  
+                
+
+              </smd-datatable>
+        </div>
+  </div>
 </div>

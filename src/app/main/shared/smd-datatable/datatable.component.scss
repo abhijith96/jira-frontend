@@ -12,6 +12,7 @@ smd-datatable {
             border-collapse: collapse;
             white-space: nowrap;
             font-size: 13px;
+            font-weight: 350;
             text-align: center;
             tr {
                 position: relative;
@@ -28,8 +29,8 @@ smd-datatable {
                     th {
                         border: none;
                         cursor: default;
-                        font-size: 13px;
-                        font-weight: 400;
+                        font-size: 16px;
+                        font-weight: 500;
                         text-align: left;
                         padding: 0 12px;
                         &:first-of-type {
@@ -94,7 +95,9 @@ smd-datatable {
             tbody {
                 tr {
                     height: 48px;
-                    font-size: 12px;
+                    font-size: 14px;
+                    font-family: 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
+                    
                     position: relative;
                     transition-duration: .28s;
                     transition-timing-function: cubic-bezier(.4, 0, .2, 1);
@@ -126,8 +129,8 @@ smd-datatable {
                         }
                         & .smd-column-title {
                             display: none;
-                            font-size: 12px;
-                            font-weight: 700;
+                            font-size: 16px;
+                            font-weight: 500;
                         }
                         &.smd-stretch {
                             width: 100%;

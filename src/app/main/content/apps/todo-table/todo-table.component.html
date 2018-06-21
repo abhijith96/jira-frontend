@@ -1,37 +1,45 @@
-<div  class="page-layout simple fullwidth" fusePerfectScrollbar>
-			<h1 class="text-center" > ALL ISSUES </h1>
-			
-			<smd-datatable dataUrl="find-issues" dataHeader="jobs" [paginated]="true"
-				showCheckBox="true" [responsive]="true" [filterEnabled]="true" [showTableFilter]="false">
+<div  class="page-layout carded fullwidth" fusePerfectScrollbar>
+		<div class="top-bg mat-teal-bg h-30"></div> 
+		<div class="center">  
+
+			<div class="header white-fg text-center" id="main-title">
+					<span class="text-center title" > ALL ISSUES </span>
+			</div>
+		
+			<div class="content-card mat-white-bg">
 					
-					<smd-datatable-column title="Key" field="key" sortable="true" [filterable]="true" > 
-						<ng-template let-model="data"   >
-							<a routerLink='/apps/todo/all/{{ model._id }}' >{{model.key}}</a>	
-						</ng-template>
-					</smd-datatable-column>
-					
-					<smd-datatable-column title="Name" field="name" sortable="true" [filterable]="true">
-						<ng-template let-model="data">
-							{{model.name}}
-						</ng-template>
-					</smd-datatable-column>
+					<smd-datatable dataUrl="find-issues" dataHeader="jobs" [paginated]="true" fusePerfectScrollbar
+						showCheckBox="true" [responsive]="true" [filterEnabled]="true" [showTableFilter]="false">
+							
+							<smd-datatable-column title="Key" field="key" sortable="true" [filterable]="true" > 
+								<ng-template let-model="data"   >
+									<a routerLink='/apps/todo/all/{{ model._id }}' >{{model.key}}</a>	
+								</ng-template>
+							</smd-datatable-column>
+							
+							<smd-datatable-column title="Name" field="name" sortable="true" [filterable]="true">
+								<ng-template let-model="data">
+									{{model.name}}
+								</ng-template>
+							</smd-datatable-column>
 
-					<smd-datatable-column title="Issue Type" field="issueType" sortable="true" [filterable]="true">
-						<ng-template let-model="data">
-							{{model.issueType}}
-						</ng-template>
-					</smd-datatable-column>
+							<smd-datatable-column title="Issue Type" field="issueType" sortable="true" [filterable]="true">
+								<ng-template let-model="data">
+									{{model.issueType}}
+								</ng-template>
+							</smd-datatable-column>
 
-					<smd-datatable-column title="Project ID" field="projectId" sortable="true" [filterable]="true">
-						<ng-template let-model="data">
-							{{model.projectId}}
-						</ng-template>
-					</smd-datatable-column>
+							<smd-datatable-column title="Project ID" field="projectId" sortable="true" [filterable]="true">
+								<ng-template let-model="data">
+									{{model.projectId}}
+								</ng-template>
+							</smd-datatable-column>
 
-					
+							
 
 
 
-			</smd-datatable>
-
+					</smd-datatable>
+				</div>
+		</div>
 </div>
