@@ -1,13 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {Routes, RouterModule } from '@angular/router';
-import { ProjectsComponent } from './projects.component';
+
 import { MatButtonModule, MatCheckboxModule, MatDatepickerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatMenuModule, MatRippleModule, MatSelectModule, MatSidenavModule } from '@angular/material';
 import { DatatableModule } from 'app/main/shared/datatable.module';
 import { FuseSharedModule } from '@fuse/shared.module';
+import { ProjectsComponent } from './projects.component';
+
+import { ProjectComponent} from './project/project.component';
 
 const routes : Routes =[
     {
+      path : ':id',
+      component : ProjectComponent
+    },    
+  
+  {
       path : '**',
       component : ProjectsComponent
     }
@@ -30,7 +38,9 @@ const routes : Routes =[
       DatatableModule,
       FuseSharedModule
   ],
-  declarations: [ProjectsComponent],
-  exports : [ProjectsComponent]
+  declarations : [ProjectsComponent, ProjectComponent
+  ],
+  exports : [ProjectsComponent,
+            ProjectComponent]
 })
 export class ProjectsModule { }

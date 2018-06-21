@@ -130,14 +130,7 @@ export const navigation = [
                         'fg'       : '#FFFFFF'
                     }
             },
-            {
-                    'id'       : 'new-issue-type',
-                    'title'    : 'New Issue Type',
-                    'translate': 'NAV.ACADEMY',
-                    'type'     : 'item',
-                    'icon'     : 'school',
-                    'url'      : '/apps/new-issue-type'
-            },
+           
             {
                 'id'       : 'projects',
                 'title'    : 'Projects',
@@ -145,7 +138,15 @@ export const navigation = [
                 'type'     : 'item',
                 'icon'     : 'school',
                 'url'      : '/apps/projects'
-            }
+            },
+            {
+                'id'       : 'new-issue-type',
+                'title'    : 'New Issue Type',
+                'translate': 'NAV.ACADEMY',
+                'type'     : 'item',
+                'icon'     : 'school',
+                'url'      : '/apps/new-issue-type'
+        },
             
         ]
     },

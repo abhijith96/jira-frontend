@@ -733,14 +733,21 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 						let newKey = sortParam.field;
 						let direction = sortParam.direction;
 						data = data.sort((a, b) => {
+							
+														
+							
 							if (direction == "ASC") {
+								a[newKey] =a[newKey].toLowerCase()
+								b[newKey] =b[newKey].toLowerCase()
 								if (a[newKey] < b[newKey])
 									return -1;
 								if (a[newKey] > b[newKey])
 									return 1;
 								return 0;
 							}
-							else {
+							else if(direction ==="DESC"){
+								a[newKey] =a[newKey].toLowerCase()
+								b[newKey] =b[newKey].toLowerCase()
 								if (a[newKey] > b[newKey])
 									return -1;
 								if (a[newKey] < b[newKey])

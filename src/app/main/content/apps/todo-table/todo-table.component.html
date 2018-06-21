@@ -3,7 +3,7 @@
 		<div class="center">  
 
 			<div class="header white-fg text-center" id="main-title">
-					<span class="text-center title" > ALL ISSUES </span>
+					<span class="title" > ALL ISSUES </span>
 			</div>
 		
 			<div class="content-card mat-white-bg">
@@ -23,21 +23,13 @@
 								</ng-template>
 							</smd-datatable-column>
 
-							<smd-datatable-column title="Issue Type" field="issueType" sortable="true" [filterable]="true">
+							<smd-datatable-column title="Type" field="issueType" sortable="true" [filterable]="true">
 								<ng-template let-model="data">
 									{{model.issueType}}
 								</ng-template>
 							</smd-datatable-column>
 
-							<smd-datatable-column title="Project ID" field="projectId" sortable="true" [filterable]="true">
-								<ng-template let-model="data">
-									{{model.projectId}}
-								</ng-template>
-							</smd-datatable-column>
-
-							
-
-
+				
 
 					</smd-datatable>
 				</div>

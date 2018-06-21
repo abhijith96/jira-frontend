@@ -1,68 +1,103 @@
-<div class="page-layout simple fullwidth" fusePerfectScrollbar>
 
-      <div class="top-bg mat-accent-bg h-30"    ></div>
-      
-      <h1 class="text-center">Add New Issue Type</h1>
+<div class="page-layout carded fullwidth" fusePerfectScrollbar>
 
-      <div fxLayout="row wrap" fxFill>
-
-            <div fxLayout="row" fxFill>
-                  <div fxLayout="column" fxFlex>
-                        <mat-selection-list role="list" fxFlex>
-                              <mat-list-option role="listitem" *ngFor="let field of availableFields" (click)="selectField(field)" [class.mat-elevation-z7]>
-                                    {{field.name}}
-                              </mat-list-option>
-                        </mat-selection-list>
-
-                        <!--Add New Field-->
-                        <h1>Add New Field</h1>
-                        <mat-form-field fxFlex>
-                              <textarea [(ngModel)]="newFieldName" [ngModelOptions]="{standalone: true}" matInput placeholder="Field Name">
-                              
-                                                </textarea>
-
-                        </mat-form-field>
-                        <mat-form-field fxFlex>
-                              <textarea [(ngModel)]="newFieldId" [ngModelOptions]="{standalone: true}" matInput placeholder="Field Id">
-                              
-                              </textarea>
-
-                        </mat-form-field>
-                        <mat-form-field fxFlex>
-                              <textarea [(ngModel)]="newFieldType" [ngModelOptions]="{standalone: true}" matInput placeholder="Field Type">
+      <mat-card>
+                  <mat-grid-list cols="2">
+                   <mat-grid-tile [style.border-right]="'1px dashed #ddd'">
+                              <mat-card>
+                                          <mat-tab-group [selectedIndex]="0" fusePerfectScrollbar>
+                                                <mat-tab label="Select Field">
+                                                      <mat-card>
+                                                            <mat-selection-list role="list" fxFlex>
+                                                                  <mat-list-option role="listitem" *ngFor="let field of availableFields" (click)="selectField(field)" [class.mat-elevation-z7]>
+                                                                        {{field.name}}
+                                                                  </mat-list-option>
+                                                            </mat-selection-list>
+                                                      </mat-card>
+                                                </mat-tab>
+                                                <mat-tab label="Add New Field" >
+                                                      <mat-card fxFill>
+                                                            <div>
+                                                                  <mat-form-field fxFlex>
+                                                                        <textarea [(ngModel)]="newFieldName" [ngModelOptions]="{standalone: true}" matInput placeholder="Field Name">
+                                                                                                                        
+                                                                                                                                          </textarea>
                                     
-                              </textarea>
+                                                                  </mat-form-field>
+                                                            </div>
+                                                            <div>                                                            
+                                                                  <mat-form-field fxFlex>
+                                                                        <textarea [(ngModel)]="newFieldId" [ngModelOptions]="{standalone: true}" matInput placeholder="Field Id">
+                                                                                                                        
+                                                                                                                        </textarea>
+                                    
+                                                                  </mat-form-field>
+                                                            </div>
+                                                            <div>
+                                                                  <mat-form-field fxFlex>
+                                                                        <textarea [(ngModel)]="newFieldType" [ngModelOptions]="{standalone: true}" matInput placeholder="Field Type">
+                                                                                                                              
+                                                                        </textarea>
+                                                                        <!-- <mat-select placeholder="Field Type" [(ngModel)]="newFieldType" [ngModelOptions]="{standalone: true}" >
+                                                                                    <mat-option [value]="string">
+                                                                                          String
+                                                                                    </mat-option>
+                                                                                    <mat-option [value]="number">
+                                                                                          Number
+                                                                                    </mat-option>
+                                                                                    
+                                                                        </mat-select> -->
+                                    
+                                                                  </mat-form-field>
+                                                            </div>
+                                                            <div>
+                                                                  <mat-form-field fxFlex>
+                                                                        <!-- <textarea [(ngModel)]="newFieldIsRequired" [ngModelOptions]="{standalone: true}" matInput placeholder="Is Required">
+                                                                                                                                    
+                                                                        </textarea> -->
+                                                                        <mat-select placeholder="True" [(ngModel)]="newFieldIsRequired" [ngModelOptions]="{standalone: true}" >
+                                                                                    <mat-option [value]="true">
+                                                                                          True
+                                                                                    </mat-option>
+                                                                                    <mat-option [value]="false">
+                                                                                                False
+                                                                                    </mat-option>
+                                                                        </mat-select>
+                                    
+                                                                  </mat-form-field>
+                                                            </div>
+                              
+                                                            <button mat-button mat-raised-button class="mat-indigo-bg" (click)="addNewField()">
+                                                                  Add Form Field
+                                                            </button>
+                                                      </mat-card>
+                                                </mat-tab>
+                              
+                                          </mat-tab-group>
+                                    </mat-card>
+                  </mat-grid-tile>
 
-                        </mat-form-field>
-                        <mat-form-field fxFlex>
-                              <textarea [(ngModel)]="newFieldIsRequired" [ngModelOptions]="{standalone: true}" matInput placeholder="Is Required">
-                                          
-                              </textarea>
+                  <mat-grid-tile [style.border-right]="'1px dashed #ddd'" >
+                              <mat-card  >
+                                          <form [formGroup]="fieldListForm" fxFlex floatLabel="never" [class.mat-elevation-z6]>
+                                                <label class="text-center" > <h2>New Issue Type </h2></label>
+                                                <div *ngFor="let field of fieldsArray">
+                              
+                                                      <mat-form-field fxFill>
+                                                            <input matInput value="{{field[1]}}" formControlName="{{field[0]}}"
+                                                             placeholder="{{field[0] }}"  [readonly]="field[0] !== 'name'"  >
+                                                      </mat-form-field>
+                              
+                                                </div>
+                                                <button mat-raised-button class="mat-accent" (click)="sendForm(fieldListForm.value)">Send Form</button>
+                              
+                                          </form>
+                                    </mat-card>
 
-                        </mat-form-field>
-
-                        <button mat-button mat-raised-button class="mat-accen" (click)="addNewField()">
-                              Add Form Field
-                        </button>
-
-
-                  </div>
-                  <form [formGroup]="fieldListForm" fxFlex floatLabel="never" [class.mat-elevation-z2]>
-                        <div *ngFor="let field of fieldsArray">
-
-                              <mat-form-field fxFill>
-                                    <input matInput value="{{field[1]}}" formControlName="{{field[0]}}" placeholder="{{field[0] }}">
-                              </mat-form-field>
-
-                        </div>
-                        <button mat-raised-button (click)="sendForm(fieldListForm.value)">Send Form</button>
-
-                  </form>
-            </div>
-
-
-
-      </div>
+                  </mat-grid-tile>
+                  
+                  </mat-grid-list>
+      </mat-card>
 
 
 </div>

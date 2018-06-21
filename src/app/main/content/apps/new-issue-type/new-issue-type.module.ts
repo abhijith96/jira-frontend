@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import {Routes, RouterModule } from '@angular/router';
 
-import { MatButtonModule, MatCheckboxModule, MatDatepickerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatMenuModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatGridList, MatGridListModule, MatList, MatListModule, MatListItem, MatCardModule, MatSelectionList } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatDatepickerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatMenuModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatGridList, MatGridListModule, MatList, MatListModule, MatListItem, MatCardModule, MatSelectionList, MatTabsModule } from '@angular/material';
 import { NgxDnDModule } from '@swimlane/ngx-dnd';
 
 import { FuseSharedModule } from '@fuse/shared.module';
@@ -34,10 +34,9 @@ const routes : Routes = [
     MatSelectModule,
     MatSidenavModule,
     MatRippleModule,
+    MatTabsModule
     // FuseAngularMaterialModule,
     // FuseMaterialColorPickerModule,
-    NgxDnDModule
-    
   ],
   declarations: [NewIssueTypeComponent],
   exports : [NewIssueTypeComponent]

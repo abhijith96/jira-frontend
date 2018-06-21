@@ -95,26 +95,26 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
                             });
                     }
                 });
+            /*
+                Subscribe to update on tag change
+                this.onTagsChanged =
+                    this.todoService.onTagsChanged
+                        .subscribe(labels => {
+                            this.tags = labels;
+                        });
 
-        // Subscribe to update on tag change
-        // this.onTagsChanged =
-        //     this.todoService.onTagsChanged
-        //         .subscribe(labels => {
-        //             this.tags = labels;
-        //         });
-
-        // // Subscribe to update on tag change
-        // this.onNewTodoClicked =
-        //     this.todoService.onNewTodoClicked
-        //         .subscribe(() => {
-        //             this.todo = new Todo({});
-        //             this.todo.id = FuseUtils.generateGUID();
-        //             this.formType = 'new';
-        //             this.todoForm = this.createTodoForm();
-        //             this.focusTitleField();
-        //             this.todoService.onCurrentTodoChanged.next([this.todo, 'new']);
-        //         });
-
+                // Subscribe to update on tag change
+                this.onNewTodoClicked =
+                    this.todoService.onNewTodoClicked
+                        .subscribe(() => {
+                            this.todo = new Todo({});
+                            this.todo.id = FuseUtils.generateGUID();
+                            this.formType = 'new';
+                            this.todoForm = this.createTodoForm();
+                            this.focusTitleField();
+                            this.todoService.onCurrentTodoChanged.next([this.todo, 'new']);
+                        });
+            */
                 
         
     }

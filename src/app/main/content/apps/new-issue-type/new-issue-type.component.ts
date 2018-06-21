@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormControl,FormGroup, FormBuilder } from '@angular/forms';
 
 import {NewIssueTypeService } from './new-issue-type.service'
-import { MatSelectionList} from '@angular/material';
-
 
 @Component({
   selector: 'app-new-issue-type',
@@ -13,8 +11,8 @@ import { MatSelectionList} from '@angular/material';
 export class NewIssueTypeComponent implements OnInit {
   private availableFields : any[] =[ ];
   private fieldListForm : FormGroup;
-  private fieldsArray : any[];
-  private tempFields : any[];
+  private fieldsArray : any[]; //Array of fields currently in form
+  private tempFields : any[]; //Array containing all Field Objects in Fields master
 
   private newFieldName : string;
   private newFieldId : string;
@@ -34,11 +32,11 @@ export class NewIssueTypeComponent implements OnInit {
   }
   
   createFieldListForm(){
-        let newForm = this.formBuilder.group({});
+        let newForm = this.formBuilder.group({ "name": new FormControl() });
         return newForm
   }
 
-
+//TODO Check how you map fields whether its the id or the name
 
   getAvailableFieldsFromServer(){
       this.newIssueService.getAvailFields().subscribe(
@@ -53,12 +51,16 @@ export class NewIssueTypeComponent implements OnInit {
                   //   console.log("available fields are : " + this.availableFields)
                     
                   //Update Form
-                    let stuff =this.fieldListForm.value
-                    this.fieldsArray = Object.keys(stuff).map(data1=>{
-                    return [data1, stuff[data1]]
-                  })
+                    this.updateForm()
             }
       )
+  }
+
+  updateForm(){
+      let stuff =this.fieldListForm.value
+      this.fieldsArray = Object.keys(stuff).map(data1=>{
+      return [data1, stuff[data1]]
+    })
   }
 
   addRequiredFieldsToForm(){
@@ -81,14 +83,29 @@ export class NewIssueTypeComponent implements OnInit {
             this.fieldListForm.addControl(field.name, new FormControl())     
       }
       //Update Form
-      let stuff =this.fieldListForm.value
-      this.fieldsArray = Object.keys(stuff).map(data=>{
-        return [data, stuff[data]]
-    })
+      this.updateForm()
   }
 
   sendForm(data){
-        this.newIssueService.sendNewIssueType(data).subscribe(
+        //Iterates through tempfields array , if form.value contains that fields name then
+            //    pushes its object id to fields array.
+        console.log(data)
+        let issueTypeName = this.fieldListForm.getRawValue().name
+        let newType = {"name": issueTypeName }
+        let formValue :any = this.fieldListForm.getRawValue()
+        console.log("Form Value is " + JSON.stringify(formValue))
+        let fields : any[] =[];
+        this.tempFields.filter(
+                  (obj)=>{
+                        if( formValue.hasOwnProperty(obj.name)  ){
+                              fields.push(obj._id)
+                        }
+                  }
+         )        
+         newType["fields"] = fields
+
+        console.log(issueTypeName + " Fields are  " + fields)
+        this.newIssueService.sendNewIssueType(newType).subscribe(
               (data)=>{
                     console.log("Succes : New Issue Type Added")
               }
@@ -108,6 +125,10 @@ export class NewIssueTypeComponent implements OnInit {
         this.newIssueService.sendNewField(newField)
         .subscribe(data=>{
                   console.log(data)
+                  this.tempFields.push(data)
+                  console.log("All available fields are : " + JSON.stringify(this.tempFields))
+                  this.updateForm()
+                  
         },
             error=>{
                         console.log(error)
