@@ -1,3 +1,31 @@
-<p>
-  project-details works!
-</p>
+<mat-card>
+    <mat-list *ngIf="selectedProject">
+      <mat-list-item>
+        <h3 mat-line>Name</h3>
+        <p mat-line>
+          <span>{{selectedProject.name}}</span>
+        </p>
+      </mat-list-item>
+
+      <mat-list-item>
+          <h3 mat-line>Description</h3>
+          <p mat-line>
+            <span>{{selectedProject.description}}</span>
+          </p>
+        </mat-list-item>
+
+        <mat-list-item>
+            <h3 mat-line>Type</h3>
+            <p mat-line>
+              <span>{{selectedProject.type}}</span>
+            </p>
+          </mat-list-item>
+
+          <mat-list-item>
+              <h3 mat-line>People Involved</h3>
+              <p mat-line *ngFor="let p of people ">
+                <span>{{p.user.name}} </span>  
+              </p>
+            </mat-list-item>
+    </mat-list>
+  </mat-card>

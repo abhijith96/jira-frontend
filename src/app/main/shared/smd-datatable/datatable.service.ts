@@ -14,7 +14,8 @@ export class DatatableService {
               return this.http.get( this._baseUrl+  url +'?' +params);         
           }
           else{
-            return this.http.get( this._baseUrl+url);                       
+             console.log("Making the new request toooo " + this._baseUrl+url)
+             return this.http.get( this._baseUrl+url);                       
           }
   }
 

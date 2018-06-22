@@ -59,7 +59,7 @@ export class FuseNavbarComponent implements OnInit, OnDestroy
     {
         this.router.events.subscribe(
             (event) => {
-                    this.toggleSidebarFolded()
+                    // this.toggleSidebarFolded()
                 if ( event instanceof NavigationEnd )
                 {
                     if ( this.sidebarService.getSidebar('navbar') )
@@ -86,7 +86,7 @@ export class FuseNavbarComponent implements OnInit, OnDestroy
 
     toggleSidebarOpened()
     {
-        this.sidebarService.getSidebar('navbar').toggleOpen();
+        // this.sidebarService.getSidebar('navbar').toggleOpen();
     }
 
     toggleSidebarFolded()

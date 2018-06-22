@@ -1,3 +1,38 @@
-<p>
-  project-issues works!
-</p>
+<div class="content-card mat-white-bg">
+
+  <smd-datatable *ngIf="selectedProjectId"  dataUrl="issuesbypid/{{selectedProjectId}}" dataHeader="jobs" [paginated]="true" fusePerfectScrollbar showCheckBox="true" [responsive]="true"
+    [filterEnabled]="true" [showTableFilter]="false">
+
+    <smd-datatable-column title="Key" field="key" sortable="true" [filterable]="true">
+      <ng-template let-model="data">
+        <a routerLink='/apps/todo/all/{{ model._id }}'>{{model.key}}</a>
+      </ng-template>
+    </smd-datatable-column>
+
+    <smd-datatable-column title="Title" field="title" sortable="true" [filterable]="true">
+      <ng-template let-model="data">
+        {{model.title}}
+      </ng-template>
+    </smd-datatable-column>
+
+    <smd-datatable-column title="Type" field="issueType" sortable="true" [filterable]="true">
+      <ng-template let-model="data">
+        {{model.issueType}}
+      </ng-template>
+    </smd-datatable-column>
+
+
+    <smd-datatable-column title="Status" field="status" sortable="true" [filterable]="true">
+      <ng-template let-model="data">
+        {{model.status}}
+      </ng-template>
+    </smd-datatable-column>
+
+    <smd-datatable-column title="Resolution" field="resolution" sortable="true" [filterable]="true">
+      <ng-template let-model="data">
+        {{model.resolution}}
+      </ng-template>
+    </smd-datatable-column>
+
+  </smd-datatable>
+</div>

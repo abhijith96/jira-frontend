@@ -13,8 +13,6 @@ export class TodoTableComponent implements OnInit {
 
   ngOnInit() {
   }
-  // navigateTo(){
-  //     this.router.navigate(['/apps/todo'])
-  // }
+ 
 
 }

@@ -1,3 +1,15 @@
-<p>
-  project-issue-types works!
-</p>
+<mat-card>
+    <mat-list *ngIf="selectedProject" >
+        <mat-list-item>
+            <h3 mat-line>Issue Types</h3>
+            <p mat-line *ngFor="let i of issueTypes">
+              <span>{{i}}</span>
+            </p>
+          </mat-list-item>
+    </mat-list>
+
+    <button mat-fab color="primary">
+            <mat-icon (click)="openDialog()" >add</mat-icon>
+    </button>
+</mat-card>
+

@@ -17,17 +17,23 @@ export class ProjectComponent implements OnInit {
 
 
   ngOnInit() {
+        
         this.route.params.subscribe(param=> {this.getProjectById(param)})
   }
 
   getProjectById(data){
-            this.projectService.getProjectByIdFromServer(data).subscribe(
-                (data :any )=>{
-                          this.currentProject = data;
-                          console.log("Current Project is " + JSON.stringify(this.currentProject))
-                          console.log("Name is " + this.currentProject["name"] )
-                }
-            )
+          //  this.projectService.getProjectByIdFromServer(data)
+          //  this.projectService.selectedProjectObservable.subscribe(
+          //    data=>{
+          //             this.currentProject = data
+          //    }
+          //  )
+          this.projectService.getProjectByIdFromServer(data).subscribe(
+              data=>{
+                    this.currentProject = data;
+              }
+          )
+            
   }
 
   goBack(): void {
