@@ -1,15 +1,15 @@
 <mat-card>
     <mat-list *ngIf="selectedProject" >
         <mat-list-item>
-            <h3 mat-line>Issue Types</h3>
+            <h1 mat-line>Issue Types</h1>
             <p mat-line *ngFor="let i of issueTypes">
-              <span>{{i}}</span>
+              <span>{{i.name}}</span>
             </p>
           </mat-list-item>
     </mat-list>
 
     <button mat-fab color="primary">
-            <mat-icon (click)="openDialog()" >add</mat-icon>
+            <mat-icon (click)="goToCreateNewIssueType()" >add</mat-icon>
     </button>
 </mat-card>
 

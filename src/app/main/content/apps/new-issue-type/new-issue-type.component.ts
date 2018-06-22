@@ -19,6 +19,9 @@ export class NewIssueTypeComponent implements OnInit {
   private newFieldType : string;
   private newFieldIsRequired : string ="false";
   
+  projectList : any[];
+  selectedProject : any;
+  all : string ="ALL";
 
 
   constructor(private newIssueService : NewIssueTypeService,
@@ -27,7 +30,7 @@ export class NewIssueTypeComponent implements OnInit {
   ngOnInit() {
       this.fieldListForm = this.createFieldListForm();
       this.getAvailableFieldsFromServer()
-
+      this.getProjects()
       
   }
   
@@ -103,7 +106,7 @@ export class NewIssueTypeComponent implements OnInit {
                   }
          )        
          newType["fields"] = fields
-
+         newType["pid"]=this.selectedProject;
         console.log(issueTypeName + " Fields are  " + fields)
         this.newIssueService.sendNewIssueType(newType).subscribe(
               (data)=>{
@@ -134,6 +137,19 @@ export class NewIssueTypeComponent implements OnInit {
                         console.log(error)
             })
                          
+  }
+
+  getProjects(){
+        this.newIssueService.getProjectsList().subscribe(
+                  (data :any[])=>{
+                              this.projectList = data.map(project=>{
+                                                return  { name : project.name,
+                                                            pid : project._id   };   
+                              });
+                        console.log("Projects list are  " +this.projectList)
+                  }
+        )
+       
   }
 
 }

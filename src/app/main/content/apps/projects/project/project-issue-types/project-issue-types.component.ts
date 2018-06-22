@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ProjectService} from '../project.service';
 import { ActivatedRoute } from '@angular/router';
 import {MatDialog} from '@angular/material';
+import { SendHelpComponent } from '../send-help/send-help.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-project-issue-types',
@@ -14,7 +16,8 @@ export class ProjectIssueTypesComponent implements OnInit {
   issueTypes :any;
   constructor(private projectService : ProjectService,
     private route : ActivatedRoute,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+      private router : Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(param=> {this.getProjectById(param)})
@@ -40,8 +43,11 @@ export class ProjectIssueTypesComponent implements OnInit {
      
   }
 
-  openDialog(){
-        // this.dialog.open()
+  goToCreateNewIssueType(){
+        this.router.navigate(['/apps/new-issue-type'])
   }
 
 }
+
+
+

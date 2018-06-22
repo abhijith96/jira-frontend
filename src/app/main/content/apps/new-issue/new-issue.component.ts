@@ -9,7 +9,10 @@ import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 })
 export class NewIssueComponent implements OnInit {
   issueTypes : any[];
+  projectList : any[];
   selectedIssueType : any;
+  selectedProject : any;
+
   isLinear = false;
   selectedTypeFields : any[];
 
@@ -23,6 +26,7 @@ export class NewIssueComponent implements OnInit {
   ngOnInit() {
         this.issueForm =this.createForm()  
         this.getIssueTypes()
+        this.getProjects()
   }
 
   createForm(){
@@ -44,6 +48,7 @@ export class NewIssueComponent implements OnInit {
                      })
             //Set value of formcontorl issuetype to value of selected IssueType 
             this.issueForm.patchValue( {"issueType" : this.selectedIssueType.name})
+            this.issueForm.patchValue({"projectId" : this.selectedProject })
             // this.issueForm["issueType"] = this.selectedIssueType.name;
             console.log( "Issue Type is "+ JSON.stringify(this.issueForm.getRawValue()) )      
             }
@@ -63,11 +68,24 @@ export class NewIssueComponent implements OnInit {
   sendForm(){
       let form = this.issueForm.getRawValue();
         form["issueType"]=this.selectedIssueType;
+        form["projectId"]=this.selectedProject;
+      
         this.newIssueService.saveNewIssue(form).subscribe(
             data=>{
                   console.log("Yaaay Issue Created" + data)
             }
         )
+  }
+  getProjects(){
+                  this.newIssueService.getProjectsList().subscribe(
+                        (data :any[])=>{
+                              this.projectList = data.map(project=>{
+                                                return  { name : project.name,
+                                                            pid : project._id   };   
+                              });
+                        console.log("Projects list are  " +this.projectList)
+                  }
+                  )
   }
 
 }

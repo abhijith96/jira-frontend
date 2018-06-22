@@ -11,7 +11,8 @@ import { ProjectComponent } from './project/project.component';
 import { ProjectDetailsComponent } from './project/project-details/project-details.component';
 import { ProjectIssuesComponent } from './project/project-issues/project-issues.component';
 import { ProjectIssueTypesComponent } from './project/project-issue-types/project-issue-types.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SendHelpComponent } from './project/send-help/send-help.component';
 
 const routes: Routes = [
   {
@@ -48,14 +49,19 @@ const routes: Routes = [
     FuseSharedModule,
     FormsModule,
     MatGridListModule,
-    MatDialogModule
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
-  declarations: [ProjectsComponent, ProjectComponent, ProjectDetailsComponent, ProjectIssuesComponent, ProjectIssueTypesComponent
+  declarations: [ProjectsComponent, ProjectComponent, ProjectDetailsComponent, ProjectIssuesComponent, ProjectIssueTypesComponent, SendHelpComponent
   ],
   exports: [ProjectsComponent,
     ProjectComponent,
     ProjectDetailsComponent,
     ProjectIssuesComponent,
-    ProjectIssueTypesComponent]
+    ProjectIssueTypesComponent,
+  SendHelpComponent],
+
+    entryComponents : [SendHelpComponent]
 })
 export class ProjectsModule { }

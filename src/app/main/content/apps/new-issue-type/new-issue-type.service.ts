@@ -19,4 +19,8 @@ export class NewIssueTypeService {
   sendNewField(field){
       return this.http.post( _baseUrl + 'fields',field)
   }
+
+  getProjectsList(){
+        return this.http.get(_baseUrl + 'projects')
+  }
 }

@@ -18,4 +18,7 @@ export class NewIssueService {
   saveNewIssue(issue){
       return this.http.post(_baseUrl + 'issues',issue)
   }
+  getProjectsList(){
+      return this.http.get(_baseUrl+'projects')
+  }
 }

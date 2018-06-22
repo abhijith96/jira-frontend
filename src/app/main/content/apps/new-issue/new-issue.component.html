@@ -1,31 +1,40 @@
-<div class="page-layout carded fullwidth" fusePerfectScrollbar>
+<div class="page-layout carded fullWidth" fusePerfectScrollbar>
 
   
       <mat-horizontal-stepper [linear]="isLinear" #stepper>
         <mat-step [stepControl]="firstFormGroup">
             <ng-template matStepLabel>Choose Issue Type</ng-template>
-            <mat-form-field>
-                <mat-select  placeholder="" [(ngModel)]="selectedIssueType" [ngModelOptions]="{standalone: true}"  >
-                    <mat-option *ngFor="let issueType of issueTypes"  [value]="issueType" >
-                            {{issueType.name}}
+            <mat-form-field fxFill>
+              <div>
+                <mat-select id="choose-project" [(value)]="selectedProject" placeholder="Choose Project" >
+                    <mat-option *ngFor="let project of projectList" [value]="project.pid"  >
+                          {{project.name}}
                     </mat-option>
-              </mat-select>
+                </mat-select>
+            </div>
+            <div>
+                  <mat-select fxFill placeholder="Choose Issue Type" [(ngModel)]="selectedIssueType" [ngModelOptions]="{standalone: true}"  >
+                      <mat-option *ngFor="let issueType of issueTypes"  [value]="issueType" >
+                              {{issueType.name}}
+                      </mat-option>
+                </mat-select>
+            </div>
             </mat-form-field>
             <div>
               <button mat-button matStepperNext  (click)="getSelectedType()"  >Next</button>
             </div>
         </mat-step>
         <mat-step [stepControl]="secondFormGroup">
-            <ng-template matStepLabel>Fill out your address</ng-template>
+            <ng-template matStepLabel>Fill out Issue Fields</ng-template>
             
 
             <form [formGroup]="issueForm" fxFlex floatLabel="never" [class.mat-elevation-z6]>
-              <label class="text-center" > <h2>New Issue </h2></label>
+              <label class="" > <h2>New Issue </h2></label>
               <div *ngFor="let field of selectedTypeFields">
 
-                    <mat-form-field fxFill>
+                    <mat-form-field >
                           <input matInput  formControlName="{{field.id}}" 
-                           placeholder="{{field.name }}"    >
+                           placeholder="{{field.name }}"  [readonly]="field.id === 'issueType' || field.id==='projectId'"  >
                     </mat-form-field>
 
               </div>
