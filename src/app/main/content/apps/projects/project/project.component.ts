@@ -9,7 +9,7 @@ import { ProjectService } from './project.service';
 })
 export class ProjectComponent implements OnInit {
 
-  private currentProject : any;
+  currentProject : any;
 
   constructor(private route : ActivatedRoute,
               private projectService : ProjectService,
@@ -24,7 +24,8 @@ export class ProjectComponent implements OnInit {
             this.projectService.getProjectByIdFromServer(data).subscribe(
                 (data :any )=>{
                           this.currentProject = data;
-                          console.log("Current Project is " + this.currentProject)
+                          console.log("Current Project is " + JSON.stringify(this.currentProject))
+                          console.log("Name is " + this.currentProject["name"] )
                 }
             )
   }

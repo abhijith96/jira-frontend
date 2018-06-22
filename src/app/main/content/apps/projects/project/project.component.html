@@ -1,2 +1,26 @@
-{{currentProject | json}}
-<mat-icon (click)="goBack()"   class="logo-icon s-32"  >arrow_back</mat-icon>
+<div class="page-layout carded fullwidth" fusePerfectScrollbar>
+
+    <div class="top-bg mat-indigo-bg h-30"></div>
+    <div class="center">
+
+
+        <div class="header white-fg text-center" id="main-title">
+            <span class="title" *ngIf="currentProject"> {{ currentProject["name"]| uppercase }} </span>
+            <mat-icon (click)="goBack()" class="logo-icon s-32">arrow_back</mat-icon> 
+            
+        </div>
+        <mat-card>
+            <mat-tab-group [selectedIndex]="0">
+                <mat-tab label="Project Details">
+                    <app-project-details> </app-project-details>
+                </mat-tab>
+                <mat-tab label="Issues">
+                        <app-project-issues></app-project-issues>  
+                </mat-tab>
+                <mat-tab label="Issue Types">
+                        <app-project-issue-types></app-project-issue-types>
+                </mat-tab>
+            </mat-tab-group>
+        </mat-card>
+    </div>
+</div>

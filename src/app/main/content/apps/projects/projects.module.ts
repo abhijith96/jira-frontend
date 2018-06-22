@@ -2,12 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {Routes, RouterModule } from '@angular/router';
 
-import { MatButtonModule, MatCheckboxModule, MatDatepickerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatMenuModule, MatRippleModule, MatSelectModule, MatSidenavModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatDatepickerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatMenuModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatTabsModule, MatCardModule } from '@angular/material';
 import { DatatableModule } from 'app/main/shared/datatable.module';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { ProjectsComponent } from './projects.component';
 
 import { ProjectComponent} from './project/project.component';
+import { ProjectDetailsComponent } from './project/project-details/project-details.component';
+import { ProjectIssuesComponent } from './project/project-issues/project-issues.component';
+import { ProjectIssueTypesComponent } from './project/project-issue-types/project-issue-types.component';
 
 const routes : Routes =[
     {
@@ -36,11 +39,15 @@ const routes : Routes =[
       MatSidenavModule,  
       MatInputModule,
       DatatableModule,
-      FuseSharedModule
+      FuseSharedModule,
+      MatTabsModule,
+      MatSelectModule,
+      MatCardModule
   ],
-  declarations : [ProjectsComponent, ProjectComponent
+  declarations : [ProjectsComponent, ProjectComponent, ProjectDetailsComponent, ProjectIssuesComponent, ProjectIssueTypesComponent
   ],
   exports : [ProjectsComponent,
-            ProjectComponent]
+            ProjectComponent,
+              ProjectDetailsComponent]
 })
 export class ProjectsModule { }

@@ -17,7 +17,7 @@ export class NewIssueTypeComponent implements OnInit {
   private newFieldName : string;
   private newFieldId : string;
   private newFieldType : string;
-  private newFieldIsRequired : string;
+  private newFieldIsRequired : string ="false";
   
 
 
@@ -113,7 +113,7 @@ export class NewIssueTypeComponent implements OnInit {
   }
 
   addNewField(){
-        this.fieldListForm.addControl(this.newFieldName,new FormControl())
+        this.fieldListForm.addControl(this.newFieldId,new FormControl())
         let newField = { name :this.newFieldName, 
                          id : this.newFieldId,
                          fieldType : this.newFieldType,
@@ -124,7 +124,7 @@ export class NewIssueTypeComponent implements OnInit {
         this.newFieldIsRequired=""
         this.newIssueService.sendNewField(newField)
         .subscribe(data=>{
-                  console.log(data)
+                  console.log( "Sent New Field to Backend, Recieved Back" + data)
                   this.tempFields.push(data)
                   console.log("All available fields are : " + JSON.stringify(this.tempFields))
                   this.updateForm()

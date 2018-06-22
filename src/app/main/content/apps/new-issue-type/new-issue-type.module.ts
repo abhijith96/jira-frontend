@@ -35,10 +35,8 @@ const routes : Routes = [
     MatSidenavModule,
     MatRippleModule,
     MatTabsModule
-    // FuseAngularMaterialModule,
-    // FuseMaterialColorPickerModule,
   ],
-  declarations: [NewIssueTypeComponent],
+  declarations: [NewIssueTypeComponent,],
   exports : [NewIssueTypeComponent]
 })
 export class NewIssueTypeModule { }

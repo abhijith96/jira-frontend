@@ -17,9 +17,9 @@
 								</ng-template>
 							</smd-datatable-column>
 							
-							<smd-datatable-column title="Name" field="name" sortable="true" [filterable]="true">
+							<smd-datatable-column title="Title" field="title" sortable="true" [filterable]="true">
 								<ng-template let-model="data">
-									{{model.name}}
+									{{model.title}}
 								</ng-template>
 							</smd-datatable-column>
 
@@ -28,8 +28,19 @@
 									{{model.issueType}}
 								</ng-template>
 							</smd-datatable-column>
-
-				
+							
+							
+							<smd-datatable-column title="Status" field="status" sortable="true" [filterable]="true">
+								<ng-template let-model="data">
+									{{model.status}}
+								</ng-template>
+							</smd-datatable-column>
+							
+							<smd-datatable-column title="Resolution" field="resolution" sortable="true" [filterable]="true">
+								<ng-template let-model="data">
+									{{model.resolution}}
+								</ng-template>
+							</smd-datatable-column>
 
 					</smd-datatable>
 				</div>

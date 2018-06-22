@@ -1,0 +1,53 @@
+<div class="page-layout carded fullwidth" fusePerfectScrollbar>
+
+  
+      <mat-horizontal-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+            <ng-template matStepLabel>Choose Issue Type</ng-template>
+            <mat-form-field>
+                <mat-select  placeholder="" [(ngModel)]="selectedIssueType" [ngModelOptions]="{standalone: true}"  >
+                    <mat-option *ngFor="let issueType of issueTypes"  [value]="issueType" >
+                            {{issueType.name}}
+                    </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div>
+              <button mat-button matStepperNext  (click)="getSelectedType()"  >Next</button>
+            </div>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+            <ng-template matStepLabel>Fill out your address</ng-template>
+            
+
+            <form [formGroup]="issueForm" fxFlex floatLabel="never" [class.mat-elevation-z6]>
+              <label class="text-center" > <h2>New Issue </h2></label>
+              <div *ngFor="let field of selectedTypeFields">
+
+                    <mat-form-field fxFill>
+                          <input matInput  formControlName="{{field.id}}" 
+                           placeholder="{{field.name }}"    >
+                    </mat-form-field>
+
+              </div>
+              <button mat-raised-button class="mat-accent" (click)="sendForm()">Send Form</button>
+
+             </form>
+  
+            
+             <div>
+              <button mat-button matStepperPrevious>Back</button>
+            </div>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+              New Issue Created
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+
+
+</div>

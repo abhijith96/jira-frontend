@@ -1,9 +1,9 @@
 
 <div class="page-layout carded fullwidth" fusePerfectScrollbar>
 
-      <mat-card>
+      <mat-card fusePerfectScrollbar fusePerfectScrollbar>
                   <mat-grid-list cols="2">
-                   <mat-grid-tile [style.border-right]="'1px dashed #ddd'">
+                   <mat-grid-tile [style.border-right]="'1px dashed #ddd'" fusePerfectScrollbar>
                               <mat-card>
                                           <mat-tab-group [selectedIndex]="0" fusePerfectScrollbar>
                                                 <mat-tab label="Select Field">
@@ -77,13 +77,13 @@
                                     </mat-card>
                   </mat-grid-tile>
 
-                  <mat-grid-tile [style.border-right]="'1px dashed #ddd'" >
+                  <mat-grid-tile [style.border-right]="'1px dashed #ddd'"  fusePerfectScrollbar fxFlex>
                               <mat-card  >
-                                          <form [formGroup]="fieldListForm" fxFlex floatLabel="never" [class.mat-elevation-z6]>
+                                          <form  id="issue-form" [formGroup]="fieldListForm" fxFlex floatLabel="never" [class.mat-elevation-z6] fusePerfectScrollbar>
                                                 <label class="text-center" > <h2>New Issue Type </h2></label>
-                                                <div *ngFor="let field of fieldsArray">
+                                                <div *ngFor="let field of fieldsArray" fusePerfectScrollbar>
                               
-                                                      <mat-form-field fxFill>
+                                                      <mat-form-field fxFill fusePerfectScrollbar>
                                                             <input matInput value="{{field[1]}}" formControlName="{{field[0]}}"
                                                              placeholder="{{field[0] }}"  [readonly]="field[0] !== 'name'"  >
                                                       </mat-form-field>
