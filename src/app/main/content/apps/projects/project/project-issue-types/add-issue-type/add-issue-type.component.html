@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Add Issue Type</h2>
+<mat-dialog-content>
+        <mat-selection-list *ngIf="issueTypeList" fxFill placeholder="Add Issue Type" 
+        [(ngModel)]="selectedIssueType" [ngModelOptions]="{standalone: true}">
+
+            <mat-list-option *ngFor="let issueType of issueTypeList"  [value]="issueType" (click)="addType(issueType)" >
+                    {{issueType.name}}
+            </mat-list-option>
+      
+          </mat-selection-list>
+  <h1>{{selectedProject | json }}</h1>
+ </mat-dialog-content> 
+ <mat-dialog-actions>
+    <button mat-raised-button class="mat-accent" (click)="addIssueTypes()">Create</button>            
+</mat-dialog-actions>

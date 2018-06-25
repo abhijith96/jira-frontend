@@ -1,3 +1,39 @@
-<p>
-  create-project works!
-</p>
+<h2 mat-dialog-title>Create Project</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="projectForm" fxFlex floatLabel="never" [class.mat-elevation-z6] *ngIf="projectForm">
+
+    <mat-form-field fxFill>
+      <input matInput formControlName="name" placeholder="Name">
+    </mat-form-field>
+
+
+    <mat-form-field fxFill>
+      <input matInput formControlName="projectKey" placeholder="Project Key">
+    </mat-form-field>
+
+    <mat-form-field fxFill>
+      <input matInput formControlName="description" placeholder="Description">
+    </mat-form-field>
+
+    <mat-form-field fxFill>
+      <input matInput formControlName="type" placeholder="Type">
+    </mat-form-field>
+
+    <!-- <mat-form-field fxFill> 
+                  <input matInput  formControlName="{{field.id}}" 
+                    placeholder="{{field.name }}"  >
+             </mat-form-field> -->
+    <mat-form-field>
+      <mat-select placeholder="Project Manager" formControlName="projectManager">
+        <mat-option *ngFor="let user of userList" [value]="user._id">
+          {{user.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button class="mat-accent" (click)="sendForm()">Create</button>            
+</mat-dialog-actions>

@@ -21,7 +21,8 @@
             </div>
 
             <div class="px-8 px-mat-16">
-                <fuse-shortcuts [navigation]="navigation"></fuse-shortcuts>
+                <!-- <fuse-shortcuts [navigation]="navigation"></fuse-shortcuts> -->
+              
             </div>
 
         </div>
@@ -58,18 +59,29 @@
 
             <div class="toolbar-separator"></div>
 
-            <fuse-search-bar (onInput)="search($event)"></fuse-search-bar>
+            <!-- <fuse-search-bar (onInput)="search($event)"></fuse-search-bar> -->
 
             <div class="toolbar-separator"></div>
 
-            <button mat-button fxHide fxShow.gt-xs
+            <span class="p-10"  id="create">
+                <mat-icon (click)="createIssueType()" class="create">create</mat-icon>
+            </span>
+            <span class="p-10"  id="create">
+                <mat-icon (click)="createIssue()" class="create">add</mat-icon>
+            </span>   
+            <span class="p-10"  id="create">
+                    <mat-icon (click)="createProject()" class="create">add_circle_outline</mat-icon>
+            </span>               
+            
+            
+            <!-- <button mat-button fxHide fxShow.gt-xs
                     class="language-button"
                     [matMenuTriggerFor]="languageMenu">
                 <div fxLayout="row" fxLayoutAlign="center center">
                     <img class="flag mr-8" [src]="'assets/images/flags/'+selectedLanguage.flag+'.png'">
                     <span class="iso text-uppercase">{{selectedLanguage.id}}</span>
                 </div>
-            </button>
+            </button> -->
 
             <mat-menu #languageMenu="matMenu" [overlapTrigger]="false">
 

@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { FuseAngularMaterialModule } from '../components/angular-material/angular-material.module';
 
 import { FuseSharedModule } from '@fuse/shared.module';
-import { CreateProjectComponent } from './create-project/create-project.component';
 
 const routes = [
     
@@ -31,7 +30,6 @@ const routes = [
         RouterModule.forChild(routes),
         FuseAngularMaterialModule
     ],
-    declarations: [CreateProjectComponent],
 })
 export class FuseAppsModule
 {

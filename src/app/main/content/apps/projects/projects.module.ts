@@ -13,6 +13,7 @@ import { ProjectIssuesComponent } from './project/project-issues/project-issues.
 import { ProjectIssueTypesComponent } from './project/project-issue-types/project-issue-types.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SendHelpComponent } from './project/send-help/send-help.component';
+import { AddIssueTypeComponent } from './project/project-issue-types/add-issue-type/add-issue-type.component';
 
 const routes: Routes = [
   {
@@ -53,7 +54,9 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
   ],
-  declarations: [ProjectsComponent, ProjectComponent, ProjectDetailsComponent, ProjectIssuesComponent, ProjectIssueTypesComponent, SendHelpComponent
+  declarations: [ProjectsComponent, ProjectComponent,
+     ProjectDetailsComponent, ProjectIssuesComponent, 
+     ProjectIssueTypesComponent, SendHelpComponent, AddIssueTypeComponent
   ],
   exports: [ProjectsComponent,
     ProjectComponent,
@@ -62,6 +65,6 @@ const routes: Routes = [
     ProjectIssueTypesComponent,
   SendHelpComponent],
 
-    entryComponents : [SendHelpComponent]
+    entryComponents : [SendHelpComponent,AddIssueTypeComponent]
 })
 export class ProjectsModule { }

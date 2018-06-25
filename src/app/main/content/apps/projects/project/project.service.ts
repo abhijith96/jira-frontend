@@ -26,4 +26,12 @@ export class ProjectService {
       // )
       return this.http.get(_baseUrl + 'projects/' + data.id)
   }
+
+  getIssuesFromServer(id){
+    console.log("Getting issues from serve .....")
+        return this.http.get(_baseUrl + 'projects/addissues/'+id)
+  }
+  sendNewIssueTypes(id,issueTypesArray){
+        return this.http.post(_baseUrl + 'projects/add-issue-type', { projectId: id, issueTypes : issueTypesArray })
+  }
 }

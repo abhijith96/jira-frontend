@@ -139,22 +139,7 @@ export const navigation = [
                 'icon'     : 'school',
                 'url'      : '/apps/projects'
             },
-            {
-                'id'       : 'new-issue-type',
-                'title'    : 'New Issue Type',
-                'translate': 'NAV.ACADEMY',
-                'type'     : 'item',
-                'icon'     : 'school',
-                'url'      : '/apps/new-issue-type'
-        },
-        {
-            'id'       : 'new-issue',
-            'title'    : 'New Issue',
-            'translate': 'NAV.ACADEMY',
-            'type'     : 'item',
-            'icon'     : 'school',
-            'url'      : '/apps/new-issue'
-    },
+     
             
         ]
     },

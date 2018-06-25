@@ -7,6 +7,13 @@ import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 
 import { navigation } from 'app/navigation/navigation';
 
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+// import { NewIssueTypeComponent } from '../content/apps/new-issue-type/new-issue-type.component';
+import { CreateIssueTypeComponent } from '../content/apps/create-issue-type/create-issue-type.component';
+import { CreateIssueComponent } from '../content/apps/create-issue/create-issue.component';
+import { CreateProjectComponent } from '../content/apps/create-project/create-project.component';
+
+
 @Component({
     selector   : 'fuse-toolbar',
     templateUrl: './toolbar.component.html',
@@ -27,7 +34,8 @@ export class FuseToolbarComponent
         private router: Router,
         private fuseConfig: FuseConfigService,
         private sidebarService: FuseSidebarService,
-        private translate: TranslateService
+        private translate: TranslateService,
+        public dialog: MatDialog
     )
     {
         this.userStatusOptions = [
@@ -112,4 +120,31 @@ export class FuseToolbarComponent
         // Use the selected language for translations
         this.translate.use(lang.id);
     }
+    createIssueType(){
+        let dialogRef = this.dialog.open(CreateIssueTypeComponent
+            , {
+            width: '700px',
+            // data: { name: this.name, animal: this.animal }
+          }
+        );
+      
+          dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+            // this.animal = result;
+          });
+    }
+    
+    createIssue(){
+        let dialogRef = this.dialog.open(CreateIssueComponent,
+        {
+            width : '700px',   
+        })
+    }    
+    createProject(){
+        let dialogRef = this.dialog.open(CreateProjectComponent,
+        {
+            width : '700px'
+        })
+    }
 }
+
