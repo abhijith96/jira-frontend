@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FuseAngularMaterialModule } from '../components/angular-material/angular-material.module';
 
 import { FuseSharedModule } from '@fuse/shared.module';
+import { CreateProjectComponent } from './create-project/create-project.component';
 
 const routes = [
     
@@ -16,17 +17,10 @@ const routes = [
         loadChildren  : './todo-table/todo-table.module#TodoTableModule'
     },
     {
-        path : 'new-issue-type',
-        loadChildren : './new-issue-type/new-issue-type.module#NewIssueTypeModule'
-    },
-    {
         path : 'projects',
         loadChildren : './projects/projects.module#ProjectsModule'
     },
-    {
-        path : 'new-issue',
-        loadChildren : './new-issue/new-issue.module#NewIssueModule'
-    }
+    
     
     
 ];
@@ -37,6 +31,7 @@ const routes = [
         RouterModule.forChild(routes),
         FuseAngularMaterialModule
     ],
+    declarations: [CreateProjectComponent],
 })
 export class FuseAppsModule
 {

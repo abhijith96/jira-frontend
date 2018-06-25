@@ -1,36 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import {NewIssueService } from './new-issue.service'
 import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
-import { CreateIssueComponent } from '../create-issue/create-issue.component';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatInput} from '@angular/material';
+
 
 @Component({
-  selector: 'app-new-issue',
-  templateUrl: './new-issue.component.html',
-  styleUrls: ['./new-issue.component.scss']
+  selector: 'app-create-issue',
+  templateUrl: './create-issue.component.html',
+  styleUrls: ['./create-issue.component.scss']
 })
-export class NewIssueComponent implements OnInit {
+export class CreateIssueComponent implements OnInit {
+
   issueTypes : any[];
   projectList : any[];
   selectedIssueType : any;
   selectedProject : any;
-
+userList : any[]
   isLinear = false;
   selectedTypeFields : any[];
 
   issueForm : FormGroup;
-  inputForm : FormGroup;
+
 
   
   constructor(private newIssueService : NewIssueService,
-                private formBuilder : FormBuilder,
-                public dialogRef: MatDialogRef<CreateIssueComponent>) { }
+                private formBuilder : FormBuilder) { }
 
   ngOnInit() {
-      this.issueForm =this.createForm()  
-      this.inputForm = this.createForm()
-      this.getIssueTypes()
-      this.getProjects()
+        this.issueForm =this.createForm()  
+        this.getIssueTypes()
+        this.getProjects()
   }
 
   createForm(){
@@ -57,6 +55,7 @@ export class NewIssueComponent implements OnInit {
             console.log( "Issue Type is "+ JSON.stringify(this.issueForm.getRawValue()) )      
             }
         )
+        this.getUsers()
   }
   
   getIssueTypes(){
@@ -90,6 +89,14 @@ export class NewIssueComponent implements OnInit {
                         console.log("Projects list are  " +this.projectList)
                   }
                   )
+  }
+  getUsers(){
+        this.newIssueService.getUsersFromServer().
+            subscribe(
+                  (users :any)=>{
+                        this.userList = users;
+                  }
+            )
   }
 
 }

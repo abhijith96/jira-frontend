@@ -1,0 +1,77 @@
+
+<h2 mat-dialog-title>Create New Issue Type</h2>
+
+
+
+<mat-form-field>
+      <input matInput [(ngModel)]="issueTypeName" placeholder="Name">
+</mat-form-field>
+
+
+<mat-dialog-content>
+      <mat-tab-group [selectedIndex]="0">
+            <mat-tab label="Select Field">
+                  <mat-card>
+                        <mat-selection-list role="list">
+                              <mat-list-option role="listitem" *ngFor="let field of availableFields" (click)="selectField(field)" [class.mat-elevation-z7]
+                                    [selected]="field.isRequired" [disabled]="field.isRequired">
+                                    {{field.name}}
+                              </mat-list-option>
+                        </mat-selection-list>
+                  </mat-card>
+            </mat-tab>
+            <mat-tab label="Add New Field">
+                  <mat-card>
+                        <div>
+                              <mat-form-field>
+                                    <textarea [(ngModel)]="newFieldName" [ngModelOptions]="{standalone: true}" matInput placeholder="Field Name">
+                                                                                                                        
+                                                                                                                                          </textarea>
+
+                              </mat-form-field>
+                        </div>
+                        <div>
+                              <mat-form-field>
+                                    <textarea [(ngModel)]="newFieldId" [ngModelOptions]="{standalone: true}" matInput placeholder="Field Id">
+                                                                                                                        
+                                                                                                                        </textarea>
+
+                              </mat-form-field>
+                        </div>
+                        <div>
+                              <mat-form-field>
+                                    <textarea [(ngModel)]="newFieldType" [ngModelOptions]="{standalone: true}" matInput placeholder="Field Type">
+                                                                                                                              
+                                                                        </textarea>
+
+
+                              </mat-form-field>
+                        </div>
+                        <div>
+                              <mat-form-field>
+
+                                    <mat-select placeholder="True" [(ngModel)]="newFieldIsRequired" [ngModelOptions]="{standalone: true}">
+                                          <mat-option [value]="true">
+                                                True
+                                          </mat-option>
+                                          <mat-option [value]="false">
+                                                False
+                                          </mat-option>
+                                    </mat-select>
+
+                              </mat-form-field>
+                        </div>
+
+                        <button mat-button mat-raised-button class="mat-indigo-bg" (click)="addNewField()">
+                              Add Form Field
+                        </button>
+                  </mat-card>
+            </mat-tab>
+
+      </mat-tab-group>
+</mat-dialog-content>
+<mat-dialog-actions>
+      <button mat-raised-button class="mat-accent" (click)="sendForm(fieldListForm.value)">Send Form</button>
+</mat-dialog-actions>
+
+

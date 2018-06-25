@@ -14,7 +14,7 @@
             </div>
             <div>
                   <mat-select fxFill placeholder="Choose Issue Type" [(ngModel)]="selectedIssueType" [ngModelOptions]="{standalone: true}"  >
-                      <mat-option *ngFor="let issueType of issueTypes"  [value]="issueType" >
+                      <mat-option *ngFor="let issueType of issueTypes"  [value]="issueType" (click)="getSelectedType()" >
                               {{issueType.name}}
                       </mat-option>
                 </mat-select>
