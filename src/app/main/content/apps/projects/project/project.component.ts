@@ -39,4 +39,12 @@ export class ProjectComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+  deleteProject(){
+      
+      this.projectService.deleteaProject(this.currentProject._id).subscribe(
+          data=>{
+              console.log("Yaaay Project DELETED!!!")
+          }
+      )
+  }
 }

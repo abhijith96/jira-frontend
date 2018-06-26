@@ -1,52 +1,84 @@
 <h2 mat-dialog-title>Create Issue</h2>
-<mat-form-field fxFill>
-       
-            <mat-select id="choose-project" [(value)]="selectedProject" placeholder="Choose Project" >
+
+<mat-form-field fxFill *ngIf="projectList">
+      <!-- <mat-select id="choose-project" [(value)]="selectedProject" placeholder="Choose Project" >
                 <mat-option *ngFor="let project of projectList" [value]="project.pid"  >
                       {{project.name}}
                 </mat-option>
-            </mat-select>
-      </mat-form-field>
-      <mat-form-field fxFill>
-              <mat-select fxFill placeholder="Choose Issue Type" [(ngModel)]="selectedIssueType" [ngModelOptions]="{standalone: true}" 
-                 >
-                  <mat-option *ngFor="let issueType of issueTypes"  [value]="issueType" (click)="getSelectedType()"
-                  >
-                          {{issueType.name}}
-                  </mat-option>
-            </mat-select>
-        
-        </mat-form-field>
+            </mat-select> -->
+
+      <input type="text" placeholder="Project" matInput [formControl]="projectControl" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let project of filteredProjects | async" [value]="project">
+                  {{ project.name }}
+            </mat-option>
+      </mat-autocomplete>
+</mat-form-field>
+
+
+<mat-form-field fxFill *ngIf="issueTypes">
+      <!-- <mat-select fxFill placeholder="Choose Issue Type" [(ngModel)]="selectedIssueType" [ngModelOptions]="{standalone: true}">
+            <mat-option *ngFor="let issueType of issueTypes" [value]="issueType" (click)="getSelectedType()">
+                  {{issueType.name}}
+            </mat-option>
+      </mat-select> -->
+
+      <input type="text" placeholder="Issue Type" matInput [formControl]="issueTypeControl" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let type of filteredIssueTypes | async" [value]="type" (click)="getSelectedType()">
+                  {{ type.name }}
+            </mat-option>
+      </mat-autocomplete>
+</mat-form-field>
+
 <mat-dialog-content>
-   
+
 
       <form [formGroup]="issueForm" fxFlex floatLabel="never" [class.mat-elevation-z6] *ngIf="issueForm">
-          <label class="" > <h2>New Issue </h2></label>
-          <div *ngFor="let field of selectedTypeFields" >
+            <label class="">
+                  <h2>New Issue </h2>
+            </label>
+            <div *ngFor="let field of selectedTypeFields">
 
-                <mat-form-field fxFill *ngIf="field.name !== 'ProjectId'">
-                      <input matInput  formControlName="{{field.id}}" 
-                       placeholder="{{field.name }}" 
-                        [readonly]="field.id === 'issueType' || field.id==='projectId'" 
-                        *ngIf="field.name !=='Assignee' && field.name!= 'CreatedBy'" 
-                       >
-                       <mat-select *ngIf="field.name==='Assignee'" placeholder="Assignee" formControlName="{{field.id}}" >
-                              <mat-option *ngFor="let user of userList" [value]="user._id" >
-                                          {{user.name}}
+                  <mat-form-field fxFill *ngIf="field.name !== 'ProjectId' && userList" >
+                        <input matInput formControlName="{{field.id}}" placeholder="{{field.name }}" [readonly]="field.id === 'issueType' || field.id==='projectId'"
+                              *ngIf="field.name !=='Assignee' && field.name!= 'CreatedBy'">
+                        <!--                               
+                        <mat-select *ngIf="field.name==='Assignee'" placeholder="Assignee" formControlName="{{field.id}}">
+                              <mat-option *ngFor="let user of userList" [value]="user._id">
+                                    {{user.name}}
                               </mat-option>
-                       </mat-select>     
+                        </mat-select>
 
-                       <mat-select *ngIf="field.name==='CreatedBy'" placeholder="Created By" formControlName="{{field.id}}" >
-                              <mat-option *ngFor="let user of userList" [value]="user._id" >
-                                          {{user.name}}
+                        <mat-select *ngIf="field.name==='CreatedBy'" placeholder="Created By" formControlName="{{field.id}}">
+                              <mat-option *ngFor="let user of userList" [value]="user._id">
+                                    {{user.name}}
                               </mat-option>
-                       </mat-select>  
-                </mat-form-field>
+                        </mat-select> -->
+                        <div *ngIf="field.name==='Assignee'"  >
+                              <input type="text" placeholder="Assignee" matInput [formControl]="userControlAssignee" [matAutocomplete]="auto">
+                              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                                    <mat-option *ngFor="let user of filteredUsersAssignee | async" [value]="user">
+                                          {{ user.name }}
+                                    </mat-option>
+                              </mat-autocomplete>
+                        </div>
 
-          </div>
+                        <div *ngIf="field.name==='CreatedBy'" >
+                                    <input type="text" placeholder="Created By" matInput [formControl]="userControlCreator" [matAutocomplete]="auto">
+                                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                                          <mat-option *ngFor="let user of filteredUsersCreator | async" [value]="user">
+                                                {{ user.name }}
+                                          </mat-option>
+                                    </mat-autocomplete>
+                        </div>
+                  </mat-form-field>
+
+            </div>
+            <button mat-raised-button class="mat-accent" (click)="sendForm()">Create</button>
+
 
       </form>
-      <mat-dialog-actions>
-          <button mat-raised-button class="mat-accent" (click)="sendForm()">Create</button>            
-      </mat-dialog-actions>
+      <!-- <mat-dialog-actions>
+      </mat-dialog-actions> -->
 </mat-dialog-content>

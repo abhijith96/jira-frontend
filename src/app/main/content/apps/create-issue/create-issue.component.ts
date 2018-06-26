@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {NewIssueService } from './new-issue.service'
 import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
+
+
+
+export class User {
+      constructor(public name: string) { }
+    }
 
 @Component({
   selector: 'app-create-issue',
@@ -14,14 +22,29 @@ export class CreateIssueComponent implements OnInit {
   projectList : any[];
   selectedIssueType : any;
   selectedProject : any;
-userList : any[]
+ userList : any[]
   isLinear = false;
   selectedTypeFields : any[];
 
   issueForm : FormGroup;
 
+  ////For Autocomplete stuff
+  projectControl = new FormControl();
 
+  filteredProjects: Observable<any[]>;
+
+  issueTypeControl = new FormControl()
+  filteredIssueTypes: Observable<any[]>;
   
+  userControlAssignee = new FormControl()
+  userControlCreator = new FormControl()
+  
+  filteredUsersAssignee : Observable<any[]>
+  filteredUsersCreator : Observable<any[]>
+  
+  ///////////////
+
+
   constructor(private newIssueService : NewIssueService,
                 private formBuilder : FormBuilder) { }
 
@@ -29,13 +52,68 @@ userList : any[]
         this.issueForm =this.createForm()  
         this.getIssueTypes()
         this.getProjects()
+
+      this.filterContainer()
+        
   }
+
+  filterContainer(){
+      this.filteredProjects = this.projectControl.valueChanges
+      .pipe(
+        startWith<string | any>(''),
+        map(value => typeof value === 'string' ? value : value.name),
+        map(name => name ? this.filterProjects(name) : this.projectList.slice())
+      );
+      this.filteredIssueTypes = this.issueTypeControl.valueChanges
+      .pipe(
+        startWith<string | any>(''),
+        map(value => typeof value === 'string' ? value : value.name),
+        map(name => name ? this.filterIssueTypes(name) : this.issueTypes.slice())
+      );
+      this.filteredUsersAssignee = this.userControlAssignee.valueChanges
+      .pipe(
+        startWith<string | any>(''),
+        map(value => typeof value === 'string' ? value : value.name),
+        map(name => name ? this.filterUsers(name) : this.userList.slice())
+      );
+      this.filteredUsersCreator = this.userControlCreator.valueChanges
+      .pipe(
+        startWith<string | any>(''),
+        map(value => typeof value === 'string' ? value : value.name),
+        map(name => name ? this.filterUsers(name) : this.userList.slice())
+      );
+  }
+
+//AUTOCOMPLETE FILTERS  
+  filterProjects(name: string): any[] {
+      return this.projectList.filter(option =>
+        option.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+    }
+    
+  filterIssueTypes(name: string): any[] {
+      return this.issueTypes.filter(option =>
+        option.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+    }
+
+    filterUsers(name: string): any[] {
+      return this.userList.filter(option =>
+        option.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+    }
+  
+//AUTOCOMPLETE FILTERS  
+    displayFn(user?: any): string | undefined {
+      return user ? user.name : undefined;
+    }
+
 
   createForm(){
         let newForm = this.formBuilder.group([]);
         return newForm;
   }
   getSelectedType(){
+        console.log("You have selected  project " + JSON.stringify(this.projectControl.value))
+        this.selectedProject = this.projectControl.value.pid
+        this.selectedIssueType = this.issueTypeControl.value
         console.log("You have selected  " + JSON.stringify(this.selectedIssueType))
         this.newIssueService.getSelectedIssueTypeFields(this.selectedIssueType._id).subscribe(
             (data : any)=>{
@@ -69,6 +147,9 @@ userList : any[]
   }
   
   sendForm(){
+      this.issueForm.patchValue( {"assignee" : this.userControlAssignee.value})
+      this.issueForm.patchValue( {"createdBy" : this.userControlCreator.value})
+      
       let form = this.issueForm.getRawValue();
         form["issueType"]=this.selectedIssueType;
         form["projectId"]=this.selectedProject;

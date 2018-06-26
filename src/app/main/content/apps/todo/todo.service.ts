@@ -429,4 +429,10 @@ export class TodoService implements Resolve<any>
         //     return this.http.get(this._baseUrl +'/issues' )
         // }
     
+    deleteaTodo(id){
+            this.getTodos()
+            return this.http.post(_baseUrl + 'issue/delete',id)
+            
+    }
+   
 }

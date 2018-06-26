@@ -140,7 +140,7 @@ export class CreateIssueTypeComponent implements OnInit {
                   console.log( "Sent New Field to Backend, Recieved Back" + data)
                   this.tempFields.push(data)
                   console.log("All available fields are : " + JSON.stringify(this.tempFields))
-                  this.updateForm()
+                  this.getAvailableFieldsFromServer()
                   
         },
             error=>{

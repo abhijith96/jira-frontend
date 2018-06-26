@@ -24,12 +24,19 @@
                   <input matInput  formControlName="{{field.id}}" 
                     placeholder="{{field.name }}"  >
              </mat-form-field> -->
-    <mat-form-field>
-      <mat-select placeholder="Project Manager" formControlName="projectManager">
+    <mat-form-field *ngIf="userList">
+      <!-- <mat-select placeholder="Project Manager" formControlName="projectManager">
         <mat-option *ngFor="let user of userList" [value]="user._id">
           {{user.name}}
         </mat-option>
-      </mat-select>
+      </mat-select> -->
+
+      <input type="text" placeholder="Manager" matInput [formControl]="userControl" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let user of filteredUsers | async" [value]="user" >
+                  {{ user.name }}
+            </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
 
   </form>

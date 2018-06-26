@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl,  } from '@angular/forms';
-
+import { Router  } from '@angular/router'
 import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 import { FuseUtils } from '@fuse/utils';
 import { fuseAnimations } from '@fuse/animations';
+import { Location} from '@angular/common';
 
 import { Todo } from '../todo.model';
 import { TodoService } from '../todo.service';
@@ -38,7 +39,9 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
     
     constructor(
         private todoService: TodoService,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private location : Location,
+        private router : Router
     )
     {
 
@@ -75,7 +78,6 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
                         this.formType = 'edit';
 
                         this.todo = todo;
-                        console.log("ellooo")
                         this.todoForm = this.createTodoForm();
 
 
@@ -147,12 +149,10 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
             })
         
 
-            // console.log(controlArray)
         let newForm= this.formBuilder.group({ });
         
         for(var i=0;i<controlArray.length;i++){
              newForm.addControl(controlArray[i][0],  new FormControl(controlArray[i][1])   )
-             console.log(i)
         }
         return newForm
     }
@@ -210,7 +210,6 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
     
     addFields(){
          this.todoForm.addControl(this.newFieldName, new FormControl(this.newFieldValue));
-         console.log("Stuff i'm saving is  " + this.todoForm.value)
          this.todoService.updateTodo(this.todoForm.getRawValue());
          
          this.newFieldName=""
@@ -220,8 +219,23 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
          this.controlArray = Object.keys(stuff).map(data=>{
                 return [data, stuff[data]]
          })
-         console.log(this.controlArray)
          
           
     }
+    deleteTodo(){
+        console.log("deletingggg   " + JSON.stringify(this.todo))
+        this.todoService.deleteaTodo(this.todo).subscribe(
+                data=>{
+                        console.log("Succesfully deleted  Yaaay")
+                        this.goBack()
+                        
+                }
+        )
+        
+        
+    }
+    goBack(): void {
+        console.log("Going back")
+        this.router.navigate(['apps/todo-table'])
+      }
 }

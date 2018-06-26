@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ProjectService} from '../project.service';
 import { ActivatedRoute } from '@angular/router';
-import { SendHelpComponent } from '../send-help/send-help.component';
 import { Router } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatInput} from '@angular/material';
 import { AddIssueTypeComponent } from './add-issue-type/add-issue-type.component';
@@ -44,15 +43,22 @@ export class ProjectIssueTypesComponent implements OnInit {
      
   }
 
-  goToCreateNewIssueType(){
-        this.router.navigate(['/apps/new-issue-type'])
-  }
+  // goToCreateNewIssueType(){
+  //       this.router.navigate(['/apps/new-issue-type'])
+  // }
+
   addIssueType(){
       let dialogRef = this.dialog.open(AddIssueTypeComponent,
       {
           width : '700px',
           data : { projectId : this.selectedProject}
       })
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        this.route.params.subscribe(param=> {this.getProjectById(param)})
+        
+      });
+      
   }
 }
 

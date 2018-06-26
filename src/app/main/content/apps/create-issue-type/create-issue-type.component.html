@@ -10,6 +10,7 @@
 
 <mat-dialog-content>
       <mat-tab-group [selectedIndex]="0">
+           
             <mat-tab label="Select Field">
                   <mat-card>
                         <mat-selection-list role="list">
@@ -20,6 +21,8 @@
                         </mat-selection-list>
                   </mat-card>
             </mat-tab>
+
+
             <mat-tab label="Add New Field">
                   <mat-card>
                         <div>
@@ -63,7 +66,7 @@
                         </div>
 
                         <button mat-button mat-raised-button class="mat-indigo-bg" (click)="addNewField()">
-                              Add Form Field
+                              Add Field
                         </button>
                   </mat-card>
             </mat-tab>

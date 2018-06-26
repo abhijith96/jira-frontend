@@ -139,7 +139,14 @@ export const navigation = [
                 'icon'     : 'school',
                 'url'      : '/apps/projects'
             },
-     
+            {
+                    'id'       : 'issue-types',
+                    'title'    : 'Issue Types',
+                    'translate': 'NAV.CALENDAR',
+                    'type'     : 'item',
+                    'icon'     : 'today',
+                    'url'      : '/apps/issuetypes'
+                },
             
         ]
     },

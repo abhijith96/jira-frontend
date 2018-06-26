@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { MatButtonModule, MatIconModule, MatMenuModule, MatProgressBarModule, MatToolbarModule,MatDialogModule, MatSelectModule, MatTabsModule, MatListModule, MatCardModule, MatGridListModule, MatInputModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatMenuModule, MatProgressBarModule, MatToolbarModule,MatDialogModule, MatSelectModule, MatTabsModule, MatListModule, MatCardModule, MatGridListModule, MatInputModule, MatTooltipModule, MatAutocompleteModule } from '@angular/material';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 
@@ -37,6 +37,8 @@ import { CreateProjectComponent } from '../content/apps/create-project/create-pr
         FuseSharedModule,
         FuseSearchBarModule,
         FuseShortcutsModule,
+        MatTooltipModule,
+        MatAutocompleteModule
         
         
     ],

@@ -13,11 +13,11 @@
         <div class="info" fxFlex fxFlexLayout="column">
 
             <div class="title">
-                {{todo.name}}
+                {{todo.title}}
             </div>
 
             <div class="notes">
-                {{todo.summary}}
+                {{todo.description}}
             </div>
 
             <div class="tags" fxLayout="row wrap" fxLayoutAlign="start center">
@@ -33,24 +33,23 @@
 
         <div class="actions" fxLayout="row" fxLayoutAlign="start center">
 
-            <button mat-icon-button (click)="toggleImportant($event)"
+            <!-- <button mat-icon-button (click)="toggleImportant($event)"
                     aria-label="Toggle important" fxHide.xs>
                 <mat-icon class="red-fg" *ngIf="todo.important">error</mat-icon>
                 <mat-icon class="secondary-text" *ngIf="!todo.important">error_outline</mat-icon>
-            </button>
+            </button> -->
 
             <button mat-icon-button (click)="toggleStar($event)"
                     aria-label="Toggle star" fxHide.xs>
-                <mat-icon class="amber-fg" *ngIf="todo.starred">star</mat-icon>
-                <mat-icon class="secondary-text" *ngIf="!todo.starred">star_outline</mat-icon>
+                <mat-icon class="secondary-text" *ngIf="!todo.starred">delete</mat-icon>
             </button>
 
-            <button mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="More" (click)="$event.stopPropagation()"
+            <!-- <button mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="More" (click)="$event.stopPropagation()"
                     fxHide.xs>
                 <mat-icon class="secondary-text">more_vert</mat-icon>
-            </button>
+            </button> -->
 
-            <mat-menu #moreMenu="matMenu">
+            <!-- <mat-menu #moreMenu="matMenu">
                 <button mat-menu-item aria-label="toggle done" (click)="toggleCompleted($event)">
                     <ng-container *ngIf="todo.completed">
                         <mat-icon>check_box</mat-icon>
@@ -83,7 +82,7 @@
                         <span>Add star</span>
                     </ng-container>
                 </button>
-            </mat-menu>
+            </mat-menu> -->
 
         </div>
 

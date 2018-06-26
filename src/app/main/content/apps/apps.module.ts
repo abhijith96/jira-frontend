@@ -19,6 +19,14 @@ const routes = [
         path : 'projects',
         loadChildren : './projects/projects.module#ProjectsModule'
     },
+    {
+        path : 'issuetypes',
+        loadChildren : './issue-types/issue-types.module#IssueTypesModule'
+    },
+    {
+        path : '**',
+        redirectTo : 'projects'
+    }
     
     
     

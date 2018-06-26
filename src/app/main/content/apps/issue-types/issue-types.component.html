@@ -1,0 +1,25 @@
+<div class="page-layout carded fullwidth" fusePerfectScrollbar>
+    <div class="center">
+        <mat-card fxFlex>
+
+            <mat-card-header>
+                <mat-card-title> <h1>ISSUE TYPES</h1></mat-card-title>
+            </mat-card-header>
+
+
+            <mat-card-content>
+
+                <mat-list>
+                    <mat-list-item *ngFor="let issue of issueTypes" fxFill >
+                            <input matInput [value]="issue.name" [readonly]="true" #data >
+                            
+                           <button mat-icon-button matTooltip="Delete"   (click)="deleteIssueType(data.value)" >
+                                <mat-icon class="secondary-text" >delete</mat-icon>
+                            </button>
+                        
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

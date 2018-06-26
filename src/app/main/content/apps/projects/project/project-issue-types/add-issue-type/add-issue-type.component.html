@@ -8,8 +8,9 @@
             </mat-list-option>
       
           </mat-selection-list>
-  <h1>{{selectedProject | json }}</h1>
+        <h2 *ngIf="!issueTypeList.length">No additional types available</h2>         
+          
  </mat-dialog-content> 
  <mat-dialog-actions>
-    <button mat-raised-button class="mat-accent" (click)="addIssueTypes()">Create</button>            
+    <button *ngIf="issueTypeList.length" mat-raised-button class="mat-accent" (click)="addIssueTypes()">Create</button>            
 </mat-dialog-actions>

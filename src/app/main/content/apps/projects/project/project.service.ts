@@ -34,4 +34,9 @@ export class ProjectService {
   sendNewIssueTypes(id,issueTypesArray){
         return this.http.post(_baseUrl + 'projects/add-issue-type', { projectId: id, issueTypes : issueTypesArray })
   }
+
+  deleteaProject(id){
+    console.log("DEleteing  "+ id)
+      return this.http.post(_baseUrl + 'project/delete',{id})
+  }
 }
