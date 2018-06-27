@@ -1,6 +1,5 @@
 <mat-card>
-    <mat-list *ngIf="selectedProject">
-      <mat-list-item>
+      <!-- <mat-list-item>
         <h3 mat-line>Name</h3>
         <p mat-line>
           <span>{{selectedProject.name}}</span>
@@ -26,6 +25,47 @@
               <p mat-line *ngFor="let p of people ">
                 <span>{{p.user.name}} </span>  
               </p>
-            </mat-list-item>
-    </mat-list>
+            </mat-list-item> -->
+            <form *ngIf="selectedProject">
+                <button style="float: right" *ngIf="!editable" mat-icon-button matTooltip="Edit" (click)="edit()" >
+                    <mat-icon class="secondary-text" >edit</mat-icon>
+                 </button>
+
+                  <mat-form-field fxFlex>
+                      <label>Name <input [(ngModel)]="name" [ngModelOptions]="{standalone: true}"
+                          matInput [readonly]="!editable" ></label>
+                  </mat-form-field>
+                  
+                  <mat-form-field fxFill>
+                    <label>Description <input [(ngModel)]="description" [ngModelOptions]="{standalone: true}"
+                        matInput  [readonly]="!editable" ></label>
+                </mat-form-field>
+
+                <mat-form-field fxFlex>
+                  <label>Type <input [(ngModel)]="type" [ngModelOptions]="{standalone: true}"
+                              matInput  [readonly]="!editable" ></label>
+              </mat-form-field>
+
+              <mat-list fxFlex *ngIf="people">
+                  <span style="font-size: 20px" >People Involved</span> 
+                  <button style="margin-left: 20px" *ngIf="editable" mat-mini-fab matTooltip="Add Users"  (click)="addUsers()" >
+                      <mat-icon class="secondary-text" >add</mat-icon>
+                   </button>                 
+
+                  <mat-list-item *ngFor="let p of people " >
+
+                      <input matInput [value]="p.user.name" [name]="p.user" [readonly]="true" #data >                            
+                      <button *ngIf='editable'  [value]="p"  mat-icon-button matTooltip="Delete" #but  (click)="deleteUser(p)" >
+                           <mat-icon class="secondary-text" >delete</mat-icon>
+                       </button>
+                  
+                      </mat-list-item>
+              </mat-list>
+
+              <button style="margin-top: 30px" *ngIf="editable" (click)="saveChanges()" mat-raised-button color="accent">Save</button>
+            </form>
+
+          
+
+
   </mat-card>

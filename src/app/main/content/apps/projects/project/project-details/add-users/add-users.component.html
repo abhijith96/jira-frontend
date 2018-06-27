@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>Add Users</h2>
+
+
+<mat-dialog-content>
+<!-- 
+    <mat-list>
+        <mat-list-item *ngFor="let user of userList" fxFill >
+                <input matInput [value]="user.name" [readonly]="true" #data >
+                
+               <button mat-icon-button matTooltip="Delete"   (click)="deleteIssueType(data.value)" >
+                    <mat-icon class="secondary-text" >delete</mat-icon>
+                </button>
+            
+        </mat-list-item>
+    </mat-list> -->
+
+    <!-- <mat-selection-list role="list">
+        <mat-list-option role="listitem" *ngFor="let user of userList" (click)="selectUser(user)" [class.mat-elevation-z7]
+              >
+              {{user.name}}
+        </mat-list-option>
+  </mat-selection-list> -->
+  <input type="text" placeholder="Manager" matInput [formControl]="userControl" [matAutocomplete]="auto">
+  <mat-autocomplete style="margin-bottom: 50px" #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let user of filteredUsers | async" [value]="user" (click)="selectUser(user)" >
+              {{ user.name }}
+        </mat-option>
+  </mat-autocomplete>
+
+
+  <mat-selection-list style="margin-top: 40px">
+        <mat-list-option  *ngFor="let user of newUsers" [selected]=true [disabled]=true>
+            {{user.name}}
+        </mat-list-option>
+  </mat-selection-list>
+
+  <button *ngIf="userList.length" mat-raised-button class="mat-accent" (click)="addUsers()">Add</button>            
+  
+</mat-dialog-content>

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatInput} from '@angular/material';
 import { AddIssueTypeComponent } from './add-issue-type/add-issue-type.component';
+import { EditIssueTypeComponent } from './edit-issue-type/edit-issue-type.component';
 
 @Component({
   selector: 'app-project-issue-types',
@@ -59,6 +60,19 @@ export class ProjectIssueTypesComponent implements OnInit {
         
       });
       
+  }
+  selectIssueType(type){
+        console.log(JSON.stringify(type))
+        let dialogRef = this.dialog.open(EditIssueTypeComponent,
+          {
+              width : '700px',
+              data : { issueType : type , pid : this.selectedProject._id}
+          })
+          dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+            this.route.params.subscribe(param=> {this.getProjectById(param)})
+            
+          });
   }
 }
 

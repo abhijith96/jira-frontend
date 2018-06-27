@@ -46,9 +46,8 @@ export class AddIssueTypeComponent implements OnInit {
     this.newFields.forEach(element => {
                 if(element._id === issueType._id){
                     exists = true;
-                }
-                    
-    });
+                }      
+        });
     if(!exists){
         this.newFields.push(issueType._id)
     }

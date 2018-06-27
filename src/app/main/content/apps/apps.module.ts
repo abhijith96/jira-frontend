@@ -25,7 +25,7 @@ const routes = [
     },
     {
         path : '**',
-        redirectTo : 'projects'
+        loadChildren  : './todo-table/todo-table.module#TodoTableModule'
     }
     
     

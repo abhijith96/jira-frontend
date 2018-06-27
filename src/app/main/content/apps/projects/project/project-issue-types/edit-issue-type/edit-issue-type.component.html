@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Edit {{currentIssueType.name}} </h2>
+<mat-dialog-content>
+          <mat-list>
+                 <!--  <mat-list-item *ngFor="let field of fields">
+                    {{field.name}}
+                </mat-list-item> -->
+
+
+                <mat-list-item *ngFor="let field of fields " >
+
+                    <input matInput [value]="field.name"  [readonly]="true"  >                            
+                    <button *ngIf="!field.isRequired"  [value]="field"  mat-icon-button matTooltip="Delete" #but  (click)="deleteField(field)" >
+                         <mat-icon class="secondary-text" >delete</mat-icon>
+                     </button>
+                
+                    </mat-list-item>
+            </mat-list>
+ </mat-dialog-content> 
+ <mat-dialog-actions>
+    <button  mat-raised-button class="mat-accent" (click)="saveChanges()">Create</button>            
+</mat-dialog-actions>

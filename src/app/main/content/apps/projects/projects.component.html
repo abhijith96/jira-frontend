@@ -4,11 +4,13 @@
     
         <div class="header white-fg " id="main-title">
             <span class="title" > ALL PROJECTS </span>
+            <mat-icon style="cursor: pointer;float: right "  (click)="refresh()" class="logo-icon s-32">refresh</mat-icon> 
         </div>
           
           <div class="content-card mat-white-bg">
               <smd-datatable  dataUrl="projects" dataHeader="projects" [paginated]="true"
-                showCheckBox="true" [responsive]="true" [filterEnabled]="true" [showTableFilter]="false">
+                showCheckBox="true" [responsive]="true" [filterEnabled]="true" [showTableFilter]="false"
+                fusePerfectScrollbar>
                 
                   <smd-datatable-column title="Key" field="projectKey" sortable="true" [filterable]="true" > 
                     <ng-template let-model="data"   >

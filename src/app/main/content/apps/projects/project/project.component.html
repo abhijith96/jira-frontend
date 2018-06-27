@@ -7,7 +7,7 @@
 
         <div class="header white-fg text-center" id="main-title">
             <span class="title" *ngIf="currentProject"> {{ currentProject["name"]| uppercase }} </span>
-            <mat-icon (click)="goBack()" class="logo-icon s-32">arrow_back</mat-icon> 
+            <mat-icon style="cursor: pointer" (click)="goBack()" class="logo-icon s-32">arrow_back</mat-icon> 
             
         </div>
        
@@ -24,7 +24,7 @@
                 </mat-tab>
                 <mat-tab label="Settings">
                         <button mat-icon-button  (click)="deleteProject()" >
-                                Delete Project<mat-icon id="delete" class="secondary-text" >delete</mat-icon>
+                                Delete Project <mat-icon id="delete" class="secondary-text" >delete</mat-icon>
                         </button>
                 </mat-tab>
             </mat-tab-group>

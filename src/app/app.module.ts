@@ -23,6 +23,10 @@ const appRoutes: Routes = [
         path        : 'apps',
         loadChildren: './main/content/apps/apps.module#FuseAppsModule'
     },
+    {
+        path : '**',
+        loadChildren : './main/content/apps/apps.module#FuseAppsModule'
+    }
     
     
 ];

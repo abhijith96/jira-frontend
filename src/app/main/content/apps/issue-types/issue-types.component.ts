@@ -8,7 +8,8 @@ import { element } from 'protractor';
 })
 export class IssueTypesComponent implements OnInit {
   private issueTypes : any[]
-  constructor(private issueTypeService : IssueTypesService) { }
+  constructor(private issueTypeService : IssueTypesService,
+              ) { }
 
   ngOnInit() {
     this.getIssueTypesFromServer()
@@ -39,5 +40,6 @@ export class IssueTypesComponent implements OnInit {
         }
       )
   }
+  
 
 }

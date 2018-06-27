@@ -1,15 +1,37 @@
 <mat-card>
     <mat-list *ngIf="selectedProject" >
-        <mat-list-item>
-            <h1 mat-line>Issue Types</h1>
-            <p mat-line *ngFor="let i of issueTypes">
-              <span>{{i.name}}</span>
-            </p>
-          </mat-list-item>
-    </mat-list>
+            <span style="font-size: 22px" >Issue Types</span>
+            <button  style="margin-left: 20px" mat-mini-fab color="primary" matTooltip="Add Issue Types"  (click)="addIssueType()">
+                 <mat-icon  >add</mat-icon>
+             </button>
 
-    <button mat-fab color="primary" matTooltip="Add Issue Types"  (click)="addIssueType()">
-            <mat-icon  >add</mat-icon>
-    </button>
+        <!-- <mat-list-item *ngFor="let i of issueTypes">
+              <span>{{i.name}}</span>
+        </mat-list-item> -->
+
+        <mat-list-item *ngFor="let i of issueTypes " >
+
+                                          
+                <button  [value]="i"  mat-raised-button color="accent" (click)="selectIssueType(i)" >
+                        <input style="cursor: pointer;" matInput [value]="i.name" [readonly]="true"  >  
+                 </button>
+            
+        </mat-list-item>
+
+    </mat-list>
+    
+
+    <!-- <mat-list>
+            <mat-list-item *ngFor="let issue of issueTypes" fxFill >
+                    <input matInput [value]="issue.name" [readonly]="true" #data >
+                    
+                   <button mat-icon-button matTooltip="Delete"   (click)="deleteIssueType(data.value)" >
+                        <mat-icon class="secondary-text" >delete</mat-icon>
+                    </button>
+                
+            </mat-list-item>
+        </mat-list> -->
+
+  
 </mat-card>
 

@@ -39,4 +39,22 @@ export class ProjectService {
     console.log("DEleteing  "+ id)
       return this.http.post(_baseUrl + 'project/delete',{id})
   }
+
+  editProjectDetails(data){
+      return this.http.post(_baseUrl + 'edit/project',data)
+  }
+  getUsersFromServer(id){
+    return this.http.get(_baseUrl + 'project/getuser/' +id )
+  }
+  sendUsersToServer(data){
+        console.log("SEnding  " +JSON.stringify(data))
+        return this.http.post(_baseUrl + 'project/adduser',data)
+  }
+  removeUser(data){
+        return this.http.post(_baseUrl + 'project/removeuser',data)
+  }
+  getSelectedIssueTypeFields(data){
+    console.log("the params aree is " + JSON.stringify(data))
+    return this.http.post(_baseUrl + 'project/issuetype/config',data)
+}
 }
