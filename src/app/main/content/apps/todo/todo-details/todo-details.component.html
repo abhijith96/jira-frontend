@@ -58,7 +58,7 @@
 
                 <div>
                         <div *ngFor="let field of controlArray">
-                            <mat-form-field fxFill *ngIf="field[0]!=='_id'" >
+                            <!-- <mat-form-field fxFill *ngIf="field[0]!=='_id'" >
                                     <input matInput value="{{field[1]}}" 
                                     formControlName="{{field[0]}}" 
                                     placeholder="{{field[0] }}"
@@ -67,8 +67,17 @@
                                             || field[0] === 'projectId' || field[0] === 'issueType' ||  field[0] === 'createdOn'
                                                 "
                                      >
-                            </mat-form-field>  
+                            </mat-form-field>   -->
+                            <mat-form-field fxFill *ngIf="field[0]!=='_id'" >
+                                <input matInput value="{{field[1]}}" 
+                                formControlName="{{field[0]}}" 
+                                placeholder="{{field[0] }}"
                                 
+                                [readonly]="field[0] === 'key' || field[0] === 'assignee' || field[0] === 'createdBy'
+                                        || field[0] === 'projectId' || field[0] === 'issueType' ||  field[0] === 'createdOn'
+                                            "
+                                 >
+                        </mat-form-field>
                         </div>
                 </div> 
         </form>

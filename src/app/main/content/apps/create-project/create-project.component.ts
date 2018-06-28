@@ -22,7 +22,7 @@ export class CreateProjectComponent implements OnInit {
   // For AUTOCOMPLETE
   userControl = new FormControl()
   filteredUsers : Observable<any[]>
-  
+  possibleKey : string ;
   constructor(private createProjectService : CreateProjectService,
               private formBuilder : FormBuilder,
               public dialogRef: MatDialogRef<CreateProjectComponent>) { }
@@ -37,6 +37,11 @@ export class CreateProjectComponent implements OnInit {
           map(value => typeof value === 'string' ? value : value.name),
           map(name => name ? this.filterUsers(name) : this.userList.slice())
         );
+
+        // console.log("Generating key  " + this.generateKey("Chicken Biriryani"))
+        // console.log("Generating key  " + this.generateKey("William Shakespaere"))
+        // console.log("Generating key  " + this.generateKey("Amazing"))
+        
   }
 
   
@@ -89,4 +94,21 @@ export class CreateProjectComponent implements OnInit {
   closeDialog(){
     this.dialogRef.close()
 }
+  generateKey(){
+      let input = this.projectForm.get('name').value
+      if(input){
+        console.log("Input is " + input)
+        var text = "";
+        var possible = input;
+        possible = possible.replace(/\s/g,'');  
+        text+=possible[0].toUpperCase()
+        for (var i = 0; i < 3; i++)
+          text += (possible.charAt(Math.floor(Math.random() * possible.length))).toUpperCase();
+      
+        this.possibleKey= text;
+        this.projectForm.patchValue( { 'projectKey' : text})
+      }
+            
+    }
+    
 }

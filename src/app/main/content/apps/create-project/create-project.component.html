@@ -12,11 +12,11 @@
     <div *ngIf="errorMsg" style="margin-bottom: 15px"> 
       <span style="color:darkred;"> {{errorMsg}} </span>
     </div>
-    <mat-form-field fxFill>
+    <mat-form-field fxFlex>
       <input matInput formControlName="projectKey" placeholder="Project Key" required>
     </mat-form-field>
-    
-
+    <button style="margin-left: 20px" mat-raised-button color="primary" (click)="generateKey()" >Generate Key</button>
+    <!-- <span style="margin-left: 10px" *ngIf="possibleKey"> {{possibleKey}} </span> -->
     <mat-form-field fxFill>
       <input matInput formControlName="description" placeholder="Description">
     </mat-form-field>

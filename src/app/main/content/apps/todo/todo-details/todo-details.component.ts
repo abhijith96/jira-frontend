@@ -86,6 +86,7 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
                         this.controlArray = Object.keys(stuff).map(data=>{
                                 return [data, stuff[data]]
                         })
+                        console.log("Control array is   " + this.controlArray)
 
 
                         this.onFormChange =

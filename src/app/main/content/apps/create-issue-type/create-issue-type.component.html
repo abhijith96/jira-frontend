@@ -27,9 +27,10 @@
 
             <mat-tab label="Add New Field">
                   <mat-card>
+                  
                         <div>
                               <mat-form-field>
-                                    <textarea [(ngModel)]="newFieldName" [ngModelOptions]="{standalone: true}" matInput placeholder="Field Name">
+                                    <textarea required [(ngModel)]="newFieldName" [ngModelOptions]="{standalone: true}" matInput placeholder="Field Name">
                                                                                                                         
                                                                                                                                           </textarea>
 
@@ -37,7 +38,7 @@
                         </div>
                         <div>
                               <mat-form-field>
-                                    <textarea [(ngModel)]="newFieldId" [ngModelOptions]="{standalone: true}" matInput placeholder="Field Id">
+                                    <textarea required [(ngModel)]="newFieldId" [ngModelOptions]="{standalone: true}" matInput placeholder="Field Id">
                                                                                                                         
                                                                                                                         </textarea>
 
@@ -45,7 +46,7 @@
                         </div>
                         <div>
                               <mat-form-field>
-                                    <textarea [(ngModel)]="newFieldType" [ngModelOptions]="{standalone: true}" matInput placeholder="Field Type">
+                                    <textarea required [(ngModel)]="newFieldType" [ngModelOptions]="{standalone: true}" matInput placeholder="Field Type">
                                                                                                                               
                                                                         </textarea>
 
@@ -55,7 +56,7 @@
                         <div>
                               <mat-form-field>
 
-                                    <mat-select placeholder="True" [(ngModel)]="newFieldIsRequired" [ngModelOptions]="{standalone: true}">
+                                    <mat-select fxFlex required placeholder="Is Required" [(ngModel)]="newFieldIsRequired" [ngModelOptions]="{standalone: true}">
                                           <mat-option [value]="true">
                                                 True
                                           </mat-option>
@@ -67,7 +68,9 @@
                               </mat-form-field>
                         </div>
 
-                        <button mat-button mat-raised-button class="mat-indigo-bg" (click)="addNewField()">
+                        <button mat-button mat-raised-button 
+                              class="mat-indigo-bg" (click)="addNewField()"
+                              [disabled]="!newFieldId ||  !newFieldName || !newFieldType"      >
                               Add Field
                         </button>
                   </mat-card>
