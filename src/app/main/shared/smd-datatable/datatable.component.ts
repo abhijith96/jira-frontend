@@ -639,7 +639,7 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 					if (column.filterable) {
 						//Set Params Only when Search Box is not empty
 						if (this.columnFilterInputs[column.id] && this.columnFilterInputs[column.id].value) {
-							console.log(column.field + "  and   " + this.columnFilterInputs[column.id].value)
+							// console.log(column.field + "  and   " + this.columnFilterInputs[column.id].value)
 							this.params.set(column.field, this.columnFilterInputs[column.id].value)
 
 							// andGrp.items.push({
@@ -723,7 +723,7 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 				*/
 				this.apiClass.get(this.dataUrl, this.params).subscribe(
 					(data: any[]) => {
-						console.log(data)
+						// console.log(data)
 
 						this.lastQueryExecutedPage = page;
 						//this.models = data[this.dataHeader];

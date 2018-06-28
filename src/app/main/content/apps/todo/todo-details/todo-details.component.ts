@@ -90,10 +90,11 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
 
                         this.onFormChange =
                             this.todoForm.valueChanges.pipe(
-                                debounceTime(500),
+                                debounceTime(1000),
                                 distinctUntilChanged()
                             ).subscribe(data => {
                                 this.todoService.updateTodo(data);
+                                console.log("Form changed")
                             });
                     }
                 });
@@ -157,71 +158,71 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
         return newForm
     }
 
-    toggleStar(event)
-    {
-        event.stopPropagation();
-        this.todo.toggleStar();
-        this.todoService.updateTodo(this.todo);
-    }
+    // toggleStar(event)
+    // {
+    //     event.stopPropagation();
+    //     this.todo.toggleStar();
+    //     this.todoService.updateTodo(this.todo);
+    // }
 
-    toggleImportant(event)
-    {
-        event.stopPropagation();
-        this.todo.toggleImportant();
-        this.todoService.updateTodo(this.todo);
-    }
+    // toggleImportant(event)
+    // {
+    //     event.stopPropagation();
+    //     this.todo.toggleImportant();
+    //     this.todoService.updateTodo(this.todo);
+    // }
 
     /**
      * Toggle Completed
      * @param event
      */
-    toggleCompleted(event)
-    {
-        event.stopPropagation();
-        this.todo.toggleCompleted();
-        this.todoService.updateTodo(this.todo);
-    }
+    // toggleCompleted(event)
+    // {
+    //     event.stopPropagation();
+    //     this.todo.toggleCompleted();
+    //     this.todoService.updateTodo(this.todo);
+    // }
 
     /**
      * Toggle Deleted
      * @param event
      */
-    toggleDeleted(event)
-    {
-        event.stopPropagation();
-        this.todo.toggleDeleted();
-        this.todoService.updateTodo(this.todo);
-    }
+    // toggleDeleted(event)
+    // {
+    //     event.stopPropagation();
+    //     this.todo.toggleDeleted();
+    //     this.todoService.updateTodo(this.todo);
+    // }
 
-    toggleTagOnTodo(tagId)
-    {
-        this.todoService.toggleTagOnTodo(tagId, this.todo);
-    }
+    // toggleTagOnTodo(tagId)
+    // {
+    //     this.todoService.toggleTagOnTodo(tagId, this.todo);
+    // }
 
     hasTag(tagId)
     {
         return this.todoService.hasTag(tagId, this.todo);
     }
 
-    addTodo()
-    {
-        this.todoService.updateTodo(this.todoForm.getRawValue());
-    }
+    // addTodo()
+    // {
+    //     this.todoService.updateTodo(this.todoForm.getRawValue());
+    // }
     
-    addFields(){
-         this.todoForm.addControl(this.newFieldName, new FormControl(this.newFieldValue));
-         this.todoService.updateTodo(this.todoForm.getRawValue());
+    // addFields(){
+    //      this.todoForm.addControl(this.newFieldName, new FormControl(this.newFieldValue));
+    //      this.todoService.updateTodo(this.todoForm.getRawValue());
          
-         this.newFieldName=""
-         this.newFieldValue=""
+    //      this.newFieldName=""
+    //      this.newFieldValue=""
          
-         let stuff = this.todoForm.value
-         this.controlArray = Object.keys(stuff).map(data=>{
-                return [data, stuff[data]]
-         })
+    //      let stuff = this.todoForm.value
+    //      this.controlArray = Object.keys(stuff).map(data=>{
+    //             return [data, stuff[data]]
+    //      })
          
           
-    }
+    // }
     deleteTodo(){
         console.log("deletingggg   " + JSON.stringify(this.todo))
         this.todoService.deleteaTodo(this.todo).subscribe(
@@ -238,4 +239,13 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
         console.log("Going back")
         this.router.navigate(['apps/todo-table'])
       }
+    //   saveChanges(){
+    //       let data = this.todoForm.getRawValue()
+    //       console.log("Sending data "+ JSON.stringify(data))
+    //         this.todoService.updateTodoNew(data).subscribe(
+    //             res=>{
+    //                         console.log("updated succesfully old ")
+    //             }
+    //         )
+    //   }
 }

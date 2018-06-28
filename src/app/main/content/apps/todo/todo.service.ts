@@ -351,26 +351,26 @@ export class TodoService implements Resolve<any>
      */
     toggleTagOnSelectedTodos(tagId)
     {
-        this.selectedTodos.map(todo => {
-            this.toggleTagOnTodo(tagId, todo);
-        });
+        // this.selectedTodos.map(todo => {
+        //     this.toggleTagOnTodo(tagId, todo);
+        // });
     }
 
-    toggleTagOnTodo(tagId, todo)
-    {
-        const index = todo.tags.indexOf(tagId);
+    // toggleTagOnTodo(tagId, todo)
+    // {
+    //     const index = todo.tags.indexOf(tagId);
 
-        if ( index !== -1 )
-        {
-            todo.tags.splice(index, 1);
-        }
-        else
-        {
-            todo.tags.push(tagId);
-        }
+    //     if ( index !== -1 )
+    //     {
+    //         todo.tags.splice(index, 1);
+    //     }
+    //     else
+    //     {
+    //         todo.tags.push(tagId);
+    //     }
 
-        this.updateTodo(todo);
-    }
+    //     this.updateTodo(todo);
+    // }
 
     hasTag(tagId, todo)
     {
@@ -390,20 +390,24 @@ export class TodoService implements Resolve<any>
 
   
     updateTodo(todo)
-    {
+    {   console.log("Old update")
         return new Promise((resolve, reject) => {
 
             this.http.post( this._baseUrl+  'edit-issues/' + todo._id, todo )
                 .subscribe(response => {
-                    console.log(response)
+                    console.log("The response is" + JSON.stringify(response)   )
                     this.getTodos().then(todos => {
-                        console.log("success iss  " + todos)
+                        console.log("success iss  " + JSON.stringify(todos))
                         resolve(todos);
 
                     }, reject);
                 });
         });
     }
+
+    // updateTodoNew(todo){
+    //         return this.http.post(this._baseUrl+  'edit-issues/' + todo._id, todo)
+    // }
 
     // changeTodo(todo){
     //     return new Promise((resolve, reject)=>{

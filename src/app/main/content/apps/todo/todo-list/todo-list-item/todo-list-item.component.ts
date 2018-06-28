@@ -80,24 +80,24 @@ export class FuseTodoListItemComponent implements OnInit, OnDestroy
     /**
      * Toggle star
      */
-    toggleStar(event)
-    {
-        event.stopPropagation();
+    // toggleStar(event)
+    // {
+    //     event.stopPropagation();
 
-        this.todo.toggleStar();
-        this.todoService.updateTodo(this.todo);
-    }
+    //     this.todo.toggleStar();
+    //     this.todoService.updateTodo(this.todo);
+    // }
 
     /**
      * Toggle Important
      */
-    toggleImportant(event)
-    {
-        event.stopPropagation();
+    // toggleImportant(event)
+    // {
+    //     event.stopPropagation();
 
-        this.todo.toggleImportant();
-        this.todoService.updateTodo(this.todo);
-    }
+    //     this.todo.toggleImportant();
+    //     this.todoService.updateTodo(this.todo);
+    // }
 
     /**
      * Toggle Completed

@@ -1,15 +1,17 @@
 <h2 mat-dialog-title>Create Issue</h2>
 
+<span *ngIf="projectFieldEmpty" style="color: red">Choose a Project First</span>
 <mat-form-field fxFill *ngIf="projectList">
       <!-- <mat-select id="choose-project" [(value)]="selectedProject" placeholder="Choose Project" >
                 <mat-option *ngFor="let project of projectList" [value]="project.pid"  >
                       {{project.name}}
                 </mat-option>
             </mat-select> -->
-
-      <input type="text" placeholder="Project" matInput [formControl]="projectControl" [matAutocomplete]="auto">
-      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-            <mat-option *ngFor="let project of filteredProjects | async" [value]="project">
+      <input type="text" placeholder="Project" matInput [formControl]="projectControl" 
+      [matAutocomplete]="auto" (keyup.enter)="getProjectIssueTypes()">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
+            <mat-option *ngFor="let project of filteredProjects | async" [value]="project"
+                        (click)="getProjectIssueTypes()" (keyup.enter)="getProjectIssueTypes()"  >
                   {{ project.name }}
             </mat-option>
       </mat-autocomplete>
@@ -17,16 +19,12 @@
 
 
 <mat-form-field fxFill *ngIf="issueTypes">
-      <!-- <mat-select fxFill placeholder="Choose Issue Type" [(ngModel)]="selectedIssueType" [ngModelOptions]="{standalone: true}">
-            <mat-option *ngFor="let issueType of issueTypes" [value]="issueType" (click)="getSelectedType()">
-                  {{issueType.name}}
-            </mat-option>
-      </mat-select> -->
-
-      <input type="text" placeholder="Issue Type" matInput [formControl]="issueTypeControl" [matAutocomplete]="auto">
-      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-            <mat-option *ngFor="let type of filteredIssueTypes | async" [value]="type" (click)="getSelectedType()">
-                  {{ type.name }}
+      <input type="text"     placeholder="Issue Type" matInput [formControl]="issueTypeControl"
+       [matAutocomplete]="auto" (keyup.enter)="getProjectSelectedType()">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFnType" >
+            <mat-option *ngFor="let type of filteredIssueTypes | async" [value]="type" 
+            (click)="getProjectSelectedType()"  >
+                  {{ type }}
             </mat-option>
       </mat-autocomplete>
 </mat-form-field>
@@ -34,7 +32,7 @@
 <mat-dialog-content>
 
 
-      <form [formGroup]="issueForm" fxFlex floatLabel="never" [class.mat-elevation-z6] *ngIf="issueForm">
+      <form [formGroup]="issueForm" fxFlex floatLabel="never" [class.mat-elevation-z6] *ngIf="selectedTypeFields">
             <label class="">
                   <h2>New Issue </h2>
             </label>
@@ -56,7 +54,8 @@
                               </mat-option>
                         </mat-select> -->
                         <div *ngIf="field.name==='Assignee'"  >
-                              <input type="text" placeholder="Assignee" matInput [formControl]="userControlAssignee" [matAutocomplete]="auto">
+                              <input type="text" placeholder="Assignee" matInput [formControl]="userControlAssignee" 
+                              [matAutocomplete]="auto">
                               <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                                     <mat-option *ngFor="let user of filteredUsersAssignee | async" [value]="user">
                                           {{ user.name }}

@@ -10,11 +10,11 @@ export class DatatableService {
   
   get(url,params? ){
           if(params){
-            console.log("Making request tooo   " + this._baseUrl+  url +'?' +params)
+            // console.log("Making request tooo   " + this._baseUrl+  url +'?' +params)
               return this.http.get( this._baseUrl+  url +'?' +params);         
           }
           else{
-             console.log("Making the new request toooo " + this._baseUrl+url)
+            //  console.log("Making the new request toooo " + this._baseUrl+url)
              return this.http.get( this._baseUrl+url);                       
           }
   }

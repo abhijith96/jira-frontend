@@ -36,7 +36,7 @@ export class ProjectDetailsComponent implements OnInit {
     this.projectService.getProjectByIdFromServer(data).subscribe(
           (data : any)=>{
                 this.selectedProject = data;
-                console.info("Current project is " + JSON.stringify(this.selectedProject))
+                // console.info("Current project is " + JSON.stringify(this.selectedProject))
                 this.people = data["people"];
                 // console.log("People are " +JSON.stringify(this.people))
                 // console.log(this.people)

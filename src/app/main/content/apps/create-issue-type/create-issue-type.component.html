@@ -2,7 +2,7 @@
 <h2 mat-dialog-title>Create Issue Type</h2>
 
 
-
+<h4 *ngIf="nameFieldEmpty" style="color: red">Name Cannot be empty</h4>
 <mat-form-field>
       <input matInput [(ngModel)]="issueTypeName" placeholder="Name">
 </mat-form-field>

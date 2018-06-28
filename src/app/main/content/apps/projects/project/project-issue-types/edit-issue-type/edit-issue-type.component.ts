@@ -34,7 +34,7 @@ export class EditIssueTypeComponent implements OnInit {
       this.projectService.getSelectedIssueTypeFields(data).subscribe(
           (res : any)=>{
               this.fields =res.fields
-              console.log("Success received fields   " + JSON.stringify(this.fields))
+              console.log("Success received fields   " )
           },
           err=>{
               console.log("Didn't get those pesky fields")
@@ -43,6 +43,17 @@ export class EditIssueTypeComponent implements OnInit {
       )
   }
   deleteField(field){
-        console.log("Preparing to delete" + JSON.stringify(field))
+        let data = { issueType : this.currentIssueType.name, pid : this.currentProjectId, fieldId : field._id }
+        console.log("Preparing to delete" + JSON.stringify(data))
+                
+        this.projectService.editProjectIssueType(data).subscribe(
+                res=>{
+                            console.log("Deletion successfull")
+                            this.getFields()
+                },
+                err=>{  
+                        console.log("Deletion error")
+                }
+        )
   }
 }

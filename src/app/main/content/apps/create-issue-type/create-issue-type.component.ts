@@ -22,7 +22,7 @@ export class CreateIssueTypeComponent implements OnInit {
   private newFieldId : string;
   private newFieldType : string;
   private newFieldIsRequired : string ="false";
-  
+  nameFieldEmpty : Boolean= false;
   projectList : any[];
   selectedProject : any;
   all : string ="ALL";
@@ -100,29 +100,36 @@ export class CreateIssueTypeComponent implements OnInit {
   }
 
   sendForm(data){
-        //Iterates through tempfields array , if form.value contains that fields name then
+        if(this.issueTypeName){
+            //Iterates through tempfields array , if form.value contains that fields name then
             //    pushes its object id to fields array.
-        console.log(data)
-        let issueTypeName = this.issueTypeName;
-        let newType = {"name": issueTypeName }
-        let formValue :any = this.fieldListForm.getRawValue()
-        console.log("Form Value is " + JSON.stringify(formValue))
-        let fields : any[] =[];
-        this.tempFields.filter(
-                  (obj)=>{
-                        if( formValue.hasOwnProperty(obj.name)  ){
-                              fields.push(obj._id)
-                        }
+            this.nameFieldEmpty = false            
+            console.log(data)
+            let issueTypeName = this.issueTypeName;
+            let newType = {"name": issueTypeName }
+            let formValue :any = this.fieldListForm.getRawValue()
+            console.log("Form Value is " + JSON.stringify(formValue))
+            let fields : any[] =[];
+            this.tempFields.filter(
+                      (obj)=>{
+                            if( formValue.hasOwnProperty(obj.name)  ){
+                                  fields.push(obj._id)
+                            }
+                      }
+             )        
+             newType["fields"] = fields
+             newType["pid"]=this.selectedProject;
+            console.log(issueTypeName + " Fields are  " + fields)
+            this.newIssueService.sendNewIssueType(newType).subscribe(
+                  (data)=>{
+                        console.log("Succes : New Issue Type Added")
                   }
-         )        
-         newType["fields"] = fields
-         newType["pid"]=this.selectedProject;
-        console.log(issueTypeName + " Fields are  " + fields)
-        this.newIssueService.sendNewIssueType(newType).subscribe(
-              (data)=>{
-                    console.log("Succes : New Issue Type Added")
-              }
-        )
+            )
+        }
+        else{
+                  this.nameFieldEmpty = true
+        }
+        
   }
 
   addNewField(){

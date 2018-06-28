@@ -57,4 +57,9 @@ export class ProjectService {
     console.log("the params aree is " + JSON.stringify(data))
     return this.http.post(_baseUrl + 'project/issuetype/config',data)
 }
+  //Function to delete fields
+  editProjectIssueType(data){
+    console.log("Sending to server" + JSON.stringify(data))
+      return this.http.post(_baseUrl + 'project/issuetype/deletefields',data)
+  }
 }
