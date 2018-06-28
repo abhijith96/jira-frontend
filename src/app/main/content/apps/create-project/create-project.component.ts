@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatInput} from '@angular/material';
 
 import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { CreateProjectService} from './create-project.service';
@@ -16,13 +17,15 @@ export class CreateProjectComponent implements OnInit {
 
   projectForm : FormGroup;
   userList : any[]
-
+  success : boolean = false
+  errorMsg : string ;
   // For AUTOCOMPLETE
   userControl = new FormControl()
   filteredUsers : Observable<any[]>
   
   constructor(private createProjectService : CreateProjectService,
-              private formBuilder : FormBuilder) { }
+              private formBuilder : FormBuilder,
+              public dialogRef: MatDialogRef<CreateProjectComponent>) { }
 
   ngOnInit() {
         this.projectForm = this.createForm()
@@ -73,8 +76,17 @@ export class CreateProjectComponent implements OnInit {
       let data = this.projectForm.getRawValue()
       this.createProjectService.createProject(data).subscribe(
           res=>{
-              console.log(res + "  Project Created !!!!!")
-          }
+              console.log("  Project Created !!!!!")
+              this.success = true
+              this.errorMsg =null
+          },
+          err=>{
+                console.log("ERror is  "+JSON.stringify(err.error.text))
+                this.errorMsg = err.error.text
+              }
       )
   }
+  closeDialog(){
+    this.dialogRef.close()
+}
 }

@@ -11,6 +11,7 @@ export class AddIssueTypeComponent implements OnInit {
   issueTypeList : any[] =[];
   selectedProject : any ;
   newFields : any[] = []
+  success = false
     constructor(private projectService : ProjectService,
     public dialogRef: MatDialogRef<AddIssueTypeComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
@@ -34,9 +35,11 @@ export class AddIssueTypeComponent implements OnInit {
       
   }
   addIssueTypes(){
+      this.success = false
       this.projectService.sendNewIssueTypes(this.data.projectId._id,this.newFields ).
           subscribe(data=>{
                 console.log("Success Issue types added")
+                this.success=true
           })
   }
   addType(issueType){
@@ -61,5 +64,9 @@ export class AddIssueTypeComponent implements OnInit {
         console.log("Exist  "+ exists)
         console.log("New fields   " + JSON.stringify(this.newFields))
   }
+
+  closeDialog(){
+    this.dialogRef.close()
+}
   
 }

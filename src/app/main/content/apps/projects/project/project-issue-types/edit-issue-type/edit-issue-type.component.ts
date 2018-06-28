@@ -56,4 +56,7 @@ export class EditIssueTypeComponent implements OnInit {
                 }
         )
   }
+  closeDialog(){
+    this.dialogRef.close()
+}
 }

@@ -1,3 +1,5 @@
+<mat-icon style="cursor: pointer;float: right;color: darkred "  (click)="closeDialog()" class="logo-icon s-28">close</mat-icon> 
+
 <h2 mat-dialog-title>Add Users</h2>
 
 
@@ -20,20 +22,23 @@
               {{user.name}}
         </mat-list-option>
   </mat-selection-list> -->
-  <input type="text" placeholder="Manager" matInput [formControl]="userControl" [matAutocomplete]="auto">
+  <input type="text" placeholder="Manager" matInput [formControl]="userControl" [matAutocomplete]="auto"
+      >
   <mat-autocomplete style="margin-bottom: 50px" #auto="matAutocomplete" [displayWith]="displayFn">
-        <mat-option *ngFor="let user of filteredUsers | async" [value]="user" (click)="selectUser(user)" >
+        <mat-option *ngFor="let user of filteredUsers | async" [value]="user" (click)="selectUser(user)"
+        (keyup.enter)="selectUser(user)" >
               {{ user.name }}
         </mat-option>
   </mat-autocomplete>
 
 
-  <mat-selection-list style="margin-top: 40px">
+  <mat-selection-list style="margin-top: 40px" *ngIf="!success" >
         <mat-list-option  *ngFor="let user of newUsers" [selected]=true [disabled]=true>
             {{user.name}}
         </mat-list-option>
   </mat-selection-list>
+  <h2 style="color:#2ECC71" *ngIf="success">Added Users!</h2>
 
-  <button *ngIf="userList.length" mat-raised-button class="mat-accent" (click)="addUsers()">Add</button>            
+  <button  style="margin-top: 20px" *ngIf="userList.length && !success" mat-raised-button class="mat-accent" (click)="addUsers()">Add</button>            
   
 </mat-dialog-content>

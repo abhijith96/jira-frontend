@@ -93,7 +93,7 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
                                 debounceTime(1000),
                                 distinctUntilChanged()
                             ).subscribe(data => {
-                                this.todoService.updateTodo(data);
+                                // this.todoService.updateTodo(data);
                                 console.log("Form changed")
                             });
                     }
@@ -239,13 +239,14 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
         console.log("Going back")
         this.router.navigate(['apps/todo-table'])
       }
-    //   saveChanges(){
-    //       let data = this.todoForm.getRawValue()
-    //       console.log("Sending data "+ JSON.stringify(data))
-    //         this.todoService.updateTodoNew(data).subscribe(
-    //             res=>{
-    //                         console.log("updated succesfully old ")
-    //             }
-    //         )
-    //   }
+      saveChanges(){
+          let data = this.todoForm.getRawValue()
+          console.log("Sending data "+ JSON.stringify(data))
+            this.todoService.updateTodoNew(data)
+            // .subscribe(
+            //     res=>{
+            //                 console.log("updated succesfully old ")
+            //     }
+            // )
+      }
 }

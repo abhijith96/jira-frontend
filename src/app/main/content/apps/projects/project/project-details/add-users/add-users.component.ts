@@ -17,7 +17,7 @@ export class AddUsersComponent implements OnInit {
   //For autocomplete stuff
   userControl = new FormControl()
   filteredUsers : Observable<any[]>
-  
+  success : boolean = false
   
   constructor(private projectService: ProjectService,
     public dialogRef: MatDialogRef<AddUsersComponent>,
@@ -82,9 +82,14 @@ export class AddUsersComponent implements OnInit {
         this.projectService.sendUsersToServer(data).subscribe(
             data=>{
                     console.log("Added users succesfulyy")
-            }
+                    this.success=true
+                  }
         )
+        
   }
+  closeDialog(){
+    this.dialogRef.close()
+}
 
 
 }

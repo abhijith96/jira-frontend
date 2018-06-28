@@ -1,23 +1,28 @@
-<h2 mat-dialog-title>Create Project</h2>
+<mat-icon style="cursor: pointer;float: right;color: darkred "  (click)="closeDialog()" class="logo-icon s-28">close</mat-icon> 
 
+<h2 mat-dialog-title>Create Project</h2>
+<h2 style="color:#2ECC71" class="text-center" *ngIf="success"> Project Created!</h2>
 <mat-dialog-content>
   <form [formGroup]="projectForm" fxFlex floatLabel="never" [class.mat-elevation-z6] *ngIf="projectForm">
 
     <mat-form-field fxFill>
-      <input matInput formControlName="name" placeholder="Name">
+      <input matInput formControlName="name" placeholder="Name" required #stuff>
     </mat-form-field>
 
-
+    <div *ngIf="errorMsg" style="margin-bottom: 15px"> 
+      <span style="color:darkred;"> {{errorMsg}} </span>
+    </div>
     <mat-form-field fxFill>
-      <input matInput formControlName="projectKey" placeholder="Project Key">
+      <input matInput formControlName="projectKey" placeholder="Project Key" required>
     </mat-form-field>
+    
 
     <mat-form-field fxFill>
       <input matInput formControlName="description" placeholder="Description">
     </mat-form-field>
 
     <mat-form-field fxFill>
-      <input matInput formControlName="type" placeholder="Type">
+      <input matInput formControlName="type" placeholder="Type"> 
     </mat-form-field>
 
     <!-- <mat-form-field fxFill> 
@@ -31,7 +36,8 @@
         </mat-option>
       </mat-select> -->
 
-      <input type="text" placeholder="Manager" matInput [formControl]="userControl" [matAutocomplete]="auto">
+      <input type="text" placeholder="Manager" matInput [formControl]="userControl" 
+      [matAutocomplete]="auto" required>
       <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
             <mat-option *ngFor="let user of filteredUsers | async" [value]="user" >
                   {{ user.name }}
@@ -41,6 +47,6 @@
 
   </form>
 </mat-dialog-content>
-<mat-dialog-actions>
-    <button mat-raised-button class="mat-accent" (click)="sendForm()">Create</button>            
+<mat-dialog-actions *ngIf="filteredUsers">
+    <button mat-raised-button class="mat-accent" [disabled]="!projectForm.valid"  (click)="sendForm()">Create</button>            
 </mat-dialog-actions>

@@ -3,6 +3,7 @@ import { NewIssueService } from './new-issue.service'
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 
 
@@ -27,7 +28,7 @@ export class CreateIssueComponent implements OnInit {
   selectedTypeFields: any[];
   projectFieldEmpty = false;
   issueForm: FormGroup;
-
+  success : boolean= false;
   ////For Autocomplete stuff
   projectControl = new FormControl();
 
@@ -46,7 +47,9 @@ export class CreateIssueComponent implements OnInit {
 
 
   constructor(private newIssueService: NewIssueService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    public dialog :MatDialog,
+    public dialogRef: MatDialogRef<CreateIssueComponent>) { }
 
   ngOnInit() {
     this.issueForm = this.createForm()
@@ -209,6 +212,7 @@ export class CreateIssueComponent implements OnInit {
     this.newIssueService.saveNewIssue(form).subscribe(
       data => {
         console.log("Yaaay Issue Created" + data)
+        this.success=true
       }
     )
   }
@@ -232,6 +236,9 @@ export class CreateIssueComponent implements OnInit {
           this.userList = users;
         }
       )
+  }
+  closeDialog(){
+      this.dialogRef.close()
   }
 
 }

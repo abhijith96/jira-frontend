@@ -1,6 +1,11 @@
+<mat-icon style="cursor: pointer;float: right;color: darkred "  (click)="closeDialog()" class="logo-icon s-28">close</mat-icon> 
+
 <h2 mat-dialog-title>Create Issue</h2>
 
+
 <span *ngIf="projectFieldEmpty" style="color: red">Choose a Project First</span>
+<h2 style="color:#2ECC71" *ngIf="success" class="text-center"> Issue Created!</h2>
+
 <mat-form-field fxFill *ngIf="projectList">
       <!-- <mat-select id="choose-project" [(value)]="selectedProject" placeholder="Choose Project" >
                 <mat-option *ngFor="let project of projectList" [value]="project.pid"  >
@@ -8,7 +13,7 @@
                 </mat-option>
             </mat-select> -->
       <input type="text" placeholder="Project" matInput [formControl]="projectControl" 
-      [matAutocomplete]="auto" (keyup.enter)="getProjectIssueTypes()">
+      [matAutocomplete]="auto" (keyup.enter)="getProjectIssueTypes()" required>
       <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
             <mat-option *ngFor="let project of filteredProjects | async" [value]="project"
                         (click)="getProjectIssueTypes()" (keyup.enter)="getProjectIssueTypes()"  >
@@ -19,7 +24,7 @@
 
 
 <mat-form-field fxFill *ngIf="issueTypes">
-      <input type="text"     placeholder="Issue Type" matInput [formControl]="issueTypeControl"
+      <input type="text"     placeholder="Issue Type" matInput [formControl]="issueTypeControl" required
        [matAutocomplete]="auto" (keyup.enter)="getProjectSelectedType()">
       <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFnType" >
             <mat-option *ngFor="let type of filteredIssueTypes | async" [value]="type" 
@@ -40,7 +45,8 @@
 
                   <mat-form-field fxFill *ngIf="field.name !== 'ProjectId' && userList" >
                         <input matInput formControlName="{{field.id}}" placeholder="{{field.name }}" [readonly]="field.id === 'issueType' || field.id==='projectId'"
-                              *ngIf="field.name !=='Assignee' && field.name!= 'CreatedBy'">
+                              *ngIf="field.name !=='Assignee' && field.name!= 'CreatedBy'"
+                               [required]="field.isRequired"           >
                         <!--                               
                         <mat-select *ngIf="field.name==='Assignee'" placeholder="Assignee" formControlName="{{field.id}}">
                               <mat-option *ngFor="let user of userList" [value]="user._id">
@@ -74,7 +80,7 @@
                   </mat-form-field>
 
             </div>
-            <button mat-raised-button class="mat-accent" (click)="sendForm()">Create</button>
+            <button mat-raised-button class="mat-accent" [disabled]="!issueForm.valid" (click)="sendForm()">Create</button>
 
 
       </form>

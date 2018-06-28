@@ -26,6 +26,7 @@ export class CreateIssueTypeComponent implements OnInit {
   projectList : any[];
   selectedProject : any;
   all : string ="ALL";
+  success : boolean = false
 
 
   constructor(private newIssueService : NewIssueTypeService,
@@ -123,6 +124,7 @@ export class CreateIssueTypeComponent implements OnInit {
             this.newIssueService.sendNewIssueType(newType).subscribe(
                   (data)=>{
                         console.log("Succes : New Issue Type Added")
+                        this.success=true
                   }
             )
         }
@@ -167,6 +169,9 @@ export class CreateIssueTypeComponent implements OnInit {
                   }
         )
        
+  }
+  closeDialog(){
+      this.dialogRef.close()
   }
 
 }

@@ -382,32 +382,42 @@ export class TodoService implements Resolve<any>
         return todo.tags.indexOf(tagId) !== -1;
     }
 
-    /**
-     * Update the todo
-     * @param todo
-     * @returns {Promise<any>}
-     */
+    // /**
+    //  * Update the todo
+    // @param todo
+    //  * @returns {Promise<any>}
+    //  */
 
   
-    updateTodo(todo)
-    {   console.log("Old update")
-        return new Promise((resolve, reject) => {
+    // updateTodo(todo)
+    // {   console.log("Old update")
+    //     return new Promise((resolve, reject) => {
 
-            this.http.post( this._baseUrl+  'edit-issues/' + todo._id, todo )
-                .subscribe(response => {
-                    console.log("The response is" + JSON.stringify(response)   )
-                    this.getTodos().then(todos => {
-                        console.log("success iss  " + JSON.stringify(todos))
-                        resolve(todos);
+    //         this.http.post( this._baseUrl+  'edit/issue', todo )
+    //             .subscribe(response => {
+    //                 console.log("The response is" + JSON.stringify(response)   )
+    //                 this.getTodos().then(todos => {
+    //                     console.log("success iss  " + JSON.stringify(todos))
+    //                     resolve(todos);
 
-                    }, reject);
-                });
-        });
-    }
-
-    // updateTodoNew(todo){
-    //         return this.http.post(this._baseUrl+  'edit-issues/' + todo._id, todo)
+    //                 }, reject);
+    //             });
+    //     });
     // }
+
+    updateTodoNew(todo){
+            // return this.http.post(this._baseUrl+  'edit/issue' , todo)
+            return new Promise((resolve,reject) =>{
+                    this.http.post(this._baseUrl+  'edit/issue' , todo)
+                        .subscribe(res=>{
+                                this.getTodos().then(
+                                    todos=>{
+                                            resolve(todos)
+                                    },reject
+                                )
+                        })
+            })
+    }
 
     // changeTodo(todo){
     //     return new Promise((resolve, reject)=>{

@@ -1,10 +1,12 @@
+<mat-icon style="cursor: pointer;float: right;color: darkred "  (click)="closeDialog()" class="logo-icon s-28">close</mat-icon> 
 
 <h2 mat-dialog-title>Create Issue Type</h2>
 
 
 <h4 *ngIf="nameFieldEmpty" style="color: red">Name Cannot be empty</h4>
+<h2 style="color:#2ECC71" class="text-center" *ngIf="success"> Issue Type Created!</h2>
 <mat-form-field>
-      <input matInput [(ngModel)]="issueTypeName" placeholder="Name">
+      <input matInput [(ngModel)]="issueTypeName" placeholder="Name" required>
 </mat-form-field>
 
 
