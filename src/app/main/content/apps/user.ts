@@ -1,0 +1,1 @@
+export const user = {"_id":"5b2b358ab1891c0e9007896e","name":"Romero Lukaku"};

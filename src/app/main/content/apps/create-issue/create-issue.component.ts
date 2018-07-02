@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
-
+import { user} from '../user'
 
 
 export class User {
@@ -18,7 +18,7 @@ export class User {
   styleUrls: ['./create-issue.component.scss']
 })
 export class CreateIssueComponent implements OnInit {
-
+  currentUser = user;
   issueTypes: any[];
   projectList: any[];
   selectedIssueType: any;
@@ -202,13 +202,14 @@ export class CreateIssueComponent implements OnInit {
 
   sendForm() {
     this.issueForm.patchValue({ "assignee": this.userControlAssignee.value })
-    this.issueForm.patchValue({ "createdBy": this.userControlCreator.value })
-
+    // this.issueForm.patchValue({ "createdBy": this.userControlCreator.value })
+    this.issueForm.patchValue({ "createdBy": this.currentUser })
+    
     let form = this.issueForm.getRawValue();
     form["issueType"] = this.selectedIssueType;
     form["projectId"] = this.selectedProject;
 
-    // console.log("Form data is   "+ JSON.stringify(form))
+    console.log("Form data is   "+ JSON.stringify(form))
     this.newIssueService.saveNewIssue(form).subscribe(
       data => {
         console.log("Yaaay Issue Created")

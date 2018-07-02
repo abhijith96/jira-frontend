@@ -12,7 +12,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { CreateIssueTypeComponent } from '../content/apps/create-issue-type/create-issue-type.component';
 import { CreateIssueComponent } from '../content/apps/create-issue/create-issue.component';
 import { CreateProjectComponent } from '../content/apps/create-project/create-project.component';
-
+import { user } from '../content/apps/user'
 
 @Component({
     selector   : 'fuse-toolbar',
@@ -30,6 +30,7 @@ export class FuseToolbarComponent
     noNav: boolean;
     navigation: any;
 
+    currentUser = user
     constructor(
         private router: Router,
         private fuseConfig: FuseConfigService,

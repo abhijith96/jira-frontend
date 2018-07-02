@@ -1,7 +1,10 @@
-<div class="smd-datatable-wrap" [class.component-loading]="loading">
-        <div *ngIf="rows.length == 0"  class="text-center no-data">
-                {{noDataDisplayMessage}}
-            </div>
+<div *ngIf="rows.length == 0"  class="text-center no-data">
+        {{noDataDisplayMessage}}
+</div>
+
+
+<div class="smd-datatable-wrap"  [class.component-loading]="loading">
+        
     <mat-form-field class="common-filter" *ngIf="filterEnabled && showTableFilter">
         <input matInput [formControl]="filterInput" />
         <mat-icon matPrefix (click)="filterTable()">search</mat-icon>

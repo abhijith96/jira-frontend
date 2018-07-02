@@ -1,17 +1,17 @@
 <div class="page-layout carded fullwidth" fusePerfectScrollbar>
 
-    <div class="top-bg mat-indigo-bg h-30"></div>
+    <div class="top-bg mat-accent-bg h-30"></div>
 
     <div class="center">
 
 
-        <div class="header white-fg text-center" id="main-title">
+        <div class="header white-fg "id="main-title">
+            <mat-icon style="cursor: pointer" (click)="goBack()" class="logo-icon s-32">arrow_back</mat-icon>             
             <span class="title" *ngIf="currentProject"> {{ currentProject["name"]| uppercase }} </span>
-            <mat-icon style="cursor: pointer" (click)="goBack()" class="logo-icon s-32">arrow_back</mat-icon> 
             
         </div>
        
-        <mat-card>
+        <mat-card class="content-card mat-white-bg"  style="margin-bottom: 25px">
             <mat-tab-group [selectedIndex]="0">
                 <mat-tab label="Project Details">
                     <app-project-details> </app-project-details>
@@ -32,6 +32,7 @@
                 </button>
             </mat-tab-group>
         </mat-card>
+
     </div>
     
 </div>

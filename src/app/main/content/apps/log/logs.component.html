@@ -1,41 +1,47 @@
 <div class="page-layout carded fullwidth" fusePerfectScrollbar>
-    <div class="top-bg mat-teal-bg h-30"></div>
+    <div class="top-bg mat-accent-bg h-30"></div>
     <div class="center">
 
         <div class="header white-fg " id="main-title">
             <span class="title"> Logs </span>
             <mat-icon style="cursor: pointer;float: right " (click)="refresh()" class="logo-icon s-32">refresh</mat-icon>
 
-            <div class="content-card mat-white-bg">
+            <div class="content-card mat-white-bg" style="margin-bottom: 25px">
 
-                <smd-datatable dataUrl="logs" dataHeader="jobs" [paginated]="true" fusePerfectScrollbar showCheckBox="true" [responsive]="true"
+                <smd-datatable dataUrl="logs"  dataHeader="jobs" [paginated]="true" fusePerfectScrollbar showCheckBox="true" [responsive]="true"
                     [filterEnabled]="true" [showTableFilter]="false">
+
+
+                    <smd-datatable-column title="Date" field="date" sortable="true" [filterable]="true">
+                            <ng-template let-model="data">
+                                <span *ngIf="model.createdOn !== null">
+                                    {{ model.createdOn  | date: 'dd/MM/yyyy' }}
+                                </span>
+                            </ng-template>
+                    </smd-datatable-column>
 
                     <smd-datatable-column title="Action" field="action" sortable="true" [filterable]="true">
                         <ng-template let-model="data">
-                            <a routerLink='/apps/log/{{ model._id }}'>{{model.action}}</a>
+                            <a  *ngIf="model.action !==null"  routerLink='/apps/log/{{ model._id }}'>{{model.action}}</a>
                         </ng-template>
                     </smd-datatable-column>
 
                     <smd-datatable-column title="Modified Field" field="modifiedField" sortable="true" [filterable]="true">
-                        <ng-template let-model="data">
+                        <ng-template   let-model="data">
                             {{model.data}}
                         </ng-template>
                     </smd-datatable-column>
 
                     <smd-datatable-column title="Affected Project" field="affectedProject" sortable="true" [filterable]="true">
-                        <ng-template let-model="data">
-                            {{model.affectedProject.name}}
+                        <ng-template  let-model="data">
+                            <span *ngIf="model.affectedProject">
+                                    {{model.affectedProject.name}}
+                            </span>
+                            
                         </ng-template>
                     </smd-datatable-column>
 
-                    <smd-datatable-column title="Date" field="date" sortable="true" [filterable]="true">
-                        <ng-template let-model="data">
-                            <span *ngIf="model.createdOn !== null">
-                                {{ model.createdOn  | date: 'dd/MM/yyyy' }}
-                            </span>
-                        </ng-template>
-                    </smd-datatable-column>
+                   
 
                     <smd-datatable-column title="By" field="by" sortable="true" [filterable]="true">
                             <ng-template let-model="data">

@@ -1,30 +1,30 @@
-// {
-//     "files.exclude": {
-//         "**/.git": true,
-//         "**/.svn": true,
-//         "**/.hg": true,
-//         "**/CVS": true,
-//         "**/.DS_Store": true,
-//         "**/node_modules" : true,
-//         "**/.vscode" : true,
-//         "**/e2e" : true,
-//         "**/store" : true,
-//         "**/environments" : true,
-//         "**/assets" : true,
-//         "**/navbar" : true,        
-//         "**/toolbar" : true,
-//         "**/*.json" : true,
-//         "**/*.js" : true,
-//         "**/*.ico" : true,
-//         "**/ui" : true,
-//         "**/content/components" : true,
-//         "**/browserslist" : true,
-//         "**/@fuse" : true,
-//         "**/i18n" : true,
-//         "**/hmr.ts" : true
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/node_modules" : true,
+        "**/.vscode" : true,
+        "**/e2e" : true,
+        "**/store" : true,
+        "**/environments" : true,
+        "**/assets" : true,
+        "**/navbar" : true,        
+        "**/toolbar" : true,
+        "**/*.json" : true,
+        "**/*.js" : true,
+        "**/*.ico" : true,
+        "**/ui" : true,
+        "**/content/components" : true,
+        "**/browserslist" : true,
+        "**/@fuse" : true,
+        "**/i18n" : true,
+        "**/hmr.ts" : true
         
         
         
 
-//     }
-// }
+    }
+}

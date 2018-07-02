@@ -152,7 +152,7 @@ export const navigation = [
                 'title'    : 'Log',
                 'translate': 'NAV.CALENDAR',
                 'type'     : 'item',
-                'icon'     : 'today',
+                'icon'     : 'shopping_cart',
                 'url'      : '/apps/log'
             }
             

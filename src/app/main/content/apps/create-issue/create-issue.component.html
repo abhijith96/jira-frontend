@@ -77,13 +77,16 @@
                               </mat-autocomplete>
                         </div>
 
-                        <div *ngIf="field.name==='CreatedBy'" >
+                        <!-- <div  >
                                     <input required type="text" placeholder="Created By" matInput [formControl]="userControlCreator" [matAutocomplete]="auto">
                                     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                                           <mat-option *ngFor="let user of filteredUsersCreator | async" [value]="user">
                                                 {{ user.name }}
                                           </mat-option>
                                     </mat-autocomplete>
+                        </div> -->
+                        <div *ngIf="field.name==='CreatedBy'">
+                              <input matInput [value]="currentUser.name" placeholder="Created By" [readonly]=true >
                         </div>
                   </mat-form-field>
 

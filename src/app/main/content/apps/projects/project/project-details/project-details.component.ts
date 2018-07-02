@@ -97,5 +97,8 @@ deleteUser(data){
 
         )
 }
+cancelEdit(){
+    this.editable = false;
+}
 
 }

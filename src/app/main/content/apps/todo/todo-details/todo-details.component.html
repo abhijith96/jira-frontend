@@ -1,7 +1,5 @@
-
 <div *ngIf="!todo" fxLayout="column" fxLayoutAlign="center center" fxFlex>
-    <mat-icon class="s-120 mb-12 select-todo-icon hint-text" *fuseIfOnDom
-              [@animate]="{value:'*',params:{delay:'300ms',scale:'0.2'}}">check_box
+    <mat-icon class="s-120 mb-12 select-todo-icon hint-text" *fuseIfOnDom [@animate]="{value:'*',params:{delay:'300ms',scale:'0.2'}}">check_box
     </mat-icon>
     <span class="hint-text mat-h1 select-todo-text" *fuseIfOnDom [@animate]="{value:'*',params:{delay:'400ms'}}">
         Select a todo
@@ -12,8 +10,7 @@
 
     <div class="todo-header" fxLayout="row" fxLayoutAlign="space-between center">
 
-        <button mat-button class="toggle-complete-button" (click)="toggleCompleted($event)"
-                aria-label="Toggle completed" fxFlex="0 1 auto">
+        <button mat-button class="toggle-complete-button" (click)="toggleCompleted($event)" aria-label="Toggle completed" fxFlex="0 1 auto">
             <!-- <mat-icon *ngIf="todo.completed">check_box</mat-icon>
             <mat-icon *ngIf="!todo.completed">check_box_outline_blank</mat-icon>
             <span class="ml-8">Mark as Done</span> -->
@@ -45,46 +42,62 @@
             </mat-menu>
 
             <button mat-icon-button (click)="deleteTodo()" aria-label="Toggle delete">
-                <mat-icon class="secondary-text" >delete</mat-icon>
+                <mat-icon class="secondary-text">delete</mat-icon>
             </button>
 
         </div>
     </div>
 
     <div class="todo-content">
+
+
+        
+            <mat-tab-group [selectedIndex]="0">
+                
+                <mat-tab label="Editable">
+                        <form [formGroup]="todoForm" >
+                    <div *ngFor="let field of controlArray" style="margin-top: 20px">
+                        <mat-form-field fxFill *ngIf="field[0]!=='_id'  && field[0] !== 'key' && 
+                                                                field[0] !== 'assignee' && field[0] !== 'createdBy'
+                                        && field[0] !== 'projectId' && field[0] !== 'issueType' &&  
+                                        field[0] !== 'createdOn'">
+
+                            <input matInput value="{{field[1]}}" formControlName="{{field[0]}}" placeholder="{{field[0] }}">
+                        </mat-form-field>
+                    </div>
+                    <button mat-raised-button class="mat-accent" (click)="saveChanges()">SAVE
+                        </button>
+                    </form>
+                </mat-tab>
+                <mat-tab label="Fixed" >
+                    <span *ngFor="let field of controlArray"  class="fixed-field">
+
+                        <!-- <mat-form-field fxFlex *ngIf="field[0]!=='_id' && ( field[0]!=='_id'  || field[0] !== 'key' || 
+                                    field[0] !== 'assignee' || field[0] !== 'createdBy'
+                                    || field[0] !== 'projectId' || field[0] !== 'issueType' 
+                                    ||  field[0] !== 'createdOn' )">
+                            <input matInput value="{{field[1]}}" formControlName="{{field[0]}}" placeholder="{{field[0] }}" [readonly]=true>
+                        </mat-form-field> -->
+
+                    </span>
+                    <mat-list>
+                            <span *ngFor="let field of controlArray">
+                                    <mat-list-item *ngIf="field[0]!=='_id' && ( field[0]!=='_id'  || field[0] !== 'key' || 
+                                    field[0] !== 'assignee' || field[0] !== 'createdBy'
+                                    || field[0] !== 'projectId' || field[0] !== 'issueType' 
+                                    ||  field[0] !== 'createdOn' )">
+                                    <strong class="list-title">{{field[0] | uppercase }}</strong> 
+                                    <span class="list-data">{{field[1]}}</span>
+                                    </mat-list-item>
+                            </span>
+                            
+                    </mat-list>
+                </mat-tab>
+
+            </mat-tab-group>
+
         
 
-        <form [formGroup]="todoForm" (submit)="addTodo()">
-
-                <div>
-                        <div *ngFor="let field of controlArray">
-                            <!-- <mat-form-field fxFill *ngIf="field[0]!=='_id'" >
-                                    <input matInput value="{{field[1]}}" 
-                                    formControlName="{{field[0]}}" 
-                                    placeholder="{{field[0] }}"
-                                    
-                                    [readonly]="field[0] === 'key' || field[0] === 'assignee' || field[0] === 'createdBy'
-                                            || field[0] === 'projectId' || field[0] === 'issueType' ||  field[0] === 'createdOn'
-                                                "
-                                     >
-                            </mat-form-field>   -->
-                            <mat-form-field fxFill *ngIf="field[0]!=='_id'" >
-                                <input matInput value="{{field[1]}}" 
-                                formControlName="{{field[0]}}" 
-                                placeholder="{{field[0] }}"
-                                
-                                [readonly]="field[0] === 'key' || field[0] === 'assignee' || field[0] === 'createdBy'
-                                        || field[0] === 'projectId' || field[0] === 'issueType' ||  field[0] === 'createdOn'
-                                            "
-                                 >
-                        </mat-form-field>
-                        </div>
-                </div> 
-        </form>
-    
-        <button 
-        mat-raised-button class="mat-accent"
-        (click)="saveChanges()">SAVE
-        </button>
+        
     </div>
 </div>

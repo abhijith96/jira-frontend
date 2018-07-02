@@ -1,5 +1,5 @@
 <div  class="page-layout carded fullwidth" fusePerfectScrollbar>
-    <div class="top-bg mat-indigo-bg h-30"></div> 
+    <div class="top-bg mat-accent-bg h-30"></div> 
     <div class="center">  
     
         <div class="header white-fg " id="main-title">
@@ -7,7 +7,7 @@
             <mat-icon style="cursor: pointer;float: right "  (click)="refresh()" class="logo-icon s-32">refresh</mat-icon> 
         </div>
           
-          <div class="content-card mat-white-bg">
+          <div class="content-card mat-white-bg"  style="margin-bottom: 25px">
               <smd-datatable  dataUrl="projects" dataHeader="projects" [paginated]="true"
                 showCheckBox="true" [responsive]="true" [filterEnabled]="true" [showTableFilter]="false"
                 fusePerfectScrollbar>
