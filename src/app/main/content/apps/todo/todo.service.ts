@@ -54,8 +54,8 @@ export class TodoService implements Resolve<any>
         return new Promise((resolve, reject) => {
 
             Promise.all([
-                this.getFilters(),
-                this.getTags(),
+                // this.getFilters(),
+                // this.getTags(),
                 this.getTodos()
             ]).then(
                 () => {
@@ -91,33 +91,33 @@ export class TodoService implements Resolve<any>
      * Get all filters
      * @returns {Promise<any>}
      */
-    getFilters(): Promise<any>
-    {
-        return new Promise((resolve, reject) => {
-            this.http.get('api/todo-filters')
-                .subscribe((response: any) => {
-                    this.filters = response;
-                    this.onFiltersChanged.next(this.filters);
-                    resolve(this.filters);
-                }, reject);
-        });
-    }
+    // getFilters(): Promise<any>
+    // {
+    //     return new Promise((resolve, reject) => {
+    //         this.http.get('api/todo-filters')
+    //             .subscribe((response: any) => {
+    //                 this.filters = response;
+    //                 this.onFiltersChanged.next(this.filters);
+    //                 resolve(this.filters);
+    //             }, reject);
+    //     });
+    // }
 
     /**
      * Get all tags
      * @returns {Promise<any>}
      */
-    getTags(): Promise<any>
-    {
-        return new Promise((resolve, reject) => {
-            this.http.get('api/todo-tags')
-                .subscribe((response: any) => {
-                    this.tags = response;
-                    this.onTagsChanged.next(this.tags);
-                    resolve(this.tags);
-                }, reject);
-        });
-    }
+    // getTags(): Promise<any>
+    // {
+    //     return new Promise((resolve, reject) => {
+    //         this.http.get('api/todo-tags')
+    //             .subscribe((response: any) => {
+    //                 this.tags = response;
+    //                 this.onTagsChanged.next(this.tags);
+    //                 resolve(this.tags);
+    //             }, reject);
+    //     });
+    // }
 
     /**
      * Get todos
@@ -150,10 +150,16 @@ export class TodoService implements Resolve<any>
             //This is hwere the magic hapens
             this.http.get(this._baseUrl + 'issues2')
                 .subscribe((todos: any) => {
-                    this.todos = todos.map(todo => {
+                    // console.log("Todos are " + todos)
+                    if(todos !== "empty document"){
+                        this.todos = todos.map(todo => {
                        
                         return (todo);
                     });
+                }
+                    else{
+                            this.todos=[]
+                    }
 
                     this.todos = FuseUtils.filterArrayByString(this.todos, this.searchText);
 

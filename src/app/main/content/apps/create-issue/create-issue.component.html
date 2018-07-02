@@ -3,8 +3,16 @@
 <h2 mat-dialog-title>Create Issue</h2>
 
 
-<span *ngIf="projectFieldEmpty" style="color: red">Choose a Project First</span>
-<h2 style="color:#2ECC71" *ngIf="success" class="text-center"> Issue Created!</h2>
+
+<div *ngIf="projectFieldEmpty" class="alert alert-danger fade in">
+      <a  (click)="toggleEmpty()" class="close" data-dismiss="alert" aria-label="close">×</a>
+      Choose a Project First
+</div>
+
+<div class="alert alert-success fade in" *ngIf="success">
+      <a (click)="toggleSuccess()"  class="close" data-dismiss="alert" aria-label="close">×</a>
+      Issue Created!
+</div>
 
 <mat-form-field fxFill *ngIf="projectList">
       <!-- <mat-select id="choose-project" [(value)]="selectedProject" placeholder="Choose Project" >
@@ -70,7 +78,7 @@
                         </div>
 
                         <div *ngIf="field.name==='CreatedBy'" >
-                                    <input type="text" placeholder="Created By" matInput [formControl]="userControlCreator" [matAutocomplete]="auto">
+                                    <input required type="text" placeholder="Created By" matInput [formControl]="userControlCreator" [matAutocomplete]="auto">
                                     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                                           <mat-option *ngFor="let user of filteredUsersCreator | async" [value]="user">
                                                 {{ user.name }}

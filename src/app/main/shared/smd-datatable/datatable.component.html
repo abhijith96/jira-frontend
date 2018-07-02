@@ -1,9 +1,12 @@
 <div class="smd-datatable-wrap" [class.component-loading]="loading">
+        <div *ngIf="rows.length == 0"  class="text-center no-data">
+                {{noDataDisplayMessage}}
+            </div>
     <mat-form-field class="common-filter" *ngIf="filterEnabled && showTableFilter">
         <input matInput [formControl]="filterInput" />
         <mat-icon matPrefix (click)="filterTable()">search</mat-icon>
     </mat-form-field>
-    <div class="smd-table-container">
+    <div class="smd-table-container" >
         <div class="smd-table-header" *ngIf="primaryListing && isTitleNeeded">
             <table class="smd-data-table full-width">
                 <thead>
@@ -52,7 +55,7 @@
                 </thead>
             </table>
         </div>
-        <div class="smd-table-body" [style.height]="primaryListing ? tableHeight + 'px' : 'auto'">
+        <div class="smd-table-body"  [style.height]="primaryListing ? tableHeight + 'px' : 'auto'">
             <table class="smd-data-table full-width">
                 <thead *ngIf="isTitleNeeded">
                     <tr>
@@ -98,10 +101,9 @@
                 </tbody>
             </table>
         </div>
-        <div *ngIf="rows.length == 0">
-            {{noDataDisplayMessage}}
-        </div>
+        
     </div>
+  
     <div class="smd-table-pagination" [class.hidden]="!paginated || rows.length == 0">
         <smd-paginator [selectedPage]="selectedPage" [selectedRowCount]="selectedRowCount" [count]="rowCount" [ranges]="paginatorRanges"
             (pageChange)="_onPageChange()">

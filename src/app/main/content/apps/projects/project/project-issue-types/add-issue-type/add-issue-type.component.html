@@ -1,12 +1,15 @@
 <mat-icon style="cursor: pointer;float: right;color: darkred "  (click)="closeDialog()" class="logo-icon s-28">close</mat-icon> 
 
 <h2 mat-dialog-title>Add Issue Type</h2>
-<h2 style="color:#2ECC71" *ngIf="success" class="text-center"> Issue Type Added!</h2>
+<div class="alert alert-success fade in" *ngIf="success">
+        <a (click)="toggleSuccess()"  class="close" data-dismiss="alert" aria-label="close">×</a>
+        Issue Type Added!
+</div>
 <mat-dialog-content>
         <mat-selection-list *ngIf="issueTypeList" fxFill placeholder="Add Issue Type" 
         [(ngModel)]="selectedIssueType" [ngModelOptions]="{standalone: true}">
 
-            <mat-list-option *ngFor="let issueType of issueTypeList"  [value]="issueType" (click)="addType(issueType)" >
+            <mat-list-option *ngFor="let issueType of issueTypeList" #op [disabled]="op.selected"  [value]="issueType" (click)="addType(issueType)" >
                     {{issueType.name}}
             </mat-list-option>
       

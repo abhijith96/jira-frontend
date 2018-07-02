@@ -37,8 +37,10 @@
             {{user.name}}
         </mat-list-option>
   </mat-selection-list>
-  <h2 style="color:#2ECC71" *ngIf="success">Added Users!</h2>
-
+  <div class="alert alert-success fade in" *ngIf="success">
+    <a (click)="toggleSuccess()"  class="close" data-dismiss="alert" aria-label="close">×</a>
+    Added Users!
+  </div>
   <button  style="margin-top: 20px" *ngIf="userList.length && !success" mat-raised-button class="mat-accent" (click)="addUsers()">Add</button>            
   
 </mat-dialog-content>

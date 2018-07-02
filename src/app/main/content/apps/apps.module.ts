@@ -24,6 +24,10 @@ const routes = [
         loadChildren : './issue-types/issue-types.module#IssueTypesModule'
     },
     {
+        path : 'log',
+        loadChildren : './log/logs.module#LogsModule'
+    },
+    {
         path : '**',
         loadChildren  : './todo-table/todo-table.module#TodoTableModule'
     }

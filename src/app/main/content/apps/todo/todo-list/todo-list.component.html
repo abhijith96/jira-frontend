@@ -3,7 +3,7 @@
 </div>
 
 <div class="todo-list" ngxDroppable [model]="todos" (out)="onDrop($event)" *fuseIfOnDom [@animateStagger]="{value:'50'}">
-    <fuse-todo-list-item class="todo-list-item has-handle"
+    <!-- <fuse-todo-list-item class="todo-list-item has-handle"
                          *ngFor="let todo of todos" [todo]="todo"
                          ngxDraggable
                          [model]="todo"
@@ -11,5 +11,17 @@
                          [ngClass]="{'current-todo':todo?.id == currentTodo?.id}"
                          matRipple
                          [@animate]="{value:'*',params:{y:'100%'}}">
+    </fuse-todo-list-item> -->
+    <div *ngFor="let todo of todos">
+
+           <fuse-todo-list-item class="todo-list-item has-handle"
+                          [todo]="todo"
+                         ngxDraggable
+                         [model]="todo"
+                         
+                         [ngClass]="{'current-todo':todo?.id == currentTodo?.id}"
+                         matRipple
+                         [@animate]="{value:'*',params:{y:'100%'}}">
     </fuse-todo-list-item>
+    </div>
 </div>

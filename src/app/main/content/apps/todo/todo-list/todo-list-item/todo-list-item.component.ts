@@ -1,7 +1,7 @@
 import { Component, HostBinding, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-
+import { Router } from '@angular/router';
 // import { Todo } from '../../todo.model';
 import { TodoService } from '../../todo.service';
 
@@ -24,7 +24,8 @@ export class FuseTodoListItemComponent implements OnInit, OnDestroy
 
     constructor(
         private todoService: TodoService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private router : Router
     )
     {
         // Disable move if path is not /all
@@ -38,6 +39,7 @@ export class FuseTodoListItemComponent implements OnInit, OnDestroy
     {
         // Set the initial values
         this.todo = (this.todo);
+        
         this.completed = this.todo.completed;
 
         // Subscribe to update on selected todo change
@@ -77,6 +79,28 @@ export class FuseTodoListItemComponent implements OnInit, OnDestroy
         this.todoService.toggleSelectedTodo(this.todo.id);
     }
 
+    deleteTodo(){
+        console.log("deletingggg   " + JSON.stringify(this.todo.title))
+        this.todoService.deleteaTodo(this.todo).subscribe(
+                data=>{
+                        console.log("Succesfully deleted  Yaaay")
+                        
+                }
+        )
+        this.refresh()
+    }
+    readTodo(todoId)
+    {
+        // Set current todo
+        this.todoService.setCurrentTodo(todoId);
+    }
+    refresh(): void {
+        console.log("Refreshing!")
+        // this.router.navigateByUrl('/apps/issuetypes', { skipLocationChange: true });
+        // this.router.navigate(ProjectsComponent);
+        this.router.navigateByUrl('', {skipLocationChange: true}).then(()=>
+        this.router.navigate(["apps/todo/all"]));
+      }
     /**
      * Toggle star
      */

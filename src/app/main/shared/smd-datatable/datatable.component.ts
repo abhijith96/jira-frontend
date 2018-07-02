@@ -354,7 +354,7 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 	}
 
 	ngOnDestroy(): void {
-		this._columnsSubscription.unsubscribe();
+		// this._columnsSubscription.unsubscribe();
 	}
 
 	newRecord($event) {

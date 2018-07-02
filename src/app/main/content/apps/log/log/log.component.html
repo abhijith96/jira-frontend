@@ -1,0 +1,49 @@
+<div class="page-layout carded fullwidth" fusePerfectScrollbar>
+
+    <div class="top-bg mat-indigo-bg h-30"></div>
+
+    <div class="center">
+
+
+        <div class="header white-fg text-center" id="main-title">
+            <mat-icon style="cursor: pointer" (click)="goBack()" class="logo-icon s-32">arrow_back</mat-icon> 
+            
+        </div>
+       
+        <mat-card *ngIf="currentLog">
+                    <div>
+                            Date {{currentLog.createdOn  | date: 'dd/MM/yyyy' }}
+                    </div>     
+                    <div>
+                            Field {{currentLog.field   }}
+                    </div>     
+                    <div>
+                            Data {{currentLog.data   }}
+                    </div>     
+                    <div>
+                            User {{currentLog.user.name  }}
+                            
+                    </div>     
+                    <div>
+                             Project<a  (click)="goTo('apps/projects/'+currentLog.affectedProject._id)" >  {{currentLog.affectedProject.name   }}</a>
+                    </div>     
+                    <div>
+                            Issue 
+                            <a (click)="goTo('apps/todo/all/'+currentLog.affectedIssue._id)">  {{currentLog.affectedIssue.title  }}</a>
+                    </div>     
+
+                    <div>
+                           Action {{currentLog.action  }}
+                    </div>     
+                    <div>
+                            Fields {{currentLog.updatedFields  | json  }}
+                    </div>     
+
+
+                    <button mat-raised-button style="color: #D9534F" (click)=revertLog() >
+                                Revert 
+                    </button>
+        </mat-card>
+    </div>
+    
+</div>

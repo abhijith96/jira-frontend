@@ -147,6 +147,14 @@ export const navigation = [
                     'icon'     : 'today',
                     'url'      : '/apps/issuetypes'
                 },
+            {
+                'id'       : 'log',
+                'title'    : 'Log',
+                'translate': 'NAV.CALENDAR',
+                'type'     : 'item',
+                'icon'     : 'today',
+                'url'      : '/apps/log'
+            }
             
         ]
     },

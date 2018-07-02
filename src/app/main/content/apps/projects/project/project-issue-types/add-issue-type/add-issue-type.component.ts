@@ -27,7 +27,7 @@ export class AddIssueTypeComponent implements OnInit {
           (data :any[])=>{
                 // console.log("Existing issue types " +   JSON.stringify(this.data.projectId["issueTypes"]))
                 this.issueTypeList =data
-                console.log("Issue types are    " + JSON.stringify(this.issueTypeList))
+                console.log("Issue types are    " )
                 
           }
           
@@ -61,12 +61,15 @@ export class AddIssueTypeComponent implements OnInit {
               }
         })
     }
-        console.log("Exist  "+ exists)
-        console.log("New fields   " + JSON.stringify(this.newFields))
+        console.log("Exist  ")
+        // console.log("New fields   " + JSON.stringify(this.newFields))
   }
 
   closeDialog(){
     this.dialogRef.close()
+}
+toggleSuccess(){
+    this.success = false;
 }
   
 }

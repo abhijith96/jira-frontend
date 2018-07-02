@@ -148,7 +148,7 @@ export class CreateIssueTypeComponent implements OnInit {
         .subscribe(data=>{
                   console.log( "Sent New Field to Backend, Recieved Back" + data)
                   this.tempFields.push(data)
-                  console.log("All available fields are : " + JSON.stringify(this.tempFields))
+                  // console.log("All available fields are : " + JSON.stringify(this.tempFields))
                   this.getAvailableFieldsFromServer()
                   
         },
@@ -165,13 +165,19 @@ export class CreateIssueTypeComponent implements OnInit {
                                                 return  { name : project.name,
                                                             pid : project._id   };   
                               });
-                        console.log("Projects list are  " +this.projectList)
+                        // console.log("Projects list are  " +this.projectList)
                   }
         )
        
   }
   closeDialog(){
       this.dialogRef.close()
+  }
+  toggleSuccess(){
+      this.success = false;
+  }
+  toggleEmpty(){
+        this.nameFieldEmpty = false;
   }
 
 }

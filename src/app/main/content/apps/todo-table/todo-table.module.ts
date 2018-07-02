@@ -4,6 +4,7 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { TodoTableComponent } from './todo-table.component';
 import {Routes, RouterModule } from '@angular/router';
 import { DatatableModule } from 'app/main/shared/datatable.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 const routes : Routes = [{
@@ -28,7 +29,9 @@ const routes : Routes = [{
         MatSelectModule,
         MatSidenavModule,  
         DatatableModule,
-        MatInputModule
+        MatInputModule,
+        FormsModule,
+        ReactiveFormsModule
         
   ],
   declarations: [TodoTableComponent,

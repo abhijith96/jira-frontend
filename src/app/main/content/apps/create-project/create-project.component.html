@@ -1,7 +1,13 @@
 <mat-icon style="cursor: pointer;float: right;color: darkred "  (click)="closeDialog()" class="logo-icon s-28">close</mat-icon> 
 
 <h2 mat-dialog-title>Create Project</h2>
-<h2 style="color:#2ECC71" class="text-center" *ngIf="success"> Project Created!</h2>
+
+<div class="alert alert-success fade in" *ngIf="success">
+  <a (click)="toggleSuccess()"  class="close" data-dismiss="alert" aria-label="close">×</a>
+  Project Created!
+</div>
+
+
 <mat-dialog-content>
   <form [formGroup]="projectForm" fxFlex floatLabel="never" [class.mat-elevation-z6] *ngIf="projectForm">
 
@@ -9,9 +15,13 @@
       <input matInput formControlName="name" placeholder="Name" required #stuff>
     </mat-form-field>
 
-    <div *ngIf="errorMsg" style="margin-bottom: 15px"> 
-      <span style="color:darkred;"> {{errorMsg}} </span>
+   
+
+    <div *ngIf="errorMsg" class="alert alert-danger fade in">
+      <a  (click)="toggleEmpty()" class="close" data-dismiss="alert" aria-label="close">×</a>
+      {{errorMsg}}
     </div>
+
     <mat-form-field fxFlex>
       <input matInput formControlName="projectKey" placeholder="Project Key" required>
     </mat-form-field>
@@ -21,9 +31,7 @@
       <input matInput formControlName="description" placeholder="Description">
     </mat-form-field>
 
-    <mat-form-field fxFill>
-      <input matInput formControlName="type" placeholder="Type"> 
-    </mat-form-field>
+
 
     <!-- <mat-form-field fxFill> 
                   <input matInput  formControlName="{{field.id}}" 
@@ -36,15 +44,18 @@
         </mat-option>
       </mat-select> -->
 
-      <input type="text" placeholder="Manager" matInput [formControl]="userControl" 
-      [matAutocomplete]="auto" required>
+      <input type="text" placeholder="Manager" #man matInput [formControl]="userControl"  required
+      [matAutocomplete]="auto" >
       <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-            <mat-option *ngFor="let user of filteredUsers | async" [value]="user" >
+            <mat-option *ngFor="let user of filteredUsers | async" [value]="user"  >
                   {{ user.name }}
             </mat-option>
       </mat-autocomplete>
     </mat-form-field>
 
+    <mat-form-field fxFill>
+        <input matInput formControlName="type" placeholder="Type" required> 
+      </mat-form-field>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions *ngIf="filteredUsers">

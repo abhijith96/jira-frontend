@@ -90,6 +90,9 @@ export class AddUsersComponent implements OnInit {
   closeDialog(){
     this.dialogRef.close()
 }
+toggleSuccess(){
+  this.success = false;
+}
 
 
 }

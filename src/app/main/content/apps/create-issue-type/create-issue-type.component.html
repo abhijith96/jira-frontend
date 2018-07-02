@@ -3,8 +3,18 @@
 <h2 mat-dialog-title>Create Issue Type</h2>
 
 
-<h4 *ngIf="nameFieldEmpty" style="color: red">Name Cannot be empty</h4>
-<h2 style="color:#2ECC71" class="text-center" *ngIf="success"> Issue Type Created!</h2>
+<!-- <h4 *ngIf="nameFieldEmpty" style="color: red"></h4> -->
+
+<div class="alert alert-danger fade in" *ngIf="nameFieldEmpty">
+      <a  (click)="toggleEmpty()" class="close" data-dismiss="alert" aria-label="close">×</a>
+      Name Cannot be empty
+</div>
+
+<div class="alert alert-success fade in" *ngIf="success">
+      <a (click)="toggleSuccess()"  class="close" data-dismiss="alert" aria-label="close">×</a>
+      Issue Type Created!
+</div>
+
 <mat-form-field>
       <input matInput [(ngModel)]="issueTypeName" placeholder="Name" required>
 </mat-form-field>

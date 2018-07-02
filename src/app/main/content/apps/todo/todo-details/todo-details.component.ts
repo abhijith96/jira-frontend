@@ -86,7 +86,7 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
                         this.controlArray = Object.keys(stuff).map(data=>{
                                 return [data, stuff[data]]
                         })
-                        console.log("Control array is   " + this.controlArray)
+                        // console.log("Control array is   " + this.controlArray)
 
 
                         this.onFormChange =
@@ -225,7 +225,7 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
           
     // }
     deleteTodo(){
-        console.log("deletingggg   " + JSON.stringify(this.todo))
+        console.log("deletingggg   " + JSON.stringify(this.todo.title))
         this.todoService.deleteaTodo(this.todo).subscribe(
                 data=>{
                         console.log("Succesfully deleted  Yaaay")

@@ -152,7 +152,7 @@ export class CreateIssueComponent implements OnInit {
     console.log("You have selected  " + JSON.stringify(data))
     this.newIssueService.getProjectSelectedIssueTypeFields(data).subscribe(
           res=>{
-                  console.log("Got the fields "+   JSON.stringify(res))
+                  console.log("Got the fields ")
                   this.selectedTypeFields = res["fields"];
 
                   this.selectedTypeFields.map((field) => {
@@ -208,10 +208,10 @@ export class CreateIssueComponent implements OnInit {
     form["issueType"] = this.selectedIssueType;
     form["projectId"] = this.selectedProject;
 
-    console.log("Form data is   "+ JSON.stringify(form))
+    // console.log("Form data is   "+ JSON.stringify(form))
     this.newIssueService.saveNewIssue(form).subscribe(
       data => {
-        console.log("Yaaay Issue Created" + data)
+        console.log("Yaaay Issue Created")
         this.success=true
       }
     )
@@ -225,7 +225,7 @@ export class CreateIssueComponent implements OnInit {
             pid: project._id
           };
         });
-        console.log("Projects list are  " + this.projectList)
+        // console.log("Projects list are  " + this.projectList)
       }
     )
   }
@@ -240,5 +240,12 @@ export class CreateIssueComponent implements OnInit {
   closeDialog(){
       this.dialogRef.close()
   }
+
+  toggleSuccess(){
+    this.success = false;
+}
+  toggleEmpty(){
+      this.projectFieldEmpty = false;
+}
 
 }
