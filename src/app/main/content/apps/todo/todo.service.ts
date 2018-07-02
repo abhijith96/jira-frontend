@@ -454,5 +454,8 @@ export class TodoService implements Resolve<any>
             return this.http.post(_baseUrl + 'issue/delete',id)
             
     }
+    getUsersFromServer(){
+        return this.http.get(_baseUrl + 'users')
+      }
    
 }

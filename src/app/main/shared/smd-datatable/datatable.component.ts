@@ -723,7 +723,7 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 				*/
 				this.apiClass.get(this.dataUrl, this.params).subscribe(
 					(data: any[]) => {
-						// console.log(data)
+						//  console.log("DAta is  "+ JSON.stringify(data))
 
 						this.lastQueryExecutedPage = page;
 						//this.models = data[this.dataHeader];
@@ -732,31 +732,34 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 						let sortParam = this.sortInfo;
 						let newKey = sortParam.field;
 						let direction = sortParam.direction;
-						data = data.sort((a, b) => {
-							
-														
-							
-							if (direction == "ASC") {
-								a[newKey] =a[newKey].toLowerCase()
-								b[newKey] =b[newKey].toLowerCase()
-								if (a[newKey] < b[newKey])
-									return -1;
-								if (a[newKey] > b[newKey])
-									return 1;
-								return 0;
-							}
-							else if(direction ==="DESC"){
-								a[newKey] =a[newKey].toLowerCase()
-								b[newKey] =b[newKey].toLowerCase()
-								if (a[newKey] > b[newKey])
-									return -1;
-								if (a[newKey] < b[newKey])
-									return 1;
-								return 0;
+						// let temp = data
+						if(this.dataUrl !== "logs"){
+								data = data.sort((a, b) => {
+									
+																
+									
+									if (direction == "ASC") {
+										// a[newKey] =a[newKey].toUpperCase()
+										// b[newKey] =b[newKey].toUpperCase()
+										if (a[newKey].toUpperCase() < b[newKey].toUpperCase())
+											return -1;
+										if (a[newKey].toUpperCase() > b[newKey].toUpperCase())
+											return 1;
+										return 0;
+									}
+									else if(direction ==="DESC"){
+										// a[newKey] =a[newKey].toUpperCase()
+										// b[newKey] =b[newKey].toUpperCase()
+										if (a[newKey].toUpperCase() > b[newKey].toUpperCase())
+											return -1;
+										if (a[newKey].toUpperCase() < b[newKey].toUpperCase())
+											return 1;
+										return 0;
 
+									}
+								})
 							}
-						})
-
+						// console.log("Sorted data is   " + JSON.stringify(data))
 						this.models = data
 						this.rowCount = data.length;
 						this._updateRows();

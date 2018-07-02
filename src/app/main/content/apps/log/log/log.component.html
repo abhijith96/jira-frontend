@@ -17,12 +17,12 @@
                                         <span class="data"> {{currentLog.createdOn | date: 'dd/MM/yyyy' }}</span>
                                 </mat-list-item>
 
-                                <mat-list-item>
+                                <mat-list-item *ngIf="currentLog.field != null"> 
                                         <strong class="title">Affected Field</strong>
                                         <span class="data">{{currentLog.field }}</span>
                                 </mat-list-item>
 
-                                <mat-list-item>
+                                <mat-list-item *ngIf="currentLog.data != null">
                                         <strong class="title">Changed Data</strong>
                                         <span class="data"> {{currentLog.data }}</span>
                                 </mat-list-item>
@@ -30,7 +30,7 @@
                                         <strong class="title">By</strong> 
                                         <span class="data"> {{currentLog.user.name }}</span> 
                                 </mat-list-item>
-                                <mat-list-item>
+                                <mat-list-item *ngIf="currentLog.affectedProject != null"> 
                                         <strong class="title">Project</strong> 
                                         <span class="data">
                                                         <a  (click)="goTo('apps/projects/'+currentLog.affectedProject._id)">
@@ -38,14 +38,14 @@
                                         </span> 
                                         
                                 </mat-list-item>
-                                <mat-list-item>
+                                <mat-list-item *ngIf="currentLog.affectedIssue != null">
                                         <strong class="title">Issue</strong> 
                                         <span class="data">
                                         <a (click)="goTo('apps/todo/all/'+currentLog.affectedIssue._id)"> {{currentLog.affectedIssue.title }}</a>                                                        
                                         </span>
                                 </mat-list-item>
 
-                                <mat-list-item>
+                                <mat-list-item *ngIf="currentLog.action != null">
                                         <strong class="title">Action</strong> 
                                         <span class="data">{{currentLog.action }}</span>
                                 </mat-list-item>

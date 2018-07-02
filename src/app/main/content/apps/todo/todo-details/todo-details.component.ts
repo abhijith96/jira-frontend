@@ -10,6 +10,8 @@ import { Location} from '@angular/common';
 
 import { Todo } from '../todo.model';
 import { TodoService } from '../todo.service';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
     selector   : 'fuse-todo-details',
@@ -23,6 +25,7 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
     tags: any[];
     formType: string;
     todoForm: FormGroup;
+    userList: any[]
     
     controlArray = [ ];
     newFieldName : string;
@@ -37,6 +40,13 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
     onTagsChanged: Subscription;
     onNewTodoClicked: Subscription;
     
+    ///For autocomplete stuff
+    userControlAssignee = new FormControl()
+    
+    filteredUsersAssignee: Observable<any[]>
+
+
+
     constructor(
         private todoService: TodoService,
         private formBuilder: FormBuilder,
@@ -48,6 +58,8 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
     }
 
     ngOnInit(){
+        this.getUsers()
+        this.filterContainer()
             /*   
                 Using promises
                 this.todoService.getIssuesFromServer().then(resolve=>{
@@ -122,6 +134,29 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
                 
         
     }
+    filterContainer() {
+       
+        
+        this.filteredUsersAssignee = this.userControlAssignee.valueChanges
+          .pipe(
+            startWith<string | any>(''),
+            map(value => typeof value === 'string' ? value : value.name),
+            map(name => name ? this.filterUsers(name) : this.userList.slice())
+          );
+       
+      }
+      filterUsers(name: string): any[] {
+        return this.userList.filter(option =>
+          option.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+      }
+    
+      //AUTOCOMPLETE FILTERS  
+      displayFn(user?: any): string | undefined {
+        return user ? user.name : undefined;
+      }
+      displayFnType(user : string): string | undefined {
+        return user ;
+      }
 
     ngOnDestroy()
     {
@@ -159,71 +194,13 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
         return newForm
     }
 
-    // toggleStar(event)
-    // {
-    //     event.stopPropagation();
-    //     this.todo.toggleStar();
-    //     this.todoService.updateTodo(this.todo);
-    // }
-
-    // toggleImportant(event)
-    // {
-    //     event.stopPropagation();
-    //     this.todo.toggleImportant();
-    //     this.todoService.updateTodo(this.todo);
-    // }
-
-    /**
-     * Toggle Completed
-     * @param event
-     */
-    // toggleCompleted(event)
-    // {
-    //     event.stopPropagation();
-    //     this.todo.toggleCompleted();
-    //     this.todoService.updateTodo(this.todo);
-    // }
-
-    /**
-     * Toggle Deleted
-     * @param event
-     */
-    // toggleDeleted(event)
-    // {
-    //     event.stopPropagation();
-    //     this.todo.toggleDeleted();
-    //     this.todoService.updateTodo(this.todo);
-    // }
-
-    // toggleTagOnTodo(tagId)
-    // {
-    //     this.todoService.toggleTagOnTodo(tagId, this.todo);
-    // }
-
+    
     hasTag(tagId)
     {
         return this.todoService.hasTag(tagId, this.todo);
     }
 
-    // addTodo()
-    // {
-    //     this.todoService.updateTodo(this.todoForm.getRawValue());
-    // }
-    
-    // addFields(){
-    //      this.todoForm.addControl(this.newFieldName, new FormControl(this.newFieldValue));
-    //      this.todoService.updateTodo(this.todoForm.getRawValue());
-         
-    //      this.newFieldName=""
-    //      this.newFieldValue=""
-         
-    //      let stuff = this.todoForm.value
-    //      this.controlArray = Object.keys(stuff).map(data=>{
-    //             return [data, stuff[data]]
-    //      })
-         
-          
-    // }
+   
     deleteTodo(){
         console.log("deletingggg   " + JSON.stringify(this.todo.title))
         this.todoService.deleteaTodo(this.todo).subscribe(
@@ -249,5 +226,14 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
             //                 console.log("updated succesfully old ")
             //     }
             // )
+      }
+      getUsers() {
+        this.todoService.getUsersFromServer().
+          subscribe(
+            (users: any) => {
+              this.userList = users;
+              console.log("Receiverd users  " + JSON.stringify(users))
+            }
+          )
       }
 }
