@@ -27,6 +27,7 @@ const routes = [
         path : 'log',
         loadChildren : './log/logs.module#LogsModule'
     },
+   
     {
         path : '**',
         loadChildren  : './todo-table/todo-table.module#TodoTableModule'

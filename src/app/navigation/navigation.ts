@@ -158,5 +158,17 @@ export const navigation = [
             
         ]
     },
+    {
+        'id'   : 'login',
+        'title': 'Login',
+        'type' : 'item',
+        'url'  : '/user/login'
+    },
+    {
+        'id'   : 'register',
+        'title': 'Register',
+        'type' : 'item',
+        'url'  : '/user/register'
+    }
     
 ];

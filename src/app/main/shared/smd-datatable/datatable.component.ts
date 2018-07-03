@@ -532,6 +532,7 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 	_onPageChange() {
 		if (this.paginatorComponent.currentPage.page < this.lastQueryExecutedPage || this.paginatorComponent.currentPage.page >= (this.lastQueryExecutedPage + this.preFetchPages)) {
 			this._queryTableData().then(() => {
+				console.log("page changed")
 				this._updateVisibleRows();
 				this.pageChange.emit({ page: this.paginatorComponent.currentPage.page });
 			}, () => { });
@@ -594,13 +595,18 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 				this.loading = true;
 				const size = this.paginatorComponent.currentPage.size ? this.paginatorComponent.currentPage.size : this.defaultRange;
 				let page: number = (this.paginatorComponent.currentPage.page - (this.preFetchPages / 2)) <= 0 ? 1 : Math.round(this.paginatorComponent.currentPage.page - (this.preFetchPages / 2));
+				console.log("Current page   " + JSON.stringify(this.paginatorComponent.currentPage,null," "))
 				let offset = (page - 1) * size + 1;
 				// let offset = 1;
 				let limit: number = this.preFetchPages * size;
+				//  let  limit: number =100;
+				
 				this.sortInfo = {
 					field: this.sortField,
 					direction: this.sortDirection
 				}
+				// this.params.paramsMap.set("offset", ['' + offset]);
+				// this.params.paramsMap.set("limit", ['' + limit]);
 				// console.log(" Direction is " + JSON.stringify(sortInfo) )
 
 				/*
@@ -732,8 +738,9 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 						let sortParam = this.sortInfo;
 						let newKey = sortParam.field;
 						let direction = sortParam.direction;
+						console.log("Sort param is  " + JSON.stringify(sortParam))
 						// let temp = data
-						if(this.dataUrl !== "logs"){
+						if(direction){
 								data = data.sort((a, b) => {
 									
 																

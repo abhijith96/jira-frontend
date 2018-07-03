@@ -12,7 +12,7 @@
                     [filterEnabled]="true" [showTableFilter]="false">
 
 
-                    <smd-datatable-column title="Date" field="date" sortable="false" [filterable]="true">
+                    <smd-datatable-column title="Date" field="date" sortable="false" [filterable]="false">
                             <ng-template let-model="data">
                                 <span *ngIf="model.createdOn !== null">
                                     {{ model.createdOn  | date: 'dd/MM/yyyy' }}
@@ -20,19 +20,19 @@
                             </ng-template>
                     </smd-datatable-column>
 
-                    <smd-datatable-column title="Action" field="action" sortable="false" [filterable]="true">
+                    <smd-datatable-column title="Action" field="action" sortable="false" [filterable]="false">
                         <ng-template let-model="data">
                             <a  *ngIf="model.action !==null"  routerLink='/apps/log/{{ model._id }}'>{{model.action}}</a>
                         </ng-template>
                     </smd-datatable-column>
 
-                    <smd-datatable-column title="Modified Field" field="modifiedField" sortable="false" [filterable]="true">
+                    <smd-datatable-column title="Modified Field" field="modifiedField" sortable="false" [filterable]="false">
                         <ng-template   let-model="data">
                             {{model.data}}
                         </ng-template>
                     </smd-datatable-column>
 
-                    <smd-datatable-column title="Affected Project" field="affectedProject" sortable="false" [filterable]="true">
+                    <smd-datatable-column title="Affected Project" field="affectedProject" sortable="false" [filterable]="false">
                         <ng-template  let-model="data">
                             <span *ngIf="model.affectedProject">
                                     {{model.affectedProject.name}}
@@ -43,7 +43,7 @@
 
                    
 
-                    <smd-datatable-column title="By" field="by" sortable="false" [filterable]="true">
+                    <smd-datatable-column title="By" field="by" sortable="false" [filterable]="false">
                             <ng-template let-model="data">
                                 <span *ngIf="model.user !== null">
                                     {{model.user.name}}
@@ -51,7 +51,7 @@
                             </ng-template>
                         </smd-datatable-column>
 
-                    <smd-datatable-column title="Affected Issue" field="affectedIssue" sortable="false" [filterable]="true">
+                    <smd-datatable-column title="Affected Issue" field="affectedIssue" sortable="false" [filterable]="false">
                         <ng-template let-model="data">
                             <span *ngIf="model.affectedIssue !== null">
                                 {{model.affectedIssue.title}}

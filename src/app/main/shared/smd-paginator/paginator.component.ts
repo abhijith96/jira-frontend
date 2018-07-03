@@ -84,6 +84,7 @@ export class SmdPaginatorComponent implements OnInit {
             this.selectedPage = this.pageCount;
             this.pageChange.emit(this.currentPage);
         }
+        
     }
 
 

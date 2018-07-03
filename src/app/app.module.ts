@@ -21,9 +21,13 @@ const appRoutes: Routes = [
         path        : 'apps',
         loadChildren: './main/content/apps/apps.module#FuseAppsModule'
     },  
+    {
+        path : 'user',
+        loadChildren : './main/content/auth/auth.module#AuthModule'
+    },
      {
         path        : '',
-        loadChildren: './main/content/apps/apps.module#FuseAppsModule'
+        loadChildren:  './main/content/auth/auth.module#AuthModule'
                 
     }
 ];
