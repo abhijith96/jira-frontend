@@ -2,7 +2,7 @@ import { Component, ElementRef, HostBinding, Inject, OnDestroy, Renderer2, ViewE
 import { DOCUMENT } from '@angular/common';
 import { Platform } from '@angular/cdk/platform';
 import { Subscription } from 'rxjs';
-
+import { AuthService } from './content/auth/auth.service'
 import { FuseConfigService } from '@fuse/services/config.service';
 
 import { navigation } from 'app/navigation/navigation';
@@ -18,6 +18,8 @@ export class FuseMainComponent implements OnDestroy
     onConfigChanged: Subscription;
     fuseSettings: any;
     navigation: any;
+    
+    isLoggedIn =false;
 
     @HostBinding('attr.fuse-layout-mode') layoutMode;
 
@@ -26,9 +28,12 @@ export class FuseMainComponent implements OnDestroy
         private _elementRef: ElementRef,
         private fuseConfig: FuseConfigService,
         private platform: Platform,
+        private authService : AuthService,
+        
         @Inject(DOCUMENT) private document: any
     )
-    {
+    {   
+        this.isLoggedIn = this.authService.loggedIn()
         this.onConfigChanged =
             this.fuseConfig.onConfigChanged
                 .subscribe(

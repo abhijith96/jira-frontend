@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { LoginService } from './login.service'
+import { Router } from '@angular/router'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,7 +10,8 @@ import { LoginService } from './login.service'
 export class LoginComponent implements OnInit {
   loginForm : FormGroup
   constructor(private formBuilder : FormBuilder,
-              private loginService : LoginService) { }
+              private loginService : LoginService,
+              private router : Router) { }
 
   ngOnInit() {
     this.loginForm = this.createForm()
@@ -29,6 +31,7 @@ export class LoginComponent implements OnInit {
           (res: any)=>{
               console.log("Yaay user logged in" + JSON.stringify(res,null, " "))
               localStorage.setItem('token',res.token)
+              this.router.navigate(['apps/todos'])
           },
           err=>{
             console.log("ERror is  " + JSON.stringify(err.error.text))

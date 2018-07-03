@@ -6,7 +6,7 @@ import { FuseConfigService } from '@fuse/services/config.service';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 
 import { navigation } from 'app/navigation/navigation';
-
+import { AuthService} from '../content/auth/auth.service'
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 // import { NewIssueTypeComponent } from '../content/apps/new-issue-type/new-issue-type.component';
 import { CreateIssueTypeComponent } from '../content/apps/create-issue-type/create-issue-type.component';
@@ -36,7 +36,8 @@ export class FuseToolbarComponent
         private fuseConfig: FuseConfigService,
         private sidebarService: FuseSidebarService,
         private translate: TranslateService,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        private authService : AuthService
     )
     {
         this.userStatusOptions = [
@@ -146,6 +147,27 @@ export class FuseToolbarComponent
         {
             width : '700px'
         })
+    }
+
+
+    //Authentication
+
+    logoutUser(){
+        this.authService.logOut()
+        // localStorage.removeItem('token')
+        // this.router.navigate(['user/login'])
+    }
+
+
+    isLoggedIn(){
+        return this.authService.loggedIn()
+    }
+
+    gotoLogin(){
+        this.router.navigate(['user/login'])            
+    }
+    gotoRegister(){
+        this.router.navigate(['user/register'])                    
     }
 }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { RegisterService } from './register.service'
+import { Router } from '@angular/router'
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -9,7 +10,8 @@ import { RegisterService } from './register.service'
 export class RegisterComponent implements OnInit {
   registerForm : FormGroup
   constructor(private formBuilder : FormBuilder,
-                private registerService : RegisterService) { }
+                private registerService : RegisterService,
+                private router : Router) { }
 
   ngOnInit() {
       this.registerForm = this.createForm()
@@ -31,10 +33,8 @@ export class RegisterComponent implements OnInit {
     let password = AC.get('password').value; // to get value in input tag
     let confirmPassword = AC.get('confirmPassword').value; // to get value in input tag
      if(password != confirmPassword) {
-         console.log('false');
          AC.get('confirmPassword').setErrors( {MatchPassword: true} )
      } else {
-         console.log('true');
          return null
      }
  }
@@ -45,6 +45,8 @@ export class RegisterComponent implements OnInit {
       this.registerService.registerNewUser(newUser).subscribe(
             res=>{
                     console.log("User registered yaay")
+                    this.router.navigate(['apps/todos'])
+                    
             },
             err=>{
                     console.log("Registration Failed")

@@ -6,7 +6,7 @@
 
         <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
 
-            <button mat-icon-button class="toggle-button-navbar" *ngIf="!noNav" (click)="toggleSidebarOpened('navbar')" fxHide.gt-md>
+            <button mat-icon-button class="toggle-button-navbar" *ngIf="!noNav && isLoggedIn()" (click)="toggleSidebarOpened('navbar')" fxHide.gt-md>
                 <mat-icon>menu</mat-icon>
             </button>
 
@@ -25,7 +25,18 @@
 
         </div>
 
-        <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
+        <div *ngIf="!isLoggedIn()">
+                <button mat-button (click)="gotoLogin()">
+                        Log In
+                </button>
+                
+                <button style="margin-left: 20px" mat-button (click)="gotoRegister()">
+                        Register
+                </button>
+        </div>
+
+
+        <div  *ngIf="isLoggedIn()" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
 
             <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
                 <div fxLayout="row" fxLayoutAlign="center center">
@@ -47,9 +58,9 @@
                     <span>Inbox</span>
                 </button>
 
-                <button mat-menu-item class="">
+                <button mat-menu-item class=""  (click)="logoutUser()">
                     <mat-icon>exit_to_app</mat-icon>
-                    <span>Logout</span>
+                    <span  >Logout</span>
                 </button>
 
             </mat-menu>
@@ -59,23 +70,23 @@
             <!-- <fuse-search-bar (onInput)="search($event)"></fuse-search-bar> -->
 
             <div class="toolbar-separator"></div>
-
-            <span class="p-10" id="create">
-                <button matTooltip="Create Issue Type" (click)="createIssueType()" >
-                    <mat-icon  class="create" >create_new_folder</mat-icon>
-                </button>
+            <span >
+                    <span class="p-10" id="create">
+                        <button matTooltip="Create Issue Type" (click)="createIssueType()" >
+                            <mat-icon  class="create" >create_new_folder</mat-icon>
+                        </button>
+                    </span>
+                    <span class="p-10" id="create">
+                            <button matTooltip="Create Issue" (click)="createIssue()" >                
+                                <mat-icon  class="create">add</mat-icon>
+                            </button>
+                    </span>
+                    <span class="p-10" id="create">
+                            <button matTooltip="Create Project" (click)="createProject()" >                                
+                                <mat-icon  class="create">add_circle_outline</mat-icon>
+                            </button>
+                    </span>
             </span>
-            <span class="p-10" id="create">
-                    <button matTooltip="Create Issue" (click)="createIssue()" >                
-                        <mat-icon  class="create">add</mat-icon>
-                    </button>
-            </span>
-            <span class="p-10" id="create">
-                    <button matTooltip="Create Project" (click)="createProject()" >                                
-                        <mat-icon  class="create">add_circle_outline</mat-icon>
-                    </button>
-            </span>
-
 
             <!-- <button mat-button fxHide fxShow.gt-xs
                     class="language-button"
@@ -105,9 +116,9 @@
 
             <div class="toolbar-separator" fxHide fxShow.gt-xs></div>
 
-            <button mat-icon-button class="quick-panel-toggle-button" fuseMatSidenavToggler="quick-panel" aria-label="Toggle quick panel">
+            <!-- <button mat-icon-button class="quick-panel-toggle-button" fuseMatSidenavToggler="quick-panel" aria-label="Toggle quick panel">
                 <mat-icon class="icon">format_list_bulleted</mat-icon>
-            </button>
+            </button> -->
 
         </div>
     </div>
