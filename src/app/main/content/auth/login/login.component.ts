@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { LoginService } from './login.service'
 import { Router } from '@angular/router'
+import { BehaviorSubject } from 'rxjs';
+
+import { AuthService} from '../auth.service'
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,9 +12,10 @@ import { Router } from '@angular/router'
 })
 export class LoginComponent implements OnInit {
   loginForm : FormGroup
+
   constructor(private formBuilder : FormBuilder,
-              private loginService : LoginService,
-              private router : Router) { }
+              private router : Router,
+              private authService : AuthService) { }
 
   ngOnInit() {
     this.loginForm = this.createForm()
@@ -26,11 +30,15 @@ export class LoginComponent implements OnInit {
 }
   loginUser(){
       let userdata = this.loginForm.getRawValue();
-      console.log("Data is   " + JSON.stringify(userdata,null," "))
-      this.loginService.loginNewUser(userdata).subscribe(
+      // console.log("Data is   " + JSON.stringify(userdata,null," "))
+      this.authService.loginNewUser(userdata).subscribe(
           (res: any)=>{
-              console.log("Yaay user logged in" + JSON.stringify(res,null, " "))
+              // console.log("Yaay user logged in" + JSON.stringify(res,null, " "))
+
+              this.authService.areYouLoggedIn.next(true)
               localStorage.setItem('token',res.token)
+              this.authService.getUserDetails()
+              
               this.router.navigate(['apps/todos'])
           },
           err=>{

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -12,7 +12,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { CreateIssueTypeComponent } from '../content/apps/create-issue-type/create-issue-type.component';
 import { CreateIssueComponent } from '../content/apps/create-issue/create-issue.component';
 import { CreateProjectComponent } from '../content/apps/create-project/create-project.component';
-import { user } from '../content/apps/user'
+
 
 @Component({
     selector   : 'fuse-toolbar',
@@ -20,7 +20,7 @@ import { user } from '../content/apps/user'
     styleUrls  : ['./toolbar.component.scss']
 })
 
-export class FuseToolbarComponent
+export class FuseToolbarComponent implements OnInit
 {
     userStatusOptions: any[];
     languages: any;
@@ -29,8 +29,8 @@ export class FuseToolbarComponent
     horizontalNav: boolean;
     noNav: boolean;
     navigation: any;
-
-    currentUser = user
+    loggedIn = false;
+    currentUser = ""
     constructor(
         private router: Router,
         private fuseConfig: FuseConfigService,
@@ -39,7 +39,8 @@ export class FuseToolbarComponent
         public dialog: MatDialog,
         private authService : AuthService
     )
-    {
+    {   
+
         this.userStatusOptions = [
             {
                 'title': 'Online',
@@ -103,6 +104,21 @@ export class FuseToolbarComponent
         this.navigation = navigation;
     }
 
+    ngOnInit(){
+        this.authService.getUserDetails()
+          this.authService.areYouLoggedIn.subscribe(
+                    res=>{
+                            this.loggedIn = res
+                            console.log("Logged in  " + this.loggedIn)
+                    }
+            )
+            
+        this.authService.currentUser.subscribe(
+                res=>{
+                       this.currentUser = res; 
+                }
+        )
+    }
     toggleSidebarOpened(key)
     {
         this.sidebarService.getSidebar(key).toggleOpen();
@@ -159,9 +175,7 @@ export class FuseToolbarComponent
     }
 
 
-    isLoggedIn(){
-        return this.authService.loggedIn()
-    }
+    
 
     gotoLogin(){
         this.router.navigate(['user/login'])            
@@ -169,5 +183,11 @@ export class FuseToolbarComponent
     gotoRegister(){
         this.router.navigate(['user/register'])                    
     }
+    // getName(){
+    //         console.log("name is  "+ JSON.stringify( this.authService.getUserDetails(), null, " ") )
+    //         let data =this.authService.getUserDetails()
+    //         this.authService.currentUser.next(data.name)
+    //         return 
+    // }
 }
 

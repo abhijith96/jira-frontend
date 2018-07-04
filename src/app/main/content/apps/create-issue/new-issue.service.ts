@@ -13,7 +13,7 @@ export class NewIssueService {
         return this.http.get(this._baseUrl + 'issuetypes')
   }
   getProjectIssueTypes(project){
-    console.log("Project id is " + JSON.stringify(project))
+    // console.log("Project id is " + JSON.stringify(project))
       return this.http.get(_baseUrl + 'project/getissuetypes/' +project.pid )
   }
 

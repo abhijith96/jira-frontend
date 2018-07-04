@@ -44,7 +44,7 @@ export class EditIssueTypeComponent implements OnInit {
   }
   deleteField(field){
         let data = { issueType : this.currentIssueType.name, pid : this.currentProjectId, fieldId : field._id }
-        console.log("Preparing to delete" + JSON.stringify(data))
+        // console.log("Preparing to delete" + JSON.stringify(data))
                 
         this.projectService.editProjectIssueType(data).subscribe(
                 res=>{

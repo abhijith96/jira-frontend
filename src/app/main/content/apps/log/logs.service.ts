@@ -10,7 +10,7 @@ export class LogService {
   constructor(private http : HttpClient) { }
 
   getLog(id){
-    console.log("making request to " + JSON.stringify(id))
+    // console.log("making request to " + JSON.stringify(id))
       return this.http.get( _baseUrl + 'logs/' + id.id)
   }
 

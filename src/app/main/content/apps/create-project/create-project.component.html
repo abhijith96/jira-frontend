@@ -32,17 +32,14 @@
     </mat-form-field>
 
 
+    <div class="alert alert-danger fade in" *ngIf="!validName">
+      <a  (click)="toggleEmpty()" class="close" data-dismiss="alert" aria-label="close">×</a>
+      Choose Valid Name
+    </div>
 
-    <!-- <mat-form-field fxFill> 
-                  <input matInput  formControlName="{{field.id}}" 
-                    placeholder="{{field.name }}"  >
-             </mat-form-field> -->
+
     <mat-form-field *ngIf="userList">
-      <!-- <mat-select placeholder="Project Manager" formControlName="projectManager">
-        <mat-option *ngFor="let user of userList" [value]="user._id">
-          {{user.name}}
-        </mat-option>
-      </mat-select> -->
+  
 
       <input type="text" placeholder="Manager" #man matInput [formControl]="userControl"  required
       [matAutocomplete]="auto" >

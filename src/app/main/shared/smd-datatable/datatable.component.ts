@@ -595,7 +595,7 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 				this.loading = true;
 				const size = this.paginatorComponent.currentPage.size ? this.paginatorComponent.currentPage.size : this.defaultRange;
 				let page: number = (this.paginatorComponent.currentPage.page - (this.preFetchPages / 2)) <= 0 ? 1 : Math.round(this.paginatorComponent.currentPage.page - (this.preFetchPages / 2));
-				console.log("Current page   " + JSON.stringify(this.paginatorComponent.currentPage,null," "))
+				// console.log("Current page   " + JSON.stringify(this.paginatorComponent.currentPage,null," "))
 				let offset = (page - 1) * size + 1;
 				// let offset = 1;
 				let limit: number = this.preFetchPages * size;
@@ -738,7 +738,7 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 						let sortParam = this.sortInfo;
 						let newKey = sortParam.field;
 						let direction = sortParam.direction;
-						console.log("Sort param is  " + JSON.stringify(sortParam))
+						// console.log("Sort param is  " + JSON.stringify(sortParam))
 						// let temp = data
 						if(direction){
 								data = data.sort((a, b) => {

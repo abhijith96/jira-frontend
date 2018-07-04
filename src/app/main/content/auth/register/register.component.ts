@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { RegisterService } from './register.service'
 import { Router } from '@angular/router'
+
+import { AuthService } from '../auth.service'
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router'
 export class RegisterComponent implements OnInit {
   registerForm : FormGroup
   constructor(private formBuilder : FormBuilder,
-                private registerService : RegisterService,
+                private authService : AuthService,
                 private router : Router) { }
 
   ngOnInit() {
@@ -42,7 +43,7 @@ export class RegisterComponent implements OnInit {
   register(){
       let newUser = this.registerForm.getRawValue();
       console.log("User dat is   " + JSON.stringify(newUser,null," "))
-      this.registerService.registerNewUser(newUser).subscribe(
+      this.authService.registerNewUser(newUser).subscribe(
             res=>{
                     console.log("User registered yaay")
                     this.router.navigate(['apps/todos'])

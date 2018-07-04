@@ -64,22 +64,36 @@
 
                             <input matInput value="{{field[1]}}" formControlName="{{field[0]}}" placeholder="{{field[0] }}">
                         </mat-form-field>
+
+
+                        
+                        <mat-form-field fxFill *ngIf="field[0] === 'assignee' && userList"  >
+                            <input placeholder="New Assignee" matInput [formControl]="userControlAssignee" 
+                            [matAutocomplete]="auto" >
+
+                            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"  >
+                                  <mat-option *ngFor="let user of filteredUsersAssignee | async"  [value]="user" (keyup.enter)="changeAssignee(user)" (click)="changeAssignee(user)" >
+                                        {{ user.name }}
+                                  </mat-option>
+                            </mat-autocomplete>
+
+                            <div class="alert alert-danger fade in" *ngIf="!nameValid">
+                                    <a  (click)="toggleEmpty()" class="close" data-dismiss="alert" aria-label="close">×</a>
+                                        Choose a valid name
+                                </div>
+                        </mat-form-field>
+
+
+
+
                     </div>
+
                     <button mat-raised-button class="mat-accent" (click)="saveChanges()">SAVE
                         </button>
                     </form>
                 </mat-tab>
                 <mat-tab label="Fixed" >
-                    <span *ngFor="let field of controlArray"  class="fixed-field">
-
-                        <!-- <mat-form-field fxFlex *ngIf="field[0]!=='_id' && ( field[0]!=='_id'  || field[0] !== 'key' || 
-                                    field[0] !== 'assignee' || field[0] !== 'createdBy'
-                                    || field[0] !== 'projectId' || field[0] !== 'issueType' 
-                                    ||  field[0] !== 'createdOn' )">
-                            <input matInput value="{{field[1]}}" formControlName="{{field[0]}}" placeholder="{{field[0] }}" [readonly]=true>
-                        </mat-form-field> -->
-
-                    </span>
+                    
                     <mat-list>
                             <span *ngFor="let field of controlArray">
                                     <mat-list-item *ngIf="field[0]!=='_id' && ( field[0]!=='_id'  || field[0] !== 'key' || 
@@ -89,6 +103,8 @@
                                     <strong class="list-title">{{field[0] | uppercase }}</strong> 
                                     <span class="list-data">{{field[1]}}</span>
                                     </mat-list-item>
+
+                                   
                             </span>
                             
                     </mat-list>

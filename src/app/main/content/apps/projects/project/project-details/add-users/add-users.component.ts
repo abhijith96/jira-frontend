@@ -49,12 +49,12 @@ export class AddUsersComponent implements OnInit {
     this.projectService.getUsersFromServer(this.data.projectId._id).subscribe(
       (data: any[]) => {
         this.userList = data
-        console.log("Receieved user list " + this.userList)
+        // console.log("Receieved user list " + this.userList)
       }
     )
   }
   selectUser(user) {
-    console.log("Clicked " + JSON.stringify(user))
+    // console.log("Clicked " + JSON.stringify(user))
     let exists = false
     this.newUsers.forEach(element => {
       console.log("Iterating  " + element._id)
@@ -77,7 +77,7 @@ export class AddUsersComponent implements OnInit {
 
   }
   addUsers(){
-    console.log(JSON.stringify(this.data))
+    // console.log(JSON.stringify(this.data))
     let data = { users : this.newUsers, id : this.data.projectId._id }
         this.projectService.sendUsersToServer(data).subscribe(
             data=>{

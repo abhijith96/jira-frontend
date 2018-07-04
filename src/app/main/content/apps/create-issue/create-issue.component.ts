@@ -5,11 +5,11 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
-import { user} from '../user'
-
+import { AuthService } from '../../auth/auth.service'
 
 export class User {
-  constructor(public name: string) { }
+  constructor(public name: string,
+              ) { }
 }
 
 @Component({
@@ -18,7 +18,7 @@ export class User {
   styleUrls: ['./create-issue.component.scss']
 })
 export class CreateIssueComponent implements OnInit {
-  currentUser = user;
+  currentUser :any;
   issueTypes: any[];
   projectList: any[];
   selectedIssueType: any;
@@ -29,6 +29,9 @@ export class CreateIssueComponent implements OnInit {
   projectFieldEmpty = false;
   issueForm: FormGroup;
   success : boolean= false;
+
+  validName = true;
+
   ////For Autocomplete stuff
   projectControl = new FormControl();
 
@@ -48,10 +51,16 @@ export class CreateIssueComponent implements OnInit {
 
   constructor(private newIssueService: NewIssueService,
     private formBuilder: FormBuilder,
-    public dialog :MatDialog,
+    public dialog :MatDialog, private authService : AuthService,
     public dialogRef: MatDialogRef<CreateIssueComponent>) { }
 
   ngOnInit() {
+    this.authService.currentUser.subscribe(
+        res=>{
+              this.currentUser = res
+              // console.log("Current user is   " + JSON.stringify(this.currentUser,null," "))
+        }
+    )
     this.issueForm = this.createForm()
     // this.getIssueTypes()
     this.getProjects()
@@ -114,15 +123,15 @@ export class CreateIssueComponent implements OnInit {
   getSelectedType() {
     if (this.projectControl.value) {
       this.projectFieldEmpty = false;
-          console.log("You have selected  project " + JSON.stringify(this.projectControl.value))
+          // console.log("You have selected  project " + JSON.stringify(this.projectControl.value))
           this.selectedProject = this.projectControl.value.pid
           this.selectedIssueType = this.issueTypeControl.value
-          console.log("You have selected  " + JSON.stringify(this.selectedIssueType))
+          // console.log("You have selected  " + JSON.stringify(this.selectedIssueType))
           this.newIssueService.getSelectedIssueTypeFields(this.selectedIssueType._id).subscribe(
             (data: any) => {
 
               this.selectedTypeFields = data[0]["fields"];
-              console.log("Required fields are " + JSON.stringify(this.selectedTypeFields))
+              // console.log("Required fields are " + JSON.stringify(this.selectedTypeFields))
 
 
               this.selectedTypeFields.map((field) => {
@@ -133,7 +142,7 @@ export class CreateIssueComponent implements OnInit {
               this.issueForm.patchValue({ "issueType": this.selectedIssueType.name })
               this.issueForm.patchValue({ "projectId": this.selectedProject })
               // this.issueForm["issueType"] = this.selectedIssueType.name;
-              console.log("Issue Type is " + JSON.stringify(this.issueForm.getRawValue()))
+              // console.log("Issue Type is " + JSON.stringify(this.issueForm.getRawValue()))
             }
           )
           this.getUsers()
@@ -149,7 +158,7 @@ export class CreateIssueComponent implements OnInit {
     this.selectedProject = this.projectControl.value.pid
     this.selectedIssueType = this.issueTypeControl.value
     let data = { pid : this.selectedProject , issueType : this.selectedIssueType }
-    console.log("You have selected  " + JSON.stringify(data))
+    // console.log("You have selected  " + JSON.stringify(data))
     this.newIssueService.getProjectSelectedIssueTypeFields(data).subscribe(
           res=>{
                   console.log("Got the fields ")
@@ -163,7 +172,7 @@ export class CreateIssueComponent implements OnInit {
                   this.issueForm.patchValue({ "issueType": this.selectedIssueType })
                   this.issueForm.patchValue({ "projectId": this.selectedProject })
                   // this.issueForm["issueType"] = this.selectedIssueType.name;
-                  console.log("Issue Type is " + JSON.stringify(this.issueForm.getRawValue()))
+                  // console.log("Issue Type is " + JSON.stringify(this.issueForm.getRawValue()))
           }
     )
     this.getUsers()
@@ -184,7 +193,7 @@ export class CreateIssueComponent implements OnInit {
     console.log("Getting issue types")
     this.newIssueService.getProjectIssueTypes(this.projectControl.value).subscribe(
         (res:any[])=>{
-              console.log("Received fields" + JSON.stringify(res))
+              // console.log("Received fields" + JSON.stringify(res))
               this.issueTypes = res
               this.filteredIssueTypes = this.issueTypeControl.valueChanges
       .pipe(
@@ -200,22 +209,40 @@ export class CreateIssueComponent implements OnInit {
     )
   }
 
+  isValid(str: any) {
+    // console.log(" lalla " + JSON.stringify(str))
+    if (typeof str ==="object") {
+      return true;
+    }
+    return false;
+
+  }
+
+
   sendForm() {
+
     this.issueForm.patchValue({ "assignee": this.userControlAssignee.value })
     // this.issueForm.patchValue({ "createdBy": this.userControlCreator.value })
     this.issueForm.patchValue({ "createdBy": this.currentUser })
     
     let form = this.issueForm.getRawValue();
-    form["issueType"] = this.selectedIssueType;
-    form["projectId"] = this.selectedProject;
+    if (this.isValid(form["assignee"])) {
+        
+        form["issueType"] = this.selectedIssueType;
+        form["projectId"] = this.selectedProject;
 
-    console.log("Form data is   "+ JSON.stringify(form))
-    this.newIssueService.saveNewIssue(form).subscribe(
-      data => {
-        console.log("Yaaay Issue Created")
-        this.success=true
-      }
-    )
+        // console.log("Form data is   "+ JSON.stringify(form))
+        this.newIssueService.saveNewIssue(form).subscribe(
+          data => {
+            console.log("Yaaay Issue Created")
+            this.success=true
+          }
+        )
+    }
+    else{
+      this.validName = false;
+        
+    }
   }
   getProjects() {
     this.newIssueService.getProjectsList().subscribe(
@@ -246,7 +273,7 @@ export class CreateIssueComponent implements OnInit {
     this.success = false;
 }
   toggleEmpty(){
-      this.projectFieldEmpty = false;
+      this.validName = true;
 }
 
 }

@@ -88,7 +88,8 @@ const routes: Routes = [
         FuseSharedModule,
         MatTabsModule,
         MatListModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatInputModule
     ],
     providers   : [
         TodoService

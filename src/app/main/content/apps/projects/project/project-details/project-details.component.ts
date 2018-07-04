@@ -88,7 +88,7 @@ deleteUser(data){
             (res : any)=>{
                     console.log("Deleted user success" + JSON.stringify(res))
                     this.people = res["people"];
-                    console.log("people is  "+ JSON.stringify(this.people) )
+                    // console.log("people is  "+ JSON.stringify(this.people) )
                     
             },
             err=>{

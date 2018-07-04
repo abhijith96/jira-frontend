@@ -87,7 +87,7 @@ export class CreateIssueTypeComponent implements OnInit {
  
   selectField(field){
       if(!field.isRequired){
-            console.log("Clicked " + field.name)
+            // console.log(" " + field.name)
             if(this.fieldListForm.contains(field.name)){
                   this.fieldListForm.removeControl(field.name)
             }
@@ -109,7 +109,7 @@ export class CreateIssueTypeComponent implements OnInit {
             let issueTypeName = this.issueTypeName;
             let newType = {"name": issueTypeName }
             let formValue :any = this.fieldListForm.getRawValue()
-            console.log("Form Value is " + JSON.stringify(formValue))
+            // console.log("Form Value is " + JSON.stringify(formValue))
             let fields : any[] =[];
             this.tempFields.filter(
                       (obj)=>{

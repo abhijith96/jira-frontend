@@ -78,7 +78,7 @@ export class CreateProjectComponent implements OnInit {
   }
 
   isValid(str: any) {
-    console.log(" lalla " + JSON.stringify(str))
+    // console.log(" lalla " + JSON.stringify(str))
     if (typeof str ==="object") {
       return true;
     }
@@ -88,7 +88,7 @@ export class CreateProjectComponent implements OnInit {
   sendForm() {
     this.projectForm.patchValue({ "projectManager": this.userControl.value })
     let data = this.projectForm.getRawValue()
-    console.log(JSON.stringify(data))
+    // console.log(JSON.stringify(data))
     console.log(this.isValid(data["projectManager"]))
 
     if (this.isValid(data["projectManager"])) {
@@ -101,7 +101,7 @@ export class CreateProjectComponent implements OnInit {
         },
         err => {
           this.success =false
-          console.log("ERror is  " + JSON.stringify(err.error.text))
+          // console.log("ERror is  " + JSON.stringify(err.error.text))
           this.errorMsg = err.error.text
         }
       )
@@ -137,7 +137,7 @@ export class CreateProjectComponent implements OnInit {
     this.success = false;
 }
   toggleEmpty(){
-      this.errorMsg = null;
+      this.validName = true;
 }
 
 }

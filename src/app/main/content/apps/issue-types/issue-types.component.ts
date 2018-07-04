@@ -19,19 +19,22 @@ export class IssueTypesComponent implements OnInit {
       this.issueTypeService.getIssueTypes().subscribe(
           (data :any[])=>{
               this.issueTypes = data
-              console.log("Issue Types " +JSON.stringify(this.issueTypes) )
+              // console.log("Issue Types " +JSON.stringify(this.issueTypes) )
+          },
+          err=>{
+                console.log(err)
           }
       )
   }
   deleteIssueType(data){
-      console.log(JSON.stringify(data))
+      // console.log(JSON.stringify(data))
       let id = this.issueTypes.filter( (ele : any)=>{
             if(ele.name === data){
               return ele._id                
             }
           }
        )
-       console.log("id is " + JSON.stringify(id))
+      //  console.log("id is " + JSON.stringify(id))
       this.issueTypeService.deleteaIssueType(id).subscribe(
         data=>{
             console.log("Deleted succesfullyy!!!")

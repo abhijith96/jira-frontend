@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -14,7 +14,7 @@ import { fuseConfig } from './fuse-config';
 import { AppComponent } from './app.component';
 import { FuseMainModule } from './main/main.module';
 import { AppStoreModule } from './store/store.module';
-
+import {TokenInterceptorService } from './main/content/auth/token-interceptor.service'
 
 const appRoutes: Routes = [
     {
@@ -27,7 +27,8 @@ const appRoutes: Routes = [
     },
      {
         path        : '',
-        loadChildren:  './main/content/auth/auth.module#AuthModule'
+        loadChildren: './main/content/apps/apps.module#FuseAppsModule'
+        
                 
     }
 ];
@@ -52,6 +53,11 @@ const appRoutes: Routes = [
         AppStoreModule,
         FuseMainModule,
     ],
+    providers: [{
+        provide : HTTP_INTERCEPTORS,
+        useClass : TokenInterceptorService,
+        multi : true
+      }],
     bootstrap   : [
         AppComponent
     ]

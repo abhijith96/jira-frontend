@@ -51,23 +51,14 @@
             </label>
             <div *ngFor="let field of selectedTypeFields">
 
-                  <mat-form-field fxFill *ngIf="field.name !== 'ProjectId' && userList" >
+                  <mat-form-field fxFill *ngIf="field.name !== 'ProjectId' && userList && field.name !== 'IssueType' " >
                         <input matInput formControlName="{{field.id}}" placeholder="{{field.name }}" [readonly]="field.id === 'issueType' || field.id==='projectId'"
                               *ngIf="field.name !=='Assignee' && field.name!= 'CreatedBy'"
                                [required]="field.isRequired"           >
-                        <!--                               
-                        <mat-select *ngIf="field.name==='Assignee'" placeholder="Assignee" formControlName="{{field.id}}">
-                              <mat-option *ngFor="let user of userList" [value]="user._id">
-                                    {{user.name}}
-                              </mat-option>
-                        </mat-select>
-
-                        <mat-select *ngIf="field.name==='CreatedBy'" placeholder="Created By" formControlName="{{field.id}}">
-                              <mat-option *ngFor="let user of userList" [value]="user._id">
-                                    {{user.name}}
-                              </mat-option>
-                        </mat-select> -->
+                   
                         <div *ngIf="field.name==='Assignee'"  >
+                                    
+
                               <input type="text" placeholder="Assignee" matInput [formControl]="userControlAssignee" 
                               [matAutocomplete]="auto">
                               <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
@@ -75,18 +66,19 @@
                                           {{ user.name }}
                                     </mat-option>
                               </mat-autocomplete>
+                              <div class="alert alert-danger fade in" *ngIf="!validName">
+                                          <a  (click)="toggleEmpty()" class="close" data-dismiss="alert" aria-label="close">×</a>
+                                          Choose A Valid Name
+                              </div>
                         </div>
 
-                        <!-- <div  >
-                                    <input required type="text" placeholder="Created By" matInput [formControl]="userControlCreator" [matAutocomplete]="auto">
-                                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                                          <mat-option *ngFor="let user of filteredUsersCreator | async" [value]="user">
-                                                {{ user.name }}
-                                          </mat-option>
-                                    </mat-autocomplete>
-                        </div> -->
+                        
+                        
+
+                
                         <div *ngIf="field.name==='CreatedBy'">
-                              <input matInput [value]="currentUser.name" placeholder="Created By" [readonly]=true >
+                              <input matInput [disabled]=true 
+                              [value]="currentUser.name" placeholder="Created By" [readonly]=true >
                         </div>
                   </mat-form-field>
 

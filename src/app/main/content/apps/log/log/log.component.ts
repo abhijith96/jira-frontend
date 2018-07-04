@@ -25,7 +25,7 @@ export class LogComponent implements OnInit {
         this.logService.getLog(data).subscribe(
             (res : any)=>{
                   this.currentLog = res;
-                  console.log("curren tLog is  "+ JSON.stringify(this.currentLog))
+                  // console.log("curren tLog is  "+ JSON.stringify(this.currentLog))
             }
             ,err=>{
                   console.log("Error Getting Log Details")

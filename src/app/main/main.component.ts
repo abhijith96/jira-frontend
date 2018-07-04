@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostBinding, Inject, OnDestroy, Renderer2, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, HostBinding, Inject, OnDestroy, Renderer2, ViewEncapsulation, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Platform } from '@angular/cdk/platform';
 import { Subscription } from 'rxjs';
@@ -13,7 +13,7 @@ import { navigation } from 'app/navigation/navigation';
     styleUrls    : ['./main.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class FuseMainComponent implements OnDestroy
+export class FuseMainComponent implements OnDestroy,OnInit
 {
     onConfigChanged: Subscription;
     fuseSettings: any;
@@ -33,7 +33,6 @@ export class FuseMainComponent implements OnDestroy
         @Inject(DOCUMENT) private document: any
     )
     {   
-        this.isLoggedIn = this.authService.loggedIn()
         this.onConfigChanged =
             this.fuseConfig.onConfigChanged
                 .subscribe(
@@ -49,6 +48,13 @@ export class FuseMainComponent implements OnDestroy
         }
 
         this.navigation = navigation;
+    }
+    ngOnInit(){
+        this.authService.areYouLoggedIn.subscribe(
+            res=>{
+                    this.isLoggedIn = res;
+            }
+        )
     }
 
     ngOnDestroy()

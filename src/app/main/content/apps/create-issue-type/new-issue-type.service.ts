@@ -12,7 +12,7 @@ export class NewIssueTypeService {
       return this.http.get(_baseUrl + 'fields')
   }
   sendNewIssueType(data){
-      console.log("Send new type  " + JSON.stringify(data))
+    //   console.log("Send new type  " + JSON.stringify(data))
       return this.http.post(_baseUrl+ 'new-issue-type',data)
   }
 

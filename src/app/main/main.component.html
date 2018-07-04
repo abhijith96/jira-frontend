@@ -4,7 +4,7 @@
 
         <!-- TOOLBAR: Above -->
         <ng-container *ngIf="fuseSettings.layout.toolbar === 'above'">
-            <fuse-toolbar class="above" [ngClass]="fuseSettings.colorClasses.toolbar"></fuse-toolbar>
+            <fuse-toolbar *ngIf="isLoggedIn" class="above" [ngClass]="fuseSettings.colorClasses.toolbar"></fuse-toolbar>
         </ng-container>
         <!-- / TOOLBAR: Above -->
 

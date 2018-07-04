@@ -13,6 +13,8 @@ import { TodoService } from '../todo.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
+import { AuthService  } from '../../../auth/auth.service'
+
 @Component({
     selector   : 'fuse-todo-details',
     templateUrl: './todo-details.component.html',
@@ -31,6 +33,10 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
     newFieldName : string;
     newFieldValue : string;
     
+    currentUser : any;
+
+    nameValid = true;
+
     @ViewChild('titleInput') titleInputField;
 
     
@@ -51,15 +57,17 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
         private todoService: TodoService,
         private formBuilder: FormBuilder,
         private location : Location,
-        private router : Router
+        private router : Router,
+        private authService : AuthService
     )
     {
 
     }
 
     ngOnInit(){
-        this.getUsers()
-        this.filterContainer()
+            this.authService.currentUser.subscribe(
+                  res=>{  this.currentUser = res}
+            )
             /*   
                 Using promises
                 this.todoService.getIssuesFromServer().then(resolve=>{
@@ -89,9 +97,14 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
                     {
                         this.formType = 'edit';
 
-                        this.todo = todo;
-                        this.todoForm = this.createTodoForm();
+                        this.getUsers()
+                        this.filterContainer()
 
+                        this.todo = todo;
+
+                        this.todoForm = this.createTodoForm();
+                        this.userControlAssignee.patchValue("asjahsj")
+                        
 
                         //Initialize control elements Array
                         let stuff = this.todoForm.value
@@ -138,14 +151,14 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
        
         
         this.filteredUsersAssignee = this.userControlAssignee.valueChanges
-          .pipe(
-            startWith<string | any>(''),
-            map(value => typeof value === 'string' ? value : value.name),
-            map(name => name ? this.filterUsers(name) : this.userList.slice())
-          );
+        .pipe(
+          startWith<string | any>(''),
+          map(value => typeof value === 'string' ? value : value.name),
+          map(name => name ? this.filterUsers(name) : this.userList.slice())
+        );
        
       }
-      filterUsers(name: string): any[] {
+      filterUsers(name: any): any[] {
         return this.userList.filter(option =>
           option.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
       }
@@ -172,11 +185,17 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
         }
     }
 
-    focusTitleField()
-    {
-        setTimeout(() => {
-            this.titleInputField.nativeElement.focus();
-        });
+    changeAssignee(user){
+            console.log(JSON.stringify(user,null," "))
+
+            this.todoForm.patchValue({"assignee" :user._id})
+            
+            console.log(JSON.stringify(this.todoForm.getRawValue(),null," "))
+            
+            let stuff = this.todoForm.value
+                        this.controlArray = Object.keys(stuff).map(data=>{
+                                return [data, stuff[data]]
+                        })
     }
 
     createTodoForm()
@@ -195,11 +214,7 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
     }
 
     
-    hasTag(tagId)
-    {
-        return this.todoService.hasTag(tagId, this.todo);
-    }
-
+  
    
     deleteTodo(){
         console.log("deletingggg   " + JSON.stringify(this.todo.title))
@@ -217,23 +232,38 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
         console.log("Going back")
         this.router.navigate(['apps/todo-table'])
       }
+
+      isValid(str: any) {
+        // console.log(" lalla " + JSON.stringify(str))
+        if (typeof str ==="object") {
+          return true;
+        }
+        return false;
+    
+      }
+
       saveChanges(){
           let data = this.todoForm.getRawValue()
-          console.log("Sending data "+ JSON.stringify(data))
+          if (this.isValid(data["assignee"]) || true) {
+             console.log("Sending data "+ JSON.stringify(data))
+            data.updatedBy = this.currentUser._id
             this.todoService.updateTodoNew(data)
-            // .subscribe(
-            //     res=>{
-            //                 console.log("updated succesfully old ")
-            //     }
-            // )
+          }
+        //   else{
+        //     this.nameValid = false;
+        //   }
       }
       getUsers() {
         this.todoService.getUsersFromServer().
           subscribe(
             (users: any) => {
               this.userList = users;
-              console.log("Receiverd users  " + JSON.stringify(users))
+            //   console.log("Receiverd users  " + JSON.stringify(this.userList,null," "))
             }
           )
       }
+
+      toggleEmpty(){
+        this.nameValid = true;
+  }
 }
