@@ -120,30 +120,11 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
                                 distinctUntilChanged()
                             ).subscribe(data => {
                                 // this.todoService.updateTodo(data);
-                                console.log("Form changed")
+                                // console.log("Form changed")
                             });
                     }
                 });
-            /*
-                Subscribe to update on tag change
-                this.onTagsChanged =
-                    this.todoService.onTagsChanged
-                        .subscribe(labels => {
-                            this.tags = labels;
-                        });
-
-                // Subscribe to update on tag change
-                this.onNewTodoClicked =
-                    this.todoService.onNewTodoClicked
-                        .subscribe(() => {
-                            this.todo = new Todo({});
-                            this.todo.id = FuseUtils.generateGUID();
-                            this.formType = 'new';
-                            this.todoForm = this.createTodoForm();
-                            this.focusTitleField();
-                            this.todoService.onCurrentTodoChanged.next([this.todo, 'new']);
-                        });
-            */
+           
                 
         
     }
@@ -188,7 +169,7 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
     changeAssignee(user){
             console.log(JSON.stringify(user,null," "))
 
-            this.todoForm.patchValue({"assignee" :user._id})
+            this.todoForm.patchValue({"assignee" :user})
             
             console.log(JSON.stringify(this.todoForm.getRawValue(),null," "))
             

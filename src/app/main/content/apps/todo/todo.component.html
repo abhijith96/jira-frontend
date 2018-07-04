@@ -77,6 +77,11 @@
                             <mat-icon>arrow_back</mat-icon>
                         </button>
                     </div>
+                    <div *ngIf="!currentTodo">
+                        <mat-icon style="cursor: pointer;float: right "  
+                        (click)="refresh()" class="logo-icon s-32">refresh</mat-icon>     
+                    </div>
+                    
 
                 </div>
                 <!-- / CONTENT TOOLBAR -->

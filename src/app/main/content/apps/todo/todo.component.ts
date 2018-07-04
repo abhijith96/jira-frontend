@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-
+import { Router } from '@angular/router'
 import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
@@ -29,7 +29,8 @@ export class FuseTodoComponent implements OnInit, OnDestroy
     onTagsChanged: Subscription;
     onCurrentTodoChanged: Subscription;
 
-    constructor(private todoService: TodoService)
+    constructor(private todoService: TodoService,
+                private router : Router)
     {
         this.searchInput = new FormControl('');
     }
@@ -117,6 +118,15 @@ export class FuseTodoComponent implements OnInit, OnDestroy
     {
         this.todoService.deselectTodos();
     }
+
+     
+  refresh(): void {
+    console.log("Refreshing!")
+    // this.router.navigateByUrl('/apps/issuetypes', { skipLocationChange: true });
+    // this.router.navigate(ProjectsComponent);
+    this.router.navigateByUrl('apps/issuetypes', {skipLocationChange: true}).then(()=>
+    this.router.navigate(["apps/todo/all"]));
+  }
 
     // toggleTagOnSelectedTodos(tagId)
     // {

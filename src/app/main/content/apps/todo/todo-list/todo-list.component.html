@@ -2,7 +2,7 @@
     <span class="no-todos-text  hint-text">There are no todos!</span>
 </div>
 
-<div class="todo-list"  (out)="onDrop($event)" *fuseIfOnDom [@animateStagger]="{value:'50'}">
+<div class="todo-list"   >
     <!-- <fuse-todo-list-item class="todo-list-item has-handle"
                          *ngFor="let todo of todos" [todo]="todo"
                          ngxDraggable
@@ -16,11 +16,8 @@
 
            <fuse-todo-list-item class="todo-list-item has-handle"
                           [todo]="todo"
-                        
-                         
                          [ngClass]="{'current-todo':todo?.id == currentTodo?.id}"
-                         matRipple
-                         [@animate]="{value:'*',params:{y:'100%'}}">
+                          >
     </fuse-todo-list-item>
     </div>
 </div>
