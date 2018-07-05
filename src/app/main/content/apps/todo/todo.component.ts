@@ -3,10 +3,9 @@ import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router'
 import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-
+import { Location } from '@angular/common'
 import { fuseAnimations } from '@fuse/animations';
 
-import { Todo } from './todo.model';
 import { TodoService } from './todo.service';
 
 @Component({
@@ -22,7 +21,7 @@ export class FuseTodoComponent implements OnInit, OnDestroy
     filters: any[];
     tags: any[];
     searchInput: FormControl;
-    currentTodo: Todo;
+    currentTodo: any;
 
     onSelectedTodosChanged: Subscription;
     onFiltersChanged: Subscription;
@@ -30,7 +29,8 @@ export class FuseTodoComponent implements OnInit, OnDestroy
     onCurrentTodoChanged: Subscription;
 
     constructor(private todoService: TodoService,
-                private router : Router)
+                private router : Router,
+                    private location : Location)
     {
         this.searchInput = new FormControl('');
     }
@@ -126,6 +126,11 @@ export class FuseTodoComponent implements OnInit, OnDestroy
     // this.router.navigate(ProjectsComponent);
     this.router.navigateByUrl('apps/issuetypes', {skipLocationChange: true}).then(()=>
     this.router.navigate(["apps/todo/all"]));
+  }
+  goBack(): void {
+    console.log("Going back")
+     this.location.back();
+     
   }
 
     // toggleTagOnSelectedTodos(tagId)

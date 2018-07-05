@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 
 import { fuseAnimations } from '@fuse/animations';
 
-import { Todo } from '../todo.model';
 import { TodoService } from '../todo.service';
 
 @Component({

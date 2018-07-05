@@ -87,53 +87,10 @@ export class TodoService implements Resolve<any>
         });
     }
 
-    /**
-     * Get all filters
-     * @returns {Promise<any>}
-     */
-    // getFilters(): Promise<any>
-    // {
-    //     return new Promise((resolve, reject) => {
-    //         this.http.get('api/todo-filters')
-    //             .subscribe((response: any) => {
-    //                 this.filters = response;
-    //                 this.onFiltersChanged.next(this.filters);
-    //                 resolve(this.filters);
-    //             }, reject);
-    //     });
-    // }
-
-    /**
-     * Get all tags
-     * @returns {Promise<any>}
-     */
-    // getTags(): Promise<any>
-    // {
-    //     return new Promise((resolve, reject) => {
-    //         this.http.get('api/todo-tags')
-    //             .subscribe((response: any) => {
-    //                 this.tags = response;
-    //                 this.onTagsChanged.next(this.tags);
-    //                 resolve(this.tags);
-    //             }, reject);
-    //     });
-    // }
-
-    /**
-     * Get todos
-     * @returns {Promise<Todo[]>}
-     */
+  
+  
     getTodos(): Promise<any[]>
     {
-        if ( this.routeParams.tagHandle )
-        {
-            return this.getTodosByTag(this.routeParams.tagHandle);
-        }
-
-        if ( this.routeParams.filterHandle )
-        {
-            return this.getTodosByFilter(this.routeParams.filterHandle);
-        }
 
         return this.getTodosByParams(this.routeParams);
     }
@@ -170,70 +127,10 @@ export class TodoService implements Resolve<any>
         });
     }
 
-    /**
-     * Get todos by filter
-     * @param handle
-     * @returns {Promise<Todo[]>}
-     */
-    getTodosByFilter(handle): Promise<any[]>
-    {
+   
+    
 
-        let param = handle + '=true';
-
-        if ( handle === 'dueDate' )
-        {
-            param = handle + '=^$|\\s+';
-        }
-
-        return new Promise((resolve, reject) => {
-
-            this.http.get('api/todo-todos?' + param)
-                .subscribe((todos: any) => {
-
-                    this.todos = todos.map(todo => {
-                        return (todo);
-                    });
-
-                    this.todos = FuseUtils.filterArrayByString(this.todos, this.searchText);
-
-                    this.onTodosChanged.next(this.todos);
-
-                    resolve(this.todos);
-
-                }, reject);
-        });
-    }
-
-    /**
-     * Get todos by tag
-     * @param handle
-     * @returns {Promise<Todo[]>}
-     */
-    getTodosByTag(handle): Promise<any[]>
-    {
-        return new Promise((resolve, reject) => {
-            this.http.get('api/todo-tags?handle=' + handle)
-                .subscribe((tags: any) => {
-
-                    const tagId = tags[0].id;
-
-                    this.http.get('api/todo-todos?tags=' + tagId)
-                        .subscribe((todos: any) => {
-
-                            this.todos = todos.map(todo => {
-                                return (todo);
-                            });
-
-                            this.todos = FuseUtils.filterArrayByString(this.todos, this.searchText);
-
-                            this.onTodosChanged.next(this.todos);
-
-                            resolve(this.todos);
-
-                        }, reject);
-                });
-        });
-    }
+    
 
     /**
      * Toggle selected todo by id
@@ -351,32 +248,9 @@ export class TodoService implements Resolve<any>
         }
     }
 
-    /**
-     * Toggle tag on selected todos
-     * @param tagId
-     */
-    toggleTagOnSelectedTodos(tagId)
-    {
-        // this.selectedTodos.map(todo => {
-        //     this.toggleTagOnTodo(tagId, todo);
-        // });
-    }
+    
 
-    // toggleTagOnTodo(tagId, todo)
-    // {
-    //     const index = todo.tags.indexOf(tagId);
 
-    //     if ( index !== -1 )
-    //     {
-    //         todo.tags.splice(index, 1);
-    //     }
-    //     else
-    //     {
-    //         todo.tags.push(tagId);
-    //     }
-
-    //     this.updateTodo(todo);
-    // }
 
     hasTag(tagId, todo)
     {
@@ -388,28 +262,7 @@ export class TodoService implements Resolve<any>
         return todo.tags.indexOf(tagId) !== -1;
     }
 
-    // /**
-    //  * Update the todo
-    // @param todo
-    //  * @returns {Promise<any>}
-    //  */
 
-  
-    // updateTodo(todo)
-    // {   console.log("Old update")
-    //     return new Promise((resolve, reject) => {
-
-    //         this.http.post( this._baseUrl+  'edit/issue', todo )
-    //             .subscribe(response => {
-    //                 console.log("The response is" + JSON.stringify(response)   )
-    //                 this.getTodos().then(todos => {
-    //                     console.log("success iss  " + JSON.stringify(todos))
-    //                     resolve(todos);
-
-    //                 }, reject);
-    //             });
-    //     });
-    // }
 
     updateTodoNew(todo){
             // return this.http.post(this._baseUrl+  'edit/issue' , todo)
@@ -425,29 +278,7 @@ export class TodoService implements Resolve<any>
             })
     }
 
-    // changeTodo(todo){
-    //     return new Promise((resolve, reject)=>{
-    //             this.http.put('api/todo-todos/' + todo.id, todo)
-    //                 .subscribe(response=>{
-    //                         this.getTodos().then(todos=>{
-    //                             resolve(todos)
-    //                         },reject)
-    //                 })
-    //     } )
-    // }
-
-    // getIssuesFromServer(){
-    //     return new Promise( ( resolve,reject)=>{
-    //             this.http.get(this._baseUrl + '/issues')
-    //                 .subscribe((response : any)=>{
-    //                         resolve (response)                               
-    //                 })
-    //     })
-    // }
-
-        // getIssuesFromServer(){
-        //     return this.http.get(this._baseUrl +'/issues' )
-        // }
+ 
     
     deleteaTodo(id){
             this.getTodos()
@@ -457,5 +288,12 @@ export class TodoService implements Resolve<any>
     getUsersFromServer(){
         return this.http.get(_baseUrl + 'users')
       }
-   
+
+      sendComment(comment){
+            return this.http.post(_baseUrl + 'issue/comments',comment)
+      }
+   deleteaComment(data){
+       console.log("Deleting  "  +JSON.stringify(data, null, " "))
+            return this.http.post(_baseUrl + 'issue/comments/delete' , data)
+   }
 }

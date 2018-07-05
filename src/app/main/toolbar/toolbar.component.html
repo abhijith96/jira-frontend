@@ -73,17 +73,19 @@
             <span >
                     <span class="p-10" id="create">
                         <button matTooltip="Create Issue Type" (click)="createIssueType()" >
-                            <mat-icon  class="create" >create_new_folder</mat-icon>
+                            <mat-icon  class="create" >playlist_add</mat-icon>
                         </button>
                     </span>
+                  
+                    <span class="p-10" id="create">
+                            <button matTooltip="Create Project" (click)="createProject()" >                                
+                                <mat-icon  class="create">create_new_folder</mat-icon>
+                            </button>
+                    </span>
+
                     <span class="p-10" id="create">
                             <button matTooltip="Create Issue" (click)="createIssue()" >                
                                 <mat-icon  class="create">add</mat-icon>
-                            </button>
-                    </span>
-                    <span class="p-10" id="create">
-                            <button matTooltip="Create Project" (click)="createProject()" >                                
-                                <mat-icon  class="create">add_circle_outline</mat-icon>
                             </button>
                     </span>
             </span>

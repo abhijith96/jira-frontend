@@ -8,7 +8,6 @@ import { FuseUtils } from '@fuse/utils';
 import { fuseAnimations } from '@fuse/animations';
 import { Location} from '@angular/common';
 
-import { Todo } from '../todo.model';
 import { TodoService } from '../todo.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -23,12 +22,12 @@ import { AuthService  } from '../../../auth/auth.service'
 })
 export class FuseTodoDetailsComponent implements OnInit, OnDestroy
 {
-    todo: Todo;
+    todo: any;
     tags: any[];
     formType: string;
     todoForm: FormGroup;
     userList: any[]
-    
+    newCommentText : string
     controlArray = [ ];
     newFieldName : string;
     newFieldValue : string;
@@ -36,6 +35,8 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
     currentUser : any;
 
     nameValid = true;
+
+    comments : any[]
 
     @ViewChild('titleInput') titleInputField;
 
@@ -101,10 +102,11 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
                         this.filterContainer()
 
                         this.todo = todo;
-
+                        // console.log("The todo is   " + JSON.stringify(this.todo, null, " "))
+                        this.comments = todo.comments;
+                        // console.log("Got comments  " + JSON.stringify(this.comments,null," "))
                         this.todoForm = this.createTodoForm();
-                        this.userControlAssignee.patchValue("asjahsj")
-                        
+
 
                         //Initialize control elements Array
                         let stuff = this.todoForm.value
@@ -211,7 +213,7 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
     }
     goBack(): void {
         console.log("Going back")
-        this.router.navigate(['apps/todo-table'])
+         this.location.back();
       }
 
       isValid(str: any) {
@@ -226,7 +228,7 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
       saveChanges(){
           let data = this.todoForm.getRawValue()
           if (this.isValid(data["assignee"]) || true) {
-             console.log("Sending data "+ JSON.stringify(data))
+            //  console.log("Sending data "+ JSON.stringify(data))
             data.updatedBy = this.currentUser._id
             this.todoService.updateTodoNew(data)
           }
@@ -246,5 +248,37 @@ export class FuseTodoDetailsComponent implements OnInit, OnDestroy
 
       toggleEmpty(){
         this.nameValid = true;
+  }
+
+  writeComment(){
+        let newComment :any  = {  }
+        newComment.text = this.newCommentText
+        newComment.author = this.currentUser
+        newComment.issueId = this.todo._id
+        this.newCommentText = ""
+        // console.log("Comment is  " + JSON.stringify(newComment,null," "))
+        this.todoService.sendComment(newComment)
+            .subscribe(
+                        (res : any)=>{
+                                // console.log("Got them comment " , JSON.stringify(res,null," "))
+                                this.comments = res
+                        },
+                        err=>{
+                                console.log("Error adding comment")
+                        }
+            )
+  }
+  deleteComment(data){
+        console.log("Deleting comment ")
+        let newData = data
+        newData.issueId = this.todo._id
+        this.todoService.deleteaComment(newData).
+                subscribe( (res : any)=>{
+                            console.log("Deleted comment")
+                            this.comments = res
+                }
+            ,err=>{
+                    console.log("Error deleting comment")
+            })
   }
 }

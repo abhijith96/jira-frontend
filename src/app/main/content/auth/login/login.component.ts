@@ -12,7 +12,7 @@ import { AuthService} from '../auth.service'
 })
 export class LoginComponent implements OnInit {
   loginForm : FormGroup
-
+  success= true
   constructor(private formBuilder : FormBuilder,
               private router : Router,
               private authService : AuthService) { }
@@ -42,10 +42,14 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['apps/todos'])
           },
           err=>{
-            console.log("ERror is  " + JSON.stringify(err.error.text))
+            // console.log("ERror is  " + JSON.stringify(err.error.text))
             console.log("Login failed")
+            this.success = false
           }
       )
   }
+  toggleEmpty(){
+    this.success = true;
+}
 
 }

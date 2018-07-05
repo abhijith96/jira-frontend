@@ -1,5 +1,6 @@
 @import 'src/@fuse/scss/fuse';
 
+
 :host {
     display: flex;
     flex: 1 0 auto;
@@ -102,4 +103,43 @@ a {
 }
 a {
     background-color: transparent;
+}
+
+  .comment {
+    margin-top: 30px;
+    padding: 10px;
+  }
+  
+  
+  
+  .comment-text {
+  }
+  
+  .name {
+    margin: 0;
+    font-size: 18px;
+    color: #2C3137;
+  }
+  
+  .time {
+    margin: 0;
+    font-family: Maitree;
+    font-size: 15px;
+    color: #a0a0a0;
+    padding-left: 20px;
+    font-weight: 400;
+  }
+  
+  p {
+    margin: 0;
+    font-size: 14px;
+    color: #626A73;
+  }
+  .comment:nth-child(n+2):after {
+	display: block;
+	content: " ";
+	clear: both;
+    }
+.comment-box{
+    margin-top: 30px
 }

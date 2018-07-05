@@ -1,7 +1,7 @@
 <div *ngIf="!todo" fxLayout="column" fxLayoutAlign="center center" fxFlex>
-    <mat-icon class="s-120 mb-12 select-todo-icon hint-text" >check_box
+    <mat-icon class="s-120 mb-12 select-todo-icon hint-text">check_box
     </mat-icon>
-    <span class="hint-text mat-h1 select-todo-text" >
+    <span class="hint-text mat-h1 select-todo-text">
         Select a todo
     </span>
 </div>
@@ -18,20 +18,6 @@
 
         <div class="actions" fxLayout="row" fxLayoutAlign="start center">
 
-            <!-- <button mat-icon-button (click)="toggleImportant($event)" aria-label="Toggle important">
-                <mat-icon class="red-fg" *ngIf="todo.important">error</mat-icon>
-                <mat-icon class="secondary-text" *ngIf="!todo.important">error_outline</mat-icon>
-            </button> -->
-
-            <!-- <button mat-icon-button (click)="toggleStar($event)" aria-label="Toggle star">
-                <mat-icon class="amber-fg" *ngIf="todo.starred">star</mat-icon>
-                <mat-icon class="secondary-text" *ngIf="!todo.starred">star_outline</mat-icon>
-            </button> -->
-
-            <button mat-icon-button [matMenuTriggerFor]="labelMenu" fxFlex="0 1 auto">
-                <mat-icon class="secondary-text">label</mat-icon>
-            </button>
-
             <mat-menu #labelMenu="matMenu">
                 <!-- <button mat-menu-item *ngFor="let tag of tags"
                         (click)="toggleTagOnTodo(tag.id)">
@@ -41,7 +27,7 @@
                 </button> -->
             </mat-menu>
 
-            <button mat-icon-button (click)="deleteTodo()" aria-label="Toggle delete">
+            <button  mat-icon-button (click)="deleteTodo()" aria-label="Toggle delete">
                 <mat-icon class="secondary-text">delete</mat-icon>
             </button>
 
@@ -51,42 +37,42 @@
     <div class="todo-content">
 
 
-        
-            <mat-tab-group [selectedIndex]="0">
-                
-                <mat-tab label="Editable">
-                        <form [formGroup]="todoForm" >
+
+        <mat-tab-group [selectedIndex]="0">
+
+            <mat-tab label="Editable">
+                <form [formGroup]="todoForm">
                     <div *ngFor="let field of controlArray" style="margin-top: 20px">
                         <mat-form-field fxFill *ngIf="field[0]!=='_id'  && field[0] !== 'key' && 
                                                                 field[0] !== 'assignee' && field[0] !== 'createdBy'
                                         && field[0] !== 'projectId' && field[0] !== 'issueType' &&  
-                                        field[0] !== 'createdOn' && field[0] !== 'updatedBy' && field[0] !== 'updatedOn'  ">
+                                        field[0] !== 'createdOn' && field[0] !== 'updatedBy' && 
+                                        field[0] !== 'updatedOn' && field[0] !== 'comments'  ">
 
                             <!-- <mat-list-item  *ngIf=" field[0] === 'assignee' "  >
                                             <strong class="list-title">{{field[0] | uppercase }}</strong> 
                                             <span class="list-data">{{field[1].name}}</span>
                                      </mat-list-item> -->
-                            
+
                             <input matInput value="{{field[1]}}" formControlName="{{field[0]}}" placeholder="{{field[0] }}">
                         </mat-form-field>
 
                         <mat-form-field *ngIf=" field[0] === 'assignee' " fxFill>
-                        <input matInput [readonly]=true  [value]="field[1].name" [placeholder]="field[0]">                            
+                            <input matInput [readonly]=true [value]="field[1].name" [placeholder]="field[0]">
                         </mat-form-field>
-                        <mat-form-field fxFill *ngIf="field[0] === 'assignee' && userList"  >
-                            <input placeholder="New Assignee" matInput [formControl]="userControlAssignee" 
-                            [matAutocomplete]="auto" >
+                        <mat-form-field fxFill *ngIf="field[0] === 'assignee' && userList">
+                            <input placeholder="New Assignee" matInput [formControl]="userControlAssignee" [matAutocomplete]="auto">
 
-                            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"  >
-                                  <mat-option *ngFor="let user of filteredUsersAssignee | async"  [value]="user" (keyup.enter)="changeAssignee(user)" (click)="changeAssignee(user)" >
-                                        {{ user.name }}
-                                  </mat-option>
+                            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                                <mat-option *ngFor="let user of filteredUsersAssignee | async" [value]="user" (keyup.enter)="changeAssignee(user)" (click)="changeAssignee(user)">
+                                    {{ user.name }}
+                                </mat-option>
                             </mat-autocomplete>
 
                             <div class="alert alert-danger fade in" *ngIf="!nameValid">
-                                    <a  (click)="toggleEmpty()" class="close" data-dismiss="alert" aria-label="close">×</a>
-                                        Choose a valid name
-                                </div>
+                                <a (click)="toggleEmpty()" class="close" data-dismiss="alert" aria-label="close">×</a>
+                                Choose a valid name
+                            </div>
                         </mat-form-field>
 
 
@@ -95,36 +81,75 @@
                     </div>
 
                     <button mat-raised-button class="mat-accent" (click)="saveChanges()">SAVE
-                        </button>
-                    </form>
-                </mat-tab>
-                <mat-tab label="Fixed" >
-                    
-                    <mat-list>
-                            <span *ngFor="let field of controlArray">
-                                    <mat-list-item *ngIf="field[0]!=='_id' && !( 
+                    </button>
+                </form>
+            </mat-tab>
+            <mat-tab label="Fixed">
+
+                <mat-list>
+                    <span *ngFor="let field of controlArray">
+                        <mat-list-item *ngIf="field[0]!=='_id' && !( 
                                      field[0] !== 'key' && field[0] !== 'createdBy'
                                     && field[0] !== 'projectId' && field[0] !== 'issueType' 
                                     &&  field[0] !== 'createdOn' && field[0] !== 'updatedBy'
-                                     && field[0] !=='updatedOn' )">
-                                    <strong class="list-title">{{field[0] | uppercase }}</strong> 
-                                    <span class="list-data">{{field[1]}}</span>
-                                    </mat-list-item>
-                                  
-                                   
-                            </span>
+                                     && field[0] !=='updatedOn'  )">
+                            <strong class="list-title">{{field[0] | uppercase }}</strong>
+                            <span class="list-data">{{field[1]}}</span>
+                        </mat-list-item>
+
+
+                    </span>
+
+                </mat-list>
+            </mat-tab>
+
+            <mat-tab label="Comments">
+
+
+                <div class="comment-box">
+                    <mat-form-field fxFill>
+                        <input fxFlex matInput placeholder="Write a Comment" [(ngModel)]="newCommentText" (keyup.enter)="writeComment()">
+                        <span class="comment-send" (click)="writeComment()">
+                            <mat-icon style="float: right">send</mat-icon>
+                        </span>
+                    </mat-form-field>
+                </div>
+
+                <div *ngIf="!comments" class="comments-empty text-center">
+                    There are no Comments
+                </div>
+
+                <div id="comments" *ngIf="comments" fxFill>
+
+                    <div class="comment" *ngFor="let comment of comments.reverse()">
+
+                        <div class="comment-text">
+                            <p class="name">{{comment.userId.name}}
+                                <span class="time">
+                                    {{comment.createdOn | date}}
+                                </span>
+                            </p>
                             
-                    </mat-list>
-                </mat-tab>
+                            <button mat-icon-button *ngIf="currentUser._id === comment.userId._id "  
+                                        style="float: right;"
+                                      (click)="deleteComment(comment)" >
+                                    <mat-icon class="secondary-text" >delete</mat-icon>
+                            </button>
+                            
+                            <p>{{comment.content}}</p>
+                        </div>
+                    </div>
 
-                <mat-tab label="Comments">
+                </div>
 
-                </mat-tab>
 
-            </mat-tab-group>
 
-        
+            </mat-tab>
 
-        
+        </mat-tab-group>
+
+
+
+
     </div>
 </div>
