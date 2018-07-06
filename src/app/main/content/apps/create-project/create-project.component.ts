@@ -25,7 +25,7 @@ export class CreateProjectComponent implements OnInit {
   possibleKey: string;
   constructor(private createProjectService: CreateProjectService,
     private formBuilder: FormBuilder,
-    public dialogRef: MatDialogRef<CreateProjectComponent>) { }
+    public dialogRef: MatDialogRef<CreateProjectComponent>) { dialogRef.disableClose = true; }
 
   ngOnInit() {
     this.projectForm = this.createForm()

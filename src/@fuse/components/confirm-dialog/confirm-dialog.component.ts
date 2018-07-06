@@ -12,6 +12,7 @@ export class FuseConfirmDialogComponent
 
     constructor(public dialogRef: MatDialogRef<FuseConfirmDialogComponent>)
     {
+        
     }
 
 }

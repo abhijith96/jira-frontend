@@ -41,7 +41,8 @@ export class DialogOverviewExampleDialog {
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    // this.dialogRef.close();
+    console.log("No click")
   }
 
 }

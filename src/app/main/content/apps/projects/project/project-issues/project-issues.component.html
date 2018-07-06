@@ -1,6 +1,6 @@
 <div class="content-card mat-white-bg">
 
-  <smd-datatable *ngIf="selectedProjectId"  dataUrl="issuesbypid/{{selectedProjectId}}" dataHeader="jobs" [paginated]="true" fusePerfectScrollbar showCheckBox="true" [responsive]="true"
+  <smd-datatable *ngIf="selectedProjectId"  dataUrl="find-issues/{{selectedProjectId}}" dataHeader="jobs" [paginated]="true" fusePerfectScrollbar showCheckBox="true" [responsive]="true"
     [filterEnabled]="true" [showTableFilter]="false">
 
     <smd-datatable-column title="Key" field="key" sortable="true" [filterable]="true">

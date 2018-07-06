@@ -741,7 +741,7 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 						let direction = sortParam.direction;
 						// console.log("Sort param is  " + JSON.stringify(sortParam))
 						// let temp = data
-						console.log("Field is  " + JSON.stringify(newKey))
+						// console.log("Field is  " + JSON.stringify(newKey))
 						
 						if(direction){
 								

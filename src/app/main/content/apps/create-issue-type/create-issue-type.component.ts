@@ -31,7 +31,9 @@ export class CreateIssueTypeComponent implements OnInit {
 
   constructor(private newIssueService : NewIssueTypeService,
               private formBuilder : FormBuilder,
-              public dialogRef: MatDialogRef<CreateIssueTypeComponent>) { }
+              public dialogRef: MatDialogRef<CreateIssueTypeComponent>) {
+                  dialogRef.disableClose = true;
+               }
   
   ngOnInit() {
       this.fieldListForm = this.createFieldListForm();

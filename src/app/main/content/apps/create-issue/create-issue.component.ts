@@ -51,7 +51,7 @@ export class CreateIssueComponent implements OnInit {
     private formBuilder: FormBuilder,
     public dialog :MatDialog, private authService : AuthService,
     public dialogRef: MatDialogRef<CreateIssueComponent>,
-    private todoService : TodoService) { }
+    private todoService : TodoService) {  dialogRef.disableClose = true;}
 
   ngOnInit() {
     this.authService.currentUser.subscribe(
