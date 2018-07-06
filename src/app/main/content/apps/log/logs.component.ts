@@ -16,11 +16,11 @@ export class LogsComponent implements OnInit {
 
 
   
-  refresh(): void {
-    console.log("Refreshing!")
-    // this.router.navigateByUrl('/apps/issuetypes', { skipLocationChange: true });
-    // this.router.navigate(ProjectsComponent);
-    this.router.navigateByUrl('apps/issuetypes', {skipLocationChange: true}).then(()=>
-    this.router.navigate(["apps/log"]));
-  }
+  // refresh(): void {
+  //   console.log("Refreshing!")
+  //   // this.router.navigateByUrl('/apps/issuetypes', { skipLocationChange: true });
+  //   // this.router.navigate(ProjectsComponent);
+  //   this.router.navigateByUrl('apps/issuetypes', {skipLocationChange: true}).then(()=>
+  //   this.router.navigate(["apps/log"]));
+  // }
 }

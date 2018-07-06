@@ -5,12 +5,10 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
+import { TodoService} from '../todo/todo.service'
 import { AuthService } from '../../auth/auth.service'
 
-export class User {
-  constructor(public name: string,
-              ) { }
-}
+
 
 @Component({
   selector: 'app-create-issue',
@@ -52,7 +50,8 @@ export class CreateIssueComponent implements OnInit {
   constructor(private newIssueService: NewIssueService,
     private formBuilder: FormBuilder,
     public dialog :MatDialog, private authService : AuthService,
-    public dialogRef: MatDialogRef<CreateIssueComponent>) { }
+    public dialogRef: MatDialogRef<CreateIssueComponent>,
+    private todoService : TodoService) { }
 
   ngOnInit() {
     this.authService.currentUser.subscribe(
@@ -236,6 +235,7 @@ export class CreateIssueComponent implements OnInit {
           data => {
             console.log("Yaaay Issue Created")
             this.success=true
+            this.todoService.getTodos()
           }
         )
     }

@@ -41,7 +41,7 @@
                                 <mat-list-item *ngIf="currentLog.affectedIssue != null">
                                         <strong class="title">Issue</strong> 
                                         <span class="data">
-                                        <a (click)="goTo('apps/todo/all/'+currentLog.affectedIssue._id)"> {{currentLog.affectedIssue }}</a>                                                        
+                                        <a (click)="goTo('apps/todo/all/'+currentLog.affectedIssue._id)"> {{currentLog.affectedIssue.title }}</a>                                                        
                                         </span>
                                 </mat-list-item>
 

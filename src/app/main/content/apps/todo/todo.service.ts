@@ -7,7 +7,9 @@ import { FuseUtils }  from '@fuse/utils';
 
 import {_baseUrl } from '../apiCall';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+  })
 export class TodoService implements Resolve<any>
 {   
     

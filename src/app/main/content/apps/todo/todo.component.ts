@@ -122,10 +122,8 @@ export class FuseTodoComponent implements OnInit, OnDestroy
      
   refresh(): void {
     console.log("Refreshing!")
-    // this.router.navigateByUrl('/apps/issuetypes', { skipLocationChange: true });
-    // this.router.navigate(ProjectsComponent);
-    this.router.navigateByUrl('apps/issuetypes', {skipLocationChange: true}).then(()=>
-    this.router.navigate(["apps/todo/all"]));
+    
+    this.todoService.getTodos()
   }
   goBack(): void {
     console.log("Going back")

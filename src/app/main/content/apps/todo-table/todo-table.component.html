@@ -4,7 +4,7 @@
 
 			<div class="header white-fg " id="main-title">
 					<span class="title" > ALL ISSUES </span>
-					<mat-icon style="cursor: pointer;float: right "  (click)="refresh()" class="logo-icon s-32">refresh</mat-icon> 
+					<!-- <mat-icon style="cursor: pointer;float: right "  (click)="refresh()" class="logo-icon s-32">refresh</mat-icon>  -->
 					
 			</div>
 		
@@ -18,6 +18,8 @@
 									<a routerLink='/apps/todo/all/{{ model._id }}' >{{model.key}}</a>	
 								</ng-template>
 							</smd-datatable-column>
+
+							
 							
 							<smd-datatable-column title="Title" field="title" sortable="true" [filterable]="true">
 								<ng-template let-model="data">
@@ -38,6 +40,15 @@
 								</ng-template>
 							</smd-datatable-column>
 							
+
+
+							<smd-datatable-column title="Assignee" field="assignee" sortable="true" [filterable]="true" > 
+									<ng-template let-model="data"   >
+										{{model.assignee.name}}	
+									</ng-template>
+								</smd-datatable-column>
+
+
 							<smd-datatable-column title="Resolution" field="resolution" sortable="true" [filterable]="true">
 								<ng-template let-model="data">
 									{{model.resolution}}

@@ -560,6 +560,7 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 	}
 
 	public refresh(model: any[] = null) {
+		console.log("Refreshing")
 		if (model) {
 			this.models = model;
 			this._updateRows();
@@ -740,7 +741,37 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 						let direction = sortParam.direction;
 						// console.log("Sort param is  " + JSON.stringify(sortParam))
 						// let temp = data
+						console.log("Field is  " + JSON.stringify(newKey))
+						
 						if(direction){
+								
+							if(newKey ===  "assignee" ||  newKey=="projectManager" ){
+								data = data.sort((a, b) => {
+									
+																
+									
+									if (direction == "ASC") {
+										// a[newKey] =a[newKey].toUpperCase()
+										// b[newKey] =b[newKey].toUpperCase()
+										if (a[newKey].name.toUpperCase() < b[newKey].name.toUpperCase())
+											return -1;
+										if (a[newKey].name.toUpperCase() > b[newKey].name.toUpperCase())
+											return 1;
+										return 0;
+									}
+									else if(direction ==="DESC"){
+										// a[newKey] =a[newKey].toUpperCase()
+										// b[newKey] =b[newKey].toUpperCase()
+										if (a[newKey].name.toUpperCase() > b[newKey].name.toUpperCase())
+											return -1;
+										if (a[newKey].name.toUpperCase() < b[newKey].name.toUpperCase())
+											return 1;
+										return 0;
+
+									}
+									})
+								}
+							else{
 								data = data.sort((a, b) => {
 									
 																
@@ -765,6 +796,7 @@ export class SmdDataTable implements AfterContentInit, AfterContentChecked, OnDe
 
 									}
 								})
+							}
 							}
 						// console.log("Sorted data is   " + JSON.stringify(data))
 						this.models = data

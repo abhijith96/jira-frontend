@@ -4,8 +4,9 @@
 
         <div class="header white-fg " id="main-title">
             <span class="title"> Logs </span>
-            <mat-icon style="cursor: pointer;float: right " (click)="refresh()" class="logo-icon s-32">refresh</mat-icon>
-
+            <!-- <mat-icon style="cursor: pointer;float: right " (click)="refresh()" class="logo-icon s-32">refresh</mat-icon> -->
+        </div>
+        
             <div class="content-card mat-white-bg" style="margin-bottom: 25px">
 
                 <smd-datatable dataUrl="logs"  dataHeader="jobs" [paginated]="true" fusePerfectScrollbar showCheckBox="true" [responsive]="true"
@@ -65,6 +66,5 @@
 
                 </smd-datatable>
             </div>
-        </div>
     </div>
 </div>
