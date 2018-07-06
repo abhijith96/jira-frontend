@@ -12,8 +12,8 @@
 
                 <mat-card *ngIf="currentLog" class="log-content">
                         <mat-list>
-                                <mat-list-item>
-                                        <strong class="title" style="display: inline-block">Date : </strong> 
+                                <mat-list-item *ngIf="currentLog.createdOn !=null">
+                                        <strong class="title" style="display: inline-block">Date </strong> 
                                         <span class="data"> {{currentLog.createdOn | date: 'dd/MM/yyyy' }}</span>
                                 </mat-list-item>
 
@@ -26,7 +26,7 @@
                                         <strong class="title">Changed Data</strong>
                                         <span class="data"> {{currentLog.data }}</span>
                                 </mat-list-item>
-                                <mat-list-item>
+                                <mat-list-item *ngIf="currentLog.user != null" >
                                         <strong class="title">By</strong> 
                                         <span class="data"> {{currentLog.user.name }}</span> 
                                 </mat-list-item>
@@ -41,7 +41,7 @@
                                 <mat-list-item *ngIf="currentLog.affectedIssue != null">
                                         <strong class="title">Issue</strong> 
                                         <span class="data">
-                                        <a (click)="goTo('apps/todo/all/'+currentLog.affectedIssue._id)"> {{currentLog.affectedIssue.title }}</a>                                                        
+                                        <a (click)="goTo('apps/todo/all/'+currentLog.affectedIssue._id)"> {{currentLog.affectedIssue }}</a>                                                        
                                         </span>
                                 </mat-list-item>
 
@@ -54,7 +54,48 @@
                                 Revert
                         </button>
 
+                        <!-- <div class=" text-center" id="change-table">
+                                <span class="change-title "> Changes </span>
+                                <mat-list *ngIf="changedFields">
+                                        <mat-list-item *ngFor="let field of changedFields" fxFill>
+                                                <span  class="field-name" >{{field.key}} </span>          
+                                                <span  class="field-value-curr ">{{field.value[0]}}</span>        
+                                                <span  class="field-value-prev">{{field.value[1]}} </span>
+                                        
+                                        </mat-list-item>
+                                </mat-list>
+                        </div> -->
+                        <div id="change-table" *ngIf="currentLog.action === 'update'    ">
+                                        <span class="change-title "> Changes </span>
+                        <table mat-table fxFill [dataSource]="changedFields" class="mat-elevation-z8">
 
+                                <!--- Note that these columns can be defined in any order.
+                                      The actual rendered columns are set as a property on the row definition" -->
+                              
+                                <!-- Position Column -->
+                                <ng-container matColumnDef="fieldName">
+                                  <th mat-header-cell *matHeaderCellDef> Field  </th>
+                                  <td mat-cell *matCellDef="let element"> {{element.key}} </td>
+                                </ng-container>
+                              
+                                <!-- Name Column -->
+                                <ng-container matColumnDef="prevValue">
+                                  <th mat-header-cell *matHeaderCellDef> Current Value </th>
+                                  <td mat-cell *matCellDef="let element"> {{element.value[0]}} </td>
+                                </ng-container>
+                              
+                                <!-- Weight Column -->
+                                <ng-container matColumnDef="currValue">
+                                  <th mat-header-cell *matHeaderCellDef> Previous Value </th>
+                                  <td mat-cell *matCellDef="let element"> {{element.value[1]}} </td>
+                                </ng-container>
+                              
+                       
+                              
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                              </table>
+                        </div>
                 </mat-card>
         </div>
 

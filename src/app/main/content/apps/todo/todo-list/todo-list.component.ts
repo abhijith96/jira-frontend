@@ -39,7 +39,7 @@ export class FuseTodoListComponent implements OnInit, OnDestroy
             this.todoService.onTodosChanged
                 .subscribe(todos => {
                     this.todos = todos;
-                    console.log(todos)
+                    // console.log(todos)
                 });
 
         // Subscribe to update current todo on changes

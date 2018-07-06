@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {Routes, RouterModule } from '@angular/router';
 import { DatatableModule } from 'app/main/shared/datatable.module';
 import { LogsComponent } from './logs.component';
-import { MatIconModule, MatCardModule, MatTabsModule, MatButtonModule, MatListModule } from '@angular/material';
+import { MatIconModule, MatCardModule, MatTabsModule, MatButtonModule, MatListModule, MatTableModule } from '@angular/material';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { LogComponent } from './log/log.component';
 
@@ -26,7 +26,8 @@ const routes : Routes = [
     MatCardModule,
     MatTabsModule,
     MatButtonModule,
-    MatListModule
+    MatListModule,
+    MatTableModule
     
   ],
   declarations: [LogsComponent, LogComponent],

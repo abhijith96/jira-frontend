@@ -11,7 +11,10 @@ import { Router } from '@angular/router'
 export class LogComponent implements OnInit {
   currentLogId ; 
   currentLog : any;
-  
+  changedFields : any[]
+
+  displayedColumns: string[] = ['fieldName', 'prevValue', 'currValue'];
+
   constructor( private route : ActivatedRoute, public location : Location, 
                 private logService : LogService, private router : Router) { }
 
@@ -25,7 +28,8 @@ export class LogComponent implements OnInit {
         this.logService.getLog(data).subscribe(
             (res : any)=>{
                   this.currentLog = res;
-                  // console.log("curren tLog is  "+ JSON.stringify(this.currentLog))
+                  console.log("curren Log is  "+ JSON.stringify(this.currentLog,null," "))
+                  this.changedFields = this.currentLog.allFields
             }
             ,err=>{
                   console.log("Error Getting Log Details")
