@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { FuseUtils }  from '@fuse/utils';
 
@@ -37,7 +37,8 @@ export class TodoService implements Resolve<any>
 
     constructor(
         private http: HttpClient,
-        private location: Location // Set current todo
+        private location: Location, // Set current todo
+        private router : Router
     )
     {
         this.selectedTodos = [];
@@ -297,5 +298,10 @@ export class TodoService implements Resolve<any>
    deleteaComment(data){
        console.log("Deleting  "  +JSON.stringify(data, null, " "))
             return this.http.post(_baseUrl + 'issue/comments/delete' , data)
+   }
+
+   getMyTodos(data){
+       console.log("data is   " + JSON.stringify(data))
+        return this.http.post(_baseUrl + 'issues/myissues',data)
    }
 }

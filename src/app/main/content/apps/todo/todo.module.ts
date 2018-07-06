@@ -29,34 +29,8 @@ const routes: Routes = [
             todo: TodoService
         }
     },
-    {
-        path     : 'tag/:tagHandle',
-        component: FuseTodoComponent,
-        resolve  : {
-            todo: TodoService
-        }
-    },
-    {
-        path     : 'tag/:tagHandle/:todoId',
-        component: FuseTodoComponent,
-        resolve  : {
-            todo: TodoService
-        }
-    },
-    {
-        path     : 'filter/:filterHandle',
-        component: FuseTodoComponent,
-        resolve  : {
-            todo: TodoService
-        }
-    },
-    {
-        path     : 'filter/:filterHandle/:todoId',
-        component: FuseTodoComponent,
-        resolve  : {
-            todo: TodoService
-        }
-    },
+  
+   
     {
         path      : '**',
         redirectTo: 'all'

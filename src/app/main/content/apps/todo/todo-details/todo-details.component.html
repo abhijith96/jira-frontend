@@ -7,15 +7,17 @@
 </div>
 
 <div *ngIf="todo">
-
+       
     <div class="todo-header" fxLayout="row" fxLayoutAlign="space-between center">
-
+            <button (click)="goBack()">
+                    <mat-icon style="cursor: pointer;float: left;"  class="logo-icon s-32">arrow_back</mat-icon>
+            </button>
         <button mat-button class="toggle-complete-button" (click)="toggleCompleted($event)" aria-label="Toggle completed" fxFlex="0 1 auto">
             <!-- <mat-icon *ngIf="todo.completed">check_box</mat-icon>
             <mat-icon *ngIf="!todo.completed">check_box_outline_blank</mat-icon>
             <span class="ml-8">Mark as Done</span> -->
         </button>
-
+        
         <div class="actions" fxLayout="row" fxLayoutAlign="start center">
 
             <mat-menu #labelMenu="matMenu">
@@ -26,10 +28,14 @@
                     <span>{{tag.title}}</span>
                 </button> -->
             </mat-menu>
-
+           
+            
+            
+            
             <button  mat-icon-button (click)="deleteTodo()" aria-label="Toggle delete">
                 <mat-icon class="secondary-text">delete</mat-icon>
             </button>
+
 
         </div>
     </div>

@@ -1,7 +1,14 @@
 <div *ngIf="todos.length === 0" fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
     <span class="no-todos-text  hint-text">There are no todos!</span>
 </div>
+<div class="toolbar px-24 py-8">
+        <div *ngIf="true">
+                <mat-icon style="cursor: pointer;float: right "  
+                (click)="refresh()" class="logo-icon s-32">refresh</mat-icon>     
+        </div>
+      
 
+</div>
 <div class="todo-list"   >
     <!-- <fuse-todo-list-item class="todo-list-item has-handle"
                          *ngFor="let todo of todos" [todo]="todo"

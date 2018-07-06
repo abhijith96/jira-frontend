@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-
+import { AuthService  } from '../../../auth/auth.service'
 import { fuseAnimations } from '@fuse/animations';
 
 import { TodoService } from '../todo.service';
@@ -18,29 +18,33 @@ export class FuseTodoListComponent implements OnInit, OnDestroy
  
  
  
-    todos: any[];
+    todos: any[] =[];
     currentTodo;
 
+    currentUser : any;
     onTodosChanged: Subscription;
     onCurrentTodoChanged: Subscription;
 
     constructor(
         private route: ActivatedRoute,
         private todoService: TodoService,
-        private location: Location
+        private location: Location,
+        private authService : AuthService
     )
     {
     }
 
     ngOnInit()
-    {
+    {   
+        this.currentUser = this.authService.currentUser.getValue()
+        this.getTodos()
         // Subscribe to update todos on changes
-        this.onTodosChanged =
-            this.todoService.onTodosChanged
-                .subscribe(todos => {
-                    this.todos = todos;
-                    // console.log(todos)
-                });
+        // this.onTodosChanged =
+        //     this.todoService.onTodosChanged
+        //         .subscribe(todos => {
+        //             this.todos = todos;
+        //             // console.log(todos)
+        //         });
 
         // Subscribe to update current todo on changes
         this.onCurrentTodoChanged =
@@ -77,7 +81,7 @@ export class FuseTodoListComponent implements OnInit, OnDestroy
 
     ngOnDestroy()
     {
-        this.onTodosChanged.unsubscribe();
+        // this.onTodosChanged.unsubscribe();
         this.onCurrentTodoChanged.unsubscribe();
     }
 
@@ -98,4 +102,22 @@ export class FuseTodoListComponent implements OnInit, OnDestroy
     {
 
     }
+    getTodos(){
+        let data =  { _id : this.currentUser._id }
+            this.todoService.getMyTodos(data).subscribe(
+                    (res : any)=>{
+                            this.todos = res
+                    }
+            )
+    }
+    refresh(): void {
+        console.log("Refreshing!")
+        
+        this.getTodos()
+      }
+      goBack(): void {
+        console.log("Going back")
+         this.location.back();
+         
+      }
 }

@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 // import { Todo } from '../../todo.model';
 import { TodoService } from '../../todo.service';
-
+import { Location } from '@angular/common'
 @Component({
     selector     : 'fuse-todo-list-item',
     templateUrl  : './todo-list-item.component.html',
@@ -25,7 +25,8 @@ export class FuseTodoListItemComponent implements OnInit, OnDestroy
     constructor(
         private todoService: TodoService,
         private route: ActivatedRoute,
-        private router : Router
+        private router : Router,
+        private location : Location
     )
     {
         // Disable move if path is not /all
@@ -101,6 +102,12 @@ export class FuseTodoListItemComponent implements OnInit, OnDestroy
         this.router.navigateByUrl('', {skipLocationChange: true}).then(()=>
         this.router.navigate(["apps/todo/all"]));
       }
+      
+  goBack(): void {
+    console.log("Going back")
+     this.location.back();
+     
+  }
     /**
      * Toggle star
      */

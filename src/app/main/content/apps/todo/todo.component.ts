@@ -120,11 +120,7 @@ export class FuseTodoComponent implements OnInit, OnDestroy
     }
 
      
-  refresh(): void {
-    console.log("Refreshing!")
-    
-    this.todoService.getTodos()
-  }
+ 
   goBack(): void {
     console.log("Going back")
      this.location.back();
